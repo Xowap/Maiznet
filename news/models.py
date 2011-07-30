@@ -1,5 +1,5 @@
 ########################################################################
-# vim: fileencoding=utf-8 tw=72 ts=8 noexpandtab :
+# vim: fileencoding=utf-8 ts=8 noexpandtab :
 #
 # ~~~~ Maiznet.fr ~~~~
 #

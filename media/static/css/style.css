@@ -12,6 +12,6 @@
  * informations, see http://sam.zoy.org/wtfpl/COPYING
  */
 
-* {
-	font-family: fantasy;
+nav h1 {
+	display: none;
 }

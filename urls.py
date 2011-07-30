@@ -29,7 +29,8 @@ urlpatterns = patterns('',
 	# Uncomment the next line to enable the admin:
 	# (r'^admin/', include(admin.site.urls)),
 
-	(r'^news/', include('maiznet.news.urls')),
+	(r'^news/',     include('maiznet.news.urls')),
+	(r'^register/', include('maiznet.register.urls')),
 
 	# The index page is actualy the news index page
 	(r'^$', redirect_to, {'url': '/news/', 'permanent': True}),

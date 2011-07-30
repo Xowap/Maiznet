@@ -3,7 +3,7 @@
 #
 # ~~~~ Maiznet.fr ~~~~
 #
-#  -> register/views.py
+#  -> register/urls.py
 #
 #
 # Copyright 2011 Rémy Sanchez <remy.sanchez@hyperthese.net>
@@ -12,3 +12,11 @@
 # informations, see http://sam.zoy.org/wtfpl/COPYING
 ########################################################################
 
+from django.conf.urls.defaults import *
+from django.views.generic.simple import direct_to_template
+
+urlpatterns = patterns('',
+	url(r'^$', direct_to_template,
+	    {'template': 'register/index.html'},
+	    name="register-index"),
+)

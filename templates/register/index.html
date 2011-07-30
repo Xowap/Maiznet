@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %}- {% trans "Register" %}{% endblock %}
+{% block content-title %}{% trans "Register" %}{% endblock %}
+
+{% block content %}
+<article>
+	<h2>{% trans "Welcome to Maiz's network !" %}</h2>
+
+	{% blocktrans %}
+	<p>We want Maiznet to be as near as possible to the network that
+	you could have at home. However, there is 150 persons in Maiz,
+	which draws some constraints. Therefore, to ensure a network of
+	good quality and well secured, users are required to register on
+	this website before they can access the Internet.</p>
+
+	<p>It should be quick and painless !</p>
+	{% endblocktrans %}
+
+	<h2>{% trans "What is your situation ?" %}</h2>
+
+	<ul>
+		<li>{% trans "I'm coming to Maiz for the first time" %}</li>
+		<li>{% trans "I changed my room and I don't have Internet anymore" %}</li>
+		<li>{% trans "I would like to change informations regarding myself" %}</li>
+		<li>{% trans "I lost my password !" %}</li>
+		<li>{% trans "I'm going away from Maiz." %}</li>
+	</ul>
+</article>
+{% endblock %}
+

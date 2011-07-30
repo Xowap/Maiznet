@@ -3,7 +3,7 @@
 #
 # ~~~~ Maiznet.fr ~~~~
 #
-#  -> new/urls.py
+#  -> news/urls.py
 #
 #
 # Copyright 2011 Rémy Sanchez <remy.sanchez@hyperthese.net>
@@ -16,5 +16,6 @@ from django.conf.urls.defaults import *
 from django.views.generic.simple import direct_to_template
 
 urlpatterns = patterns('',
-	(r'^$', direct_to_template, {'template': 'news/index.html'}),
+	url(r'^$', direct_to_template, {'template': 'news/index.html'},
+	    name="news-index"),
 )

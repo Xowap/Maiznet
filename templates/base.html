@@ -7,7 +7,7 @@
 		<title>{% trans "Maiznet" %}{% block head-title %}{% endblock %}</title>
 
 		<!-- CSS -->
-		<link rel="stylesheet" href="{{ MEDIA_URL }}/static/css/reset.css" />
+		<!-- <link rel="stylesheet" href="{{ MEDIA_URL }}/static/css/reset.css" /> -->
 		<link rel="stylesheet" href="{{ MEDIA_URL }}/static/css/style.css" />
 
 		<!-- Favicon -->
@@ -33,9 +33,11 @@
 			</hgroup>
 
 			<nav>
+				<h1>{% trans "Main Menu" %}</h1>
+
 				<ul>
-					<li><a href="#">{% trans "News" %}</a></li>
-					<li><a href="#">{% trans "Register" %}</a></li>
+					<li><a href="{% url news-index %}">{% trans "News" %}</a></li>
+					<li><a href="{% url register-index %}">{% trans "Register" %}</a></li>
 					<li><a href="#">{% trans "About" %}</a></li>
 					<li><a href="#">{% trans "Monitoring" %}</a></li>
 				</ul>

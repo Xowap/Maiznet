@@ -37,6 +37,9 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = relpath + '/media/'
 
+# Profil des utilisateurs
+AUTH_PROFILE_MODULE = "register.Presence"
+
 # Liste des fonctions qui peuvent importer des templates depuis diverses
 # sources.
 TEMPLATE_LOADERS = (

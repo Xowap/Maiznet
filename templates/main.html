@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr"><!-- TODO: penser à mettre la langue vraiment utilisée sur la page à la place -->
+{% load i18n %}
+
 	<head>
 		<meta charset="utf8" />
-		<title>Maiznet{% block head-title %}{% endblock %}</title>
+		<title>{% trans "Maiznet" %}{% block head-title %}{% endblock %}</title>
 
 		<!-- CSS -->
 		<link rel="stylesheet" href="{{ MEDIA_URL }}/static/css/reset.css" />
@@ -26,23 +28,23 @@
 	<body>
 		<header>
 			<hgroup>
-				<h1>Maiznet</h1>
-				<h2>Le site du club qu'il est bien.</h2>
+				<h1>{% trans "Maiznet" %}</h1>
+				<h2>{% trans "The website that's good" %}</h2>
 			</hgroup>
 
 			<nav>
 				<ul>
-					<li><a href="#">News</a></li>
-					<li><a href="#">Register</a></li>
-					<li><a href="#">À propos</a></li>
-					<li><a href="#">Monitoring</a></li>
+					<li><a href="#">{% trans "News" %}</a></li>
+					<li><a href="#">{% trans "Register" %}</a></li>
+					<li><a href="#">{% trans "About" %}</a></li>
+					<li><a href="#">{% trans "Monitoring" %}</a></li>
 				</ul>
 			</nav>
 		</header>
 
 		<div id="wrapper">
 			<aside id="sidebar">
-				<p>Oooooh la sidebar</p>
+				<p>{% trans "What a wonderful sidebar" %}</p>
 			</aside>
 
 			<section id="content">

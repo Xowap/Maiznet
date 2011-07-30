@@ -1,5 +1,5 @@
 ########################################################################
-# vim: fileencoding=utf8 tw=72 ts=8 noexpandtab :
+# vim: fileencoding=utf-8 tw=72 ts=8 noexpandtab :
 #
 # ~~~~ Maiznet.fr ~~~~
 #
@@ -22,7 +22,7 @@ MANAGERS = ADMINS
 SITE_ID = 1
 
 # Code de langage
-LANGUAGE_CODE = 'fr-fr'
+LANGUAGE_CODE = 'fr'
 
 # On utilise l'internationalisation (et oui, il y a des étranger qui
 # viennent à Maiz, il est important d'avoir au moins une version

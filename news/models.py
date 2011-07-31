@@ -13,7 +13,7 @@
 ########################################################################
 from django.db import models
 from django.utils.translation import ugettext as _
-import datetime
+from datetime import datetime
 
 class Category(models.Model):
 	name = models.CharField(max_length = 40)
@@ -21,11 +21,11 @@ class Category(models.Model):
 	def __unicode__(self):
 		return self.name
 
-class New(models.Model):
+class News(models.Model):
 	title = models.CharField(max_length = 40)
 	content = models.TextField(max_length = 140)
 	category = models.ForeignKey(Category)
-	date_start = models.DateTimeField(default = datetime.datetime.now())
+	date_start = models.DateTimeField(default = datetime.now, blank = True)
 	date_end = models.DateTimeField(blank = True, null = True, default = None)
 
 	def __unicode__(self):

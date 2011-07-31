@@ -6,18 +6,16 @@
 {% block content-title %}{% trans "News" %}{% endblock %}
 
 {% block content %}
-<ul>
 {% for new in news %}
 	{% if new.category.name == "Maintenance" %}
-	<li> {{new.content}}</li>
+	<header> {{new.title}} </header>
+	<article> {{new.content}}</article>
 	{% endif %}
 {% endfor %}
-</ul>
-<ul>
 {% for new in news %}
 	{% if new.category.name != "Maintenance" %}
-	<li> {{new.content}}</li>
+	<header> {{new.title}} </header>
+	<article> {{new.content}}</article>
 	{% endif %}
 {% endfor %}
-</ul>
 {% endblock %}

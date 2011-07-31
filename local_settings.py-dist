@@ -44,12 +44,10 @@ TIME_ZONE = 'Europe/Berlin'
 # URL à laquelle on peut trouver les fichiers situés dans le répertoire
 # media. Attention d'utiliser un / à la fin si l'URL n'est pas juste un
 # domaine.
-MEDIA_URL = ''
-#MEDIA_URL = 'http://localhost/maiznet-media/'
+MEDIA_URL = 'http://localhost/maiznet-media/'
 
 # URL à laquelle on trouve les medias de l'admin de Django
-#ADMIN_MEDIA_PREFIX = 'http://localhost/django-admin-media/'
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = 'http://localhost/django-admin-media/'
 
 # Une clef secrète pour divers chiffrements. Attention à la changer, et
 # à ne la montrer à personne !

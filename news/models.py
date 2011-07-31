@@ -1,5 +1,5 @@
 ########################################################################
-# vim: fileencoding=utf-8 tw=72 ts=8 noexpandtab :
+# vim: fileencoding=utf-8 ts=8 noexpandtab :
 #
 # ~~~~ Maiznet.fr ~~~~
 #
@@ -12,5 +12,25 @@
 # informations, see http://sam.zoy.org/wtfpl/COPYING
 ########################################################################
 from django.db import models
+from django.utils.translation import ugettext as _
+import datetime
 
-# Create your models here.
+class Category(models.Model):
+	name = models.CharField(max_length = 40)
+
+	def __unicode__(self):
+		return self.name
+
+class New(models.Model):
+	title = models.CharField(max_length = 40)
+	content = models.TextField(max_length = 140)
+	category = models.ForeignKey(Category)
+	date_start = models.DateTimeField(default = datetime.datetime.now())
+	date_end = models.DateTimeField(blank = True, null = True, default = None)
+
+	def __unicode__(self):
+		return self.title
+
+	class Meta:
+		ordering = ["-date_start"]
+

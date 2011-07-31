@@ -21,7 +21,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-	('Rémy Sanchez', 'remy.sanchez@hyperthese.net'),
+	('Grégoire Leroy', 'gregoire.leroy@retenodus.net'),
 )
 
 DATABASES = {
@@ -44,12 +44,14 @@ TIME_ZONE = 'Europe/Berlin'
 # URL à laquelle on peut trouver les fichiers situés dans le répertoire
 # media. Attention d'utiliser un / à la fin si l'URL n'est pas juste un
 # domaine.
-MEDIA_URL = 'http://localhost/maiznet-media/'
+MEDIA_URL = ''
+#MEDIA_URL = 'http://localhost/maiznet-media/'
 
 # URL à laquelle on trouve les medias de l'admin de Django
-ADMIN_MEDIA_PREFIX = 'http://localhost/django-admin-media/'
+#ADMIN_MEDIA_PREFIX = 'http://localhost/django-admin-media/'
+ADMIN_MEDIA_PREFIX = '/media/'
 
 # Une clef secrète pour divers chiffrements. Attention à la changer, et
 # à ne la montrer à personne !
-SECRET_KEY = '-=n$s1dyv_owh*ljvn9s5c^k42r$lcmokd!9(e6e@0^a9sme8v'
+SECRET_KEY = 'plop'
 

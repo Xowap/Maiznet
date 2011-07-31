@@ -8,14 +8,16 @@
 {% block content %}
 {% for new in news %}
 	{% if new.category.name == "Maintenance" %}
-	<header> {{new.title}} </header>
-	<article> {{new.content}}</article>
+	<header> <h1>{{new.title}}</h1> </header>
+	<article> <p>{{new.content}}</p>
+	<p>À partir du {{new.date_start}} {%if new.date_end %} au {{new.date_end}} {%endif%} </p></article>
 	{% endif %}
 {% endfor %}
 {% for new in news %}
 	{% if new.category.name != "Maintenance" %}
-	<header> {{new.title}} </header>
-	<article> {{new.content}}</article>
+	<header> <h1>{{new.title}}</h1> </header>
+	<article> <p>{{new.content}}</p>
+	<p>À partir du {{new.date_start}} {%if new.date_end %} au {{new.date_end}} {%endif%} </p></article>
 	{% endif %}
 {% endfor %}
 {% endblock %}

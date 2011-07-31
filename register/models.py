@@ -17,7 +17,7 @@ from django.utils.translation import ugettext as _
 
 class Room(models.Model):
 	number = models.CharField(max_length = 20, name = _("room number"), help_text = _("Number of the room, written on the door."))
-	ticket = models.CharField(max_length = 14, name = _("ticket"), help_text = _("A unique identifier that was given to you with your key."))
+	ticket = models.CharField(max_length = 14, name = _("ticket"), help_text = _("A unique identifier that was given to you with your key."), unique  = True, blank = True, null = True)
 
 	def __unicode__(self):
 		return self.number
@@ -26,3 +26,7 @@ class Presence(models.Model):
 	user = models.ForeignKey(User, unique = True)
 	room = models.ForeignKey(Room, unique = True, blank = True, null = True)
 	netif = models.TextField(name = _("network interface"), help_text = ("The MAC adress(es) of your network card. If unsure, keep the pre-filled value"))
+
+class Promo(Group):
+	class Meta:
+		ordering = ['name']

@@ -16,7 +16,7 @@ from django.conf.urls.defaults import *
 from django.views.generic.simple import direct_to_template
 
 urlpatterns = patterns('',
-	url(r'^$', direct_to_template,
-	    {'template': 'register/index.html'},
-	    name="register-index"),
+	url(r'^$', direct_to_template, {'template': 'register/index.html'}, name="register-index"),
+	url(r'^signup/', 'maiznet.register.views.signup', name="register-signup"),
+	url(r'^welcome/', direct_to_template, {'template': 'register/welcome.html'}, name="register-welcome"),
 )

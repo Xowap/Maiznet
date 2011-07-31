@@ -20,6 +20,9 @@ class Category(models.Model):
 
 	def __unicode__(self):
 		return self.name
+	
+	class Meta:
+		verbose_name_plural = "Categories"
 
 class News(models.Model):
 	title = models.CharField(max_length = 40)
@@ -33,4 +36,4 @@ class News(models.Model):
 
 	class Meta:
 		ordering = ["-date_start"]
-
+		verbose_name_plural = "News"

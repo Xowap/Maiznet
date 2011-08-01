@@ -22,7 +22,12 @@ MANAGERS = ADMINS
 SITE_ID = 1
 
 # Code de langage
-LANGUAGE_CODE = 'fr'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = (
+	('fr', 'Français'),
+	('en', 'English'),
+)
 
 # On utilise l'internationalisation (et oui, il y a des étranger qui
 # viennent à Maiz, il est important d'avoir au moins une version
@@ -48,8 +53,9 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-	'django.middleware.common.CommonMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.locale.LocaleMiddleware',
+	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',

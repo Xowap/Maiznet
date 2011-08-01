@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-31 21:19+0200\n"
-"PO-Revision-Date: 2011-08-01 23:49+0100\n"
+"POT-Creation-Date: 2011-08-02 01:34+0200\n"
+"PO-Revision-Date: 2011-08-02 01:36+0100\n"
 "Last-Translator: Rémy Sanchez <remy.sanchez@hyperthese.net>\n"
 "Language-Team: Maiznet <maiznet@googlegroups.com>\n"
 "Language: \n"
@@ -17,55 +17,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: register/forms.py:23
+#: register/forms.py:27
+msgid "The ticket should be formated like xxxx-xxxx-xxxx, with x being a digit"
+msgstr "Ton ticket devrait ressembler à « xxxx-xxxx-xxxx », avec x un chiffre."
+
+#: register/forms.py:33
+msgid "No room exists with this ticket"
+msgstr "Il n'existe aucune chambre avec ce ticket."
+
+#: register/forms.py:59
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: register/forms.py:24
+#: register/forms.py:60
 msgid "Required. 30 characters or fewer. Begins and ends with a letter and can contain letters, digits, _ and -."
 msgstr "Obligatoire. Commence et finit par une lettre, et peut contenir des lettres, des chiffres, _ et -"
 
-#: register/forms.py:25
+#: register/forms.py:61
 msgid "This value must begin and end with a letter and can contain letters, digits, and _/-"
 msgstr "Cette valeur doit commencer et finir par une lettre, et peut contenir des lettres, des chiffres, _ et -"
 
-#: register/forms.py:26
+#: register/forms.py:62
 msgid "Firstname"
 msgstr "Prénom"
 
-#: register/forms.py:27
+#: register/forms.py:63
 msgid "Lastname"
 msgstr "Nom de famille"
 
-#: register/forms.py:28
-#, fuzzy
+#: register/forms.py:64
 msgid "Email"
 msgstr "Couriel"
 
-#: register/forms.py:29
+#: register/forms.py:65
 msgid "Promo"
 msgstr "Promotion"
 
-#: register/forms.py:29
+#: register/forms.py:65
 msgid "(None)"
 msgstr "(Aucune)"
 
-#: register/forms.py:31
+#: register/forms.py:67
 msgid "MAC Address"
 msgstr "Adresse MAC"
 
-#: register/forms.py:31
+#: register/forms.py:67
 msgid "This is the MAC address of your network card. If unsure, keep the default value."
 msgstr "Ceci est la valeur de l'adresse MAC de ta carte réseau. Dans le doute, garde la valeur par défaut."
 
-#: register/forms.py:41
-#, fuzzy
+#: register/forms.py:77
 msgid "A user with that email already exists."
 msgstr "Il existe déjà un utilisateur avec cette adresse de couriel."
-
-#: register/forms.py:51
-msgid "No room exists with this ticket"
-msgstr "Il n'existe aucune chambre avec ce ticket."
 
 #: register/models.py:19
 msgid "room number"
@@ -86,6 +88,15 @@ msgstr "Un identifiant unique qui t'a été remis avec les clefs."
 #: register/models.py:28
 msgid "network interface"
 msgstr "interface réseau"
+
+#: register/models.py:32
+#, python-format
+msgid "Room %(room)s"
+msgstr "Chambre %(room)s"
+
+#: register/models.py:34
+msgid "(No room assigned)"
+msgstr "(Pas de chambre assignée)"
 
 #: templates/base.html:7
 #: templates/base.html.py:31
@@ -120,9 +131,44 @@ msgstr "À propos"
 msgid "Monitoring"
 msgstr "État des services"
 
-#: templates/base.html:49
+#: templates/base.html:45
+msgid "Log Out"
+msgstr "Se déconnecter"
+
+#: templates/base.html:47
+#: templates/register/login.html:5
+#: templates/register/login.html.py:6
+#: templates/register/login.html:28
+#: templates/register/ticket.html:5
+#: templates/register/ticket.html.py:6
+msgid "Log In"
+msgstr "Se connecter"
+
+#: templates/base.html:55
 msgid "What a wonderful sidebar"
 msgstr "Oh une super sidebar"
+
+#: templates/register/changeroom.html:5
+msgid "Room Change"
+msgstr "Changement de chambre"
+
+#: templates/register/changeroom.html:6
+msgid "Your Room Has Been Changed"
+msgstr "Ta chambre a été changée"
+
+#: templates/register/changeroom.html:10
+#, python-format
+msgid ""
+"\n"
+"\t<p>The ticket you have entered has been taken in account. You\n"
+"\tare now registered in room <strong>%(room)s</strong>.</p>\n"
+"\n"
+"\t<p>In order for the modification to take effect, please wait a\n"
+"\tfew minutes, and restart your network connection.</p>\n"
+"\t"
+msgstr ""
+"\n"
+"<p>Le ticket que tu a entré a été pris en compte. Tu es maintenant enregistré en chambre <strong>%(room)s</strong>.</p><p>Pour que la modification preonne effet, attends quelques minutes, et redémarre ta connexion réseau.</p>"
 
 #: templates/register/index.html:10
 msgid "Welcome to Maiz's network !"
@@ -168,6 +214,97 @@ msgstr "J'ai perdu mon mot de passe !"
 msgid "I'm going away from Maiz."
 msgstr "Je m'en vais de Maiz."
 
+#: templates/register/login.html:11
+msgid "Your username and password didn't match. Please try again."
+msgstr "Ton nom d'utilisateur et ton mot de passe ne correspondent pas. Merci d'essayer encore."
+
+#: templates/register/password.html:5
+#: templates/register/password.html.py:6
+#: templates/register/password_confirm.html:5
+msgid "Password Reset"
+msgstr "Réinitialisation du mot de passe"
+
+#: templates/register/password.html:10
+msgid "Forgotten your password? Enter your e-mail address below, and we'll e-mail instructions for setting a new one."
+msgstr "Mot de passe oublié ? Entre ton couriel, et on t'enverra les instructions pour le changer par couriel."
+
+#: templates/register/password.html:14
+msgid "E-mail address:"
+msgstr "Adresse de couriel:"
+
+#: templates/register/password.html:14
+msgid "Reset my password"
+msgstr "Réinitialiser mon mot de passe"
+
+#: templates/register/password_complete.html:5
+#: templates/register/password_complete.html:6
+msgid "Password Reset Complete"
+msgstr "Réinitialisation du mot de passe terminée"
+
+#: templates/register/password_complete.html:10
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr "Ton mot de passe a été défini. Tu peux maintenant te connecter."
+
+#: templates/register/password_confirm.html:9
+msgid "Enter new password"
+msgstr "Entre le nouveau mot de passe"
+
+#: templates/register/password_confirm.html:11
+msgid "Invalid Reset Link"
+msgstr "Lien de réinitialisation invalide"
+
+#: templates/register/password_confirm.html:18
+msgid "Please enter your new password twice so we can verify you typed it in correctly."
+msgstr "Merci d'entrer ton nouveau mot de passe deux fois pour être sûr de le saisir correctement."
+
+#: templates/register/password_confirm.html:22
+msgid "New password:"
+msgstr "Nouveau mot de passe:"
+
+#: templates/register/password_confirm.html:24
+msgid "Confirm password:"
+msgstr "Confirme le mot de passe:"
+
+#: templates/register/password_confirm.html:25
+msgid "Change my password"
+msgstr "Changer mon mot de passe"
+
+#: templates/register/password_confirm.html:28
+msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
+msgstr "Le lien de changement de mot de passe était invalide, probablement parce qu'il a déjà été utilisé. Veuillez effectuer une nouvelle demande de changement."
+
+#: templates/register/password_done.html:5
+#: templates/register/password_done.html:6
+msgid "Password Reset Successful"
+msgstr "Changement de mot de passe réussi"
+
+#: templates/register/password_done.html:10
+msgid "We've e-mailed you instructions for setting your password to the e-mail address you submitted. You should be receiving it shortly."
+msgstr "Nous vous avons envoyé un couriel contenant les instructions pour changer le mot de passe. Si vous n'avez pas de smartphone, essayez de demander à un de vos voisins, ou adressez vous à l'accueil."
+
+#: templates/register/quit_ask.html:5
+#: templates/register/quit_ask.html.py:6
+#: templates/register/quit_done.html:5
+#: templates/register/quit_done.html:6
+msgid "Leaving Maiz"
+msgstr "Partir de Maiz"
+
+#: templates/register/quit_ask.html:10
+msgid "This will free your room, and disable your Internet access. You should only use this when leaving Maiz."
+msgstr "Ceci va libérer ta chambre, et désactiver ton accès à Internet. Tu ne devrais utiliser ceci uniquement qu'en partant de Maiz."
+
+#: templates/register/quit_ask.html:13
+msgid "Procceed"
+msgstr "Continuer"
+
+#: templates/register/quit_ask.html:14
+msgid "Take me back"
+msgstr "Faire marche arrière"
+
+#: templates/register/quit_done.html:10
+msgid "You are no longer registered in a room, however your account remains available. You will be able to use it again next year with a new ticket."
+msgstr "Vous n'êtes plus assigné à une chambre, cependant, votre compte reste disponible. Vous pourrez l'utiliser l'an prochain avec un nouveau ticket. N'oubliez pas votre mot de passe d'ici là !"
+
 #: templates/register/signup.html:5
 #: templates/register/signup.html.py:16
 msgid "Sign Up"
@@ -176,6 +313,14 @@ msgstr "S'inscrire"
 #: templates/register/signup.html:6
 msgid "Sign Up to Maiz Network"
 msgstr "S'inscrire sur le réseau de Maiz"
+
+#: templates/register/ticket.html:11
+msgid "Your ticket is invalid."
+msgstr "Ce ticket est invalide."
+
+#: templates/register/ticket.html:21
+msgid "Change Room"
+msgstr "Changer de chambre"
 
 #: templates/register/welcome.html:5
 msgid "Welcome"
@@ -186,15 +331,16 @@ msgid "Welcome to Maiz's Network"
 msgstr "Bienvue sur le réseau de Maiz !"
 
 #: templates/register/welcome.html:10
+#, python-format
 msgid ""
 "\n"
-"\t<p>Congratulations, you have now signed up to Maiz's Network !\n"
-"\tNow you should wait a few minutes, restart your network\n"
-"\tconnection (simply re-plug the cable !), and you should be able\n"
-"\tto access the Internet !</p>\n"
+"\t<p>Congratulations <strong>%(user)s</strong>, you have now signed up\n"
+"\tto Maiz's Network!  Now you should wait a few minutes, restart your\n"
+"\tnetwork connection (simply re-plug the cable!), and you should be able\n"
+"\tto access the Internet!</p>\n"
 "\t"
 msgstr ""
 "\n"
-"<p>Félicitations, vous êtes maintenant enregistrés sur le réseau de Maiz !\n"
-"Maintenant, il ne vous reste plus qu'à attendre quelques minutes, et redémarrer votre connexion (simplement en re-branchant le câble réseau !), et vous devriez pouvoir accéder à Internet !</p>"
+"<p>Félicitations <strong>%(user)s</strong>, tu es maintenant enregistrés sur le réseau de Maiz !\n"
+"Maintenant, il ne te reste plus qu'à attendre quelques minutes, et redémarrer ta connexion (simplement en re-branchant le câble réseau !), et tu devrais pouvoir accéder à Internet !</p>"
 

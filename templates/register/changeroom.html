@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %} - {% trans "Room Change" %}{% endblock %}
+{% block content-title %}{% trans "Your Room Has Been Changed" %}{% endblock %}
+
+{% block content %}
+<article>
+	{% blocktrans with user.get_profile.room as room %}
+	<p>The ticket you have entered has been taken in account. You
+	are now registered in room <strong>{{ room }}</strong>.</p>
+
+	<p>In order for the modification to take effect, please wait a
+	few minutes, and restart your network connection.</p>
+	{% endblocktrans %}
+</article>
+{% endblock %}
+

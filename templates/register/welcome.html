@@ -7,11 +7,11 @@
 
 {% block content %}
 <article>
-	{% blocktrans %}
-	<p>Congratulations, you have now signed up to Maiz's Network !
-	Now you should wait a few minutes, restart your network
-	connection (simply re-plug the cable !), and you should be able
-	to access the Internet !</p>
+	{% blocktrans with user as user %}
+	<p>Congratulations <strong>{{ user }}</strong>, you have now signed up
+	to Maiz's Network!  Now you should wait a few minutes, restart your
+	network connection (simply re-plug the cable!), and you should be able
+	to access the Internet!</p>
 	{% endblocktrans %}
 </article>
 {% endblock %}

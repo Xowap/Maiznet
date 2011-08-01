@@ -27,6 +27,12 @@ class Presence(models.Model):
 	room = models.ForeignKey(Room, unique = True, blank = True, null = True)
 	netif = models.TextField(name = _("network interface"), help_text = ("The MAC adress(es) of your network card. If unsure, keep the pre-filled value"))
 
+	def __unicode__(self):
+		if self.room != None:
+			return _('Room %(room)s') % {'room': unicode(self.room)}
+		else:
+			return _('(No room assigned)')
+
 class Promo(Group):
 	class Meta:
 		ordering = ['name']

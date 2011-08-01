@@ -17,7 +17,8 @@ from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from maiznet.register.forms import UserRegistrationForm, TicketForm
-from maiznet.register.models import Promo
+from maiznet.register.models import Promo, Presence
+from django.contrib.auth import login
 
 # TODO faire une vraie fonction
 def ip_to_mac(ip):
@@ -29,6 +30,8 @@ def signup(request):
 		form = UserRegistrationForm(request.POST)
 		if form.is_valid():
 			form.save()
+			user = authenticate(username = form.cleaned_data['username'], password = request.POST['password1'])
+			login(request, user)
 			return redirect('register-welcome')
 	else:
 		try:
@@ -46,6 +49,10 @@ def signup(request):
 	}, RequestContext(request))
 
 @login_required
+def welcome(request):
+	return render_to_response("register/welcome.html", {}, RequestContext(request))
+
+@login_required
 def ticket(request):
 	if request.method == "POST":
 		form = TicketForm(request.POST)
@@ -58,3 +65,17 @@ def ticket(request):
 	return render_to_response("register/ticket.html", {
 		"form": form,
 	}, RequestContext(request))
+
+@login_required
+def quit(request, do = None):
+	if do == "do":
+		try:
+			p = request.user.get_profile()
+			p.room = None
+			p.save()
+		except Presence.DoesNotExist:
+			pass
+
+		return render_to_response("register/quit_done.html", {}, RequestContext(request))
+
+	return render_to_response("register/quit_ask.html", {}, RequestContext(request))

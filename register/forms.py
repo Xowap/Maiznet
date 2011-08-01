@@ -78,16 +78,6 @@ class UserRegistrationForm(UserCreationForm):
 
 		return email
 
-	def clean_ticket(self):
-		ticket = self.cleaned_data["ticket"]
-
-		try:
-			Room.objects.get(ticket = ticket)
-		except Room.DoesNotExist:
-			raise ValidationError(_("No room exists with this ticket"))
-
-		return ticket
-
 	def save(self):
 		user = super(UserRegistrationForm, self).save()
 
@@ -110,3 +100,6 @@ class UserRegistrationForm(UserCreationForm):
 		user.groups.add(self.cleaned_data["promo"])
 
 		return user
+
+class UserModificationForm(UserRegistrationForm):
+	pass

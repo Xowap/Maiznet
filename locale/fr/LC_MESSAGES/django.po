@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-31 21:19+0200\n"
-"PO-Revision-Date: 2011-07-31 21:23+0100\n"
+"PO-Revision-Date: 2011-08-01 23:49+0100\n"
 "Last-Translator: Rémy Sanchez <remy.sanchez@hyperthese.net>\n"
 "Language-Team: Maiznet <maiznet@googlegroups.com>\n"
 "Language: \n"
@@ -35,7 +35,7 @@ msgstr "Prénom"
 
 #: register/forms.py:27
 msgid "Lastname"
-msgstr "Nom d'utilisateur"
+msgstr "Nom de famille"
 
 #: register/forms.py:28
 #, fuzzy

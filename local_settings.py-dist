@@ -1,5 +1,5 @@
 ########################################################################
-# vim: fileencoding=utf8 tw=72 ts=8 noexpandtab :
+# vim: fileencoding=utf8 ts=8 noexpandtab :
 #
 # ~~~~ Maiznet.fr ~~~~
 #
@@ -53,3 +53,9 @@ ADMIN_MEDIA_PREFIX = 'http://localhost/django-admin-media/'
 # à ne la montrer à personne !
 SECRET_KEY = '-=n$s1dyv_owh*ljvn9s5c^k42r$lcmokd!9(e6e@0^a9sme8v'
 
+# L'URL par défaut sur laquelle les utilisateurs sont redirigés après le
+# login.
+LOGIN_REDIRECT_URL = '/register/'
+
+# L'URL à laquelle se trouve le formulaire de login
+LOGIN_URL = '/register/login/'

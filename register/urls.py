@@ -23,4 +23,8 @@ urlpatterns = patterns('',
 	url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name="logout"),
 	url(r'^ticket/$', 'maiznet.register.views.ticket', name="register-ticket"),
 	url(r'^ticket/done$', direct_to_template, {'template': 'register/changeroom.html'}, name="register-changeroom"),
+	url(r'^password/$', 'django.contrib.auth.views.password_reset', {'template_name': 'register/password.html'}, name='register-pwreset'),
+	url(r'^password/done$', 'django.contrib.auth.views.password_reset_done', {'template_name': 'register/password_done.html'}, name='register-pwreset-done'),
+	url(r'^password/confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)$', 'django.contrib.auth.views.password_reset_confirm', {'template_name': 'register/password_confirm.html'}, name='register-pwreset-confirm'),
+	url(r'^password/complete$', 'django.contrib.auth.views.password_reset_complete', {'template_name': 'register/password_complete.html'}, name='register-pwreset-complete')
 )

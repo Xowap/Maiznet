@@ -59,3 +59,9 @@ LOGIN_REDIRECT_URL = '/register/'
 
 # L'URL à laquelle se trouve le formulaire de login
 LOGIN_URL = '/register/login/'
+
+# L'email à utiliser pour envoyer les mails automatiques pour les administrateurs
+SERVER_EMAIL = 'site-maiznet-auto@hyperthese.net'
+
+# L'email à utiliser dans les mails à destination des utilisateurs
+DEFAULT_FROM_EMAIL = 'site-maiznet-auto@hyperthese.net'

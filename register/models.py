@@ -36,3 +36,16 @@ class Presence(models.Model):
 class Promo(Group):
 	class Meta:
 		ordering = ['name']
+
+# Hacks
+# Ça sert à avoir une authentification insensible à la casse. On ne pose
+# pas de questions, merci.
+
+tmp = User.objects.get
+def hack_user_get(*args, **kwargs):
+	if 'username' in kwargs:
+		kwargs['username__iexact'] = kwargs['username']
+		del kwargs['username']
+
+	return tmp(*args, **kwargs)
+User.objects.get = hack_user_get

@@ -12,12 +12,18 @@
 # informations, see http://sam.zoy.org/wtfpl/COPYING
 ########################################################################
 
+from django.conf import settings
 from django.forms import Form, ModelForm, RegexField, ModelChoiceField, CharField, EmailField, ValidationError
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 from maiznet.register.models import Presence, Promo, Room
 from maiznet.register.fields import MacAddressField
+
+# TODO faire une vraie fonction
+def ip_to_mac(ip):
+	print ip
+	return '00:fa:ce:de:ca:ca'
 
 def validate_ticket(value):
 	# Vérifie le format
@@ -62,7 +68,7 @@ class UserRegistrationForm(UserCreationForm):
 	first_name = CharField(label = _("Firstname"), max_length = 30)
 	last_name  = CharField(label = _("Lastname"), max_length = 30)
 	email      = EmailField(label = _("Email"))
-	promo      = ModelChoiceField(label = _("Promo"), queryset = Promo.objects.all(), empty_label = _("(None)"), required = False)
+	promo      = ModelChoiceField(label = _("Promo"), help_text = _('Your promo'), queryset = Promo.objects.all(), empty_label = _("(None)"), required = False)
 	ticket     = CharField(max_length = 14, validators = [validate_ticket])
 	netif      = MacAddressField(label = _("MAC Address"), help_text = _("This is the MAC address of your network card. If unsure, keep the default value."), required = False)
 
@@ -101,5 +107,80 @@ class UserRegistrationForm(UserCreationForm):
 
 		return user
 
-class UserModificationForm(UserRegistrationForm):
-	pass
+class UserModificationForm(ModelForm):
+	first_name = CharField(label = _("Firstname"), max_length = 30)
+	last_name  = CharField(label = _("Lastname"), max_length = 30)
+	email = EmailField(label = _("Email"))
+	promo = ModelChoiceField(label = _("Promo"), help_text = _('Your promo'), queryset = Promo.objects.all(), empty_label = _("(None)"), required = False)
+	netif = MacAddressField(label = _("MAC Address"), help_text = _("This is the MAC address of your network card. If unsure, keep the default value. If you are using a new mac address, it has been added to the list, but you should still save."), required = False)
+
+	class Meta:
+		model = User
+		fields = ("id", "first_name", "last_name", "email")
+
+	def _get_user_promo(self, user):
+		promo = None
+		for group in user.groups.all():
+			try:
+				promo = Promo.objects.get(pk = group.pk)
+				break
+			except Promo.DoesNotExist:
+				pass
+
+		return promo
+
+	def __init__(self, data = None, files = None, instance = None, initial = None, remote_ip = None, *args, **kwargs):
+		if instance != None:
+			if initial == None:
+				initial = {}
+
+			# Il faut deviner la promo
+			initial['promo'] = self._get_user_promo(instance)
+
+			try:
+				p = instance.get_profile()
+			except Presence.DoesNotExist:
+				p = Presence(user = instance)
+
+			netif = p.netif
+			try:
+				import IPy
+
+				# TODO sortir les tests d'IP etc dans une lib externe (?)
+				if remote_ip != None and IPy.IPint(settings.MAIZ_IP_GUEST).overlaps(remote_ip) == 1:
+					mac = ip_to_mac(remote_ip)
+					if netif.find(mac) == -1:
+						if netif != '':
+							netif += ','
+						netif += mac
+			except:
+				pass
+
+			initial['netif'] = netif
+
+		super(UserModificationForm, self).__init__(data = data, files = files, instance = instance, initial = initial, *args, **kwargs)
+
+	def clean_email(self):
+		email = self.cleaned_data["email"]
+
+		if self.instance == None or self.instance.email != email:
+			if User.objects.filter(email = email).count() > 0:
+				raise ValidationError(_("A user with that email already exists."))
+
+		return email
+
+	def save(self):
+		user = super(UserModificationForm, self).save()
+
+		# Est-ce que l'utilisateur a changé de promo ?
+		promo = self._get_user_promo(user)
+		if promo != self.cleaned_data['promo']:
+			user.groups.remove(promo)
+			user.groups.add(self.cleaned_data['promo'])
+
+		# Et on met à jour sa carte réseau
+		p = user.get_profile()
+		p.netif = self.cleaned_data['netif']
+		p.save()
+
+		return user

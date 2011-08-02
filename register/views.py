@@ -16,7 +16,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
-from maiznet.register.forms import UserRegistrationForm, TicketForm
+from maiznet.register.forms import UserRegistrationForm, UserModificationForm, TicketForm
 from maiznet.register.models import Promo, Presence
 from django.contrib.auth import login
 
@@ -45,6 +45,20 @@ def signup(request):
 		})
 
 	return render_to_response("register/signup.html", {
+		"form": form,
+	}, RequestContext(request))
+
+@login_required
+def edit(request):
+	if request.method == "POST":
+		form = UserModificationForm(data = request.POST, instance = request.user)
+		if form.is_valid():
+			form.save()
+			return redirect('register-edit-done')
+	else:
+		form = UserModificationForm(instance = request.user, remote_ip = request.META['REMOTE_ADDR'])
+
+	return render_to_response("register/edit.html", {
 		"form": form,
 	}, RequestContext(request))
 

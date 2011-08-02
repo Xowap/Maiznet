@@ -78,3 +78,6 @@ INSTALLED_APPS = (
 	'maiznet.news',
 	'maiznet.register',
 )
+
+#MAIZ_IP_GUEST = "172.17.192.0/18"
+MAIZ_IP_GUEST = '127.0.0.0/24'

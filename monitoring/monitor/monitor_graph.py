@@ -33,7 +33,7 @@ class MonitorGraph(object):
 		"""
 		Récupère les données de la base de données
 		"""
-		self.cursor.execute("SELECT * FROM " + self.plugin + " ORDER BY date DESC") 
+		self.cursor.execute("SELECT * FROM %s ORDER BY date DESC" self.plugin) 
 		self.data = self.cursor.fetchall()
 	
 	def positionToSpeed(self):

@@ -82,8 +82,8 @@ class MonitorPlugin(object):
 		"""
 		hours = (datetime.now() - timedelta(hours=config.TIME/60),)
 		now = (datetime.now(),)
-		self.mp.cursor.execute('INSERT INTO ' + self.plugin + ' VALUES (null, "' + '", "'.join(self.values) + '", datetime(?))',(now))
-		self.mp.cursor.execute('DELETE FROM ' + self.plugin + ' WHERE datetime(date) <  datetime(?)', hours)
+		self.mp.cursor.execute('INSERT INTO %s VALUES (null, "%s", datetime(?))', self.plugin, '", "'.join(self.values), (now))
+		self.mp.cursor.execute('DELETE FROM %s WHERE datetime(date) <  datetime(?)', self.plugin, hours)
 	
 	def retreiveValues(self):
 		""" Utilisé pour les tests uniquement """
@@ -93,7 +93,7 @@ def ifacePluginDB(names):
 	connection = sqlite.connect(config.DATABASE)
 	cursor = connection.cursor()
 	for name in names :
-		cursor.execute('CREATE TABLE ' + name + ' (id INTEGER PRIMARY KEY, `in` INTEGER, out INTEGER, date DATETIME)')
+		cursor.execute('CREATE TABLE %s (id INTEGER PRIMARY KEY, `in` INTEGER, out INTEGER, date DATETIME)', name)
 	connection.commit()
 	connection.close()
 

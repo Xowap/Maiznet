@@ -19,11 +19,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 from maiznet.register.models import Presence, Promo, Room
 from maiznet.register.fields import MacAddressField
-
-# TODO faire une vraie fonction
-def ip_to_mac(ip):
-	print ip
-	return '00:fa:ce:de:ca:ca'
+from maiznet.register.tipmac import ip_to_mac
 
 def validate_ticket(value):
 	# Vérifie le format
@@ -144,15 +140,11 @@ class UserModificationForm(ModelForm):
 
 			netif = p.netif
 			try:
-				import IPy
-
-				# TODO sortir les tests d'IP etc dans une lib externe (?)
-				if remote_ip != None and IPy.IPint(settings.MAIZ_IP_GUEST).overlaps(remote_ip) == 1:
-					mac = ip_to_mac(remote_ip)
-					if netif.find(mac) == -1:
-						if netif != '':
-							netif += ','
-						netif += mac
+				mac = ip_to_mac(remote_ip)
+				if netif.find(mac) == -1:
+					if netif != '':
+						netif += ','
+					netif += mac
 			except:
 				pass
 

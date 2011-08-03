@@ -65,3 +65,10 @@ SERVER_EMAIL = 'site-maiznet-auto@hyperthese.net'
 
 # L'email à utiliser dans les mails à destination des utilisateurs
 DEFAULT_FROM_EMAIL = 'site-maiznet-auto@hyperthese.net'
+
+# Serveur de correspondance IP/MAC
+TIPMAC_SERVER = "172.17.0.3"
+TIPMAC_PORT = 1337
+
+# IP invitées de Maiz
+MAIZ_IP_GUEST = '172.17.192.0/18'

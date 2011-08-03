@@ -16,14 +16,10 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 from maiznet.register.forms import UserRegistrationForm, UserModificationForm, TicketForm
 from maiznet.register.models import Promo, Presence
-from django.contrib.auth import login
-
-# TODO faire une vraie fonction
-def ip_to_mac(ip):
-	print ip
-	return '00:1f:16:b6:9a:ac'
+from maiznet.register.tipmac import ip_to_mac
 
 def signup(request):
 	if request.method == "POST":
@@ -39,8 +35,13 @@ def signup(request):
 		except:
 			promo = None
 
+		try:
+			mac = ip_to_mac(request.META['REMOTE_ADDR'])
+		except:
+			mac = None
+
 		form = UserRegistrationForm(initial = {
-			'netif': ip_to_mac(request.META['REMOTE_ADDR']),
+			'netif': mac,
 			'promo': promo
 		})
 

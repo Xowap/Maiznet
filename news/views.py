@@ -7,6 +7,7 @@
 #
 #
 # Copyright 2011 Rémy Sanchez <remy.sanchez@hyperthese.net>
+# Copyright 2011 Grégoire Leroy <gregoire.leroy@retenodus.net>
 #
 # This file is distributed under the terms of the WTFPL. For more
 # informations, see http://sam.zoy.org/wtfpl/COPYING

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr"><!-- TODO: penser à mettre la langue vraiment utilisée sur la page à la place -->
+<html lang="{{ LANGUAGE_CODE }}">
 {% load i18n %}
 
 	<head>
@@ -40,6 +40,12 @@
 					<li><a href="{% url register-index %}">{% trans "Register" %}</a></li>
 					<li><a href="#">{% trans "About" %}</a></li>
 					<li><a href="#">{% trans "Monitoring" %}</a></li>
+
+					{% if user.is_authenticated %}
+					<li>{{ user }} (<a href="{% url logout %}">{% trans "Log Out" %}</a>)</li>
+					{% else %}
+					<li><a href="{% url login %}">{% trans "Log In" %}</a></li>
+					{% endif %}
 				</ul>
 			</nav>
 		</header>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %} - {% trans "Info Edit" %}{% endblock %}
+{% block content-title %}{% trans "Edit your informations" %}{% endblock %}
+
+{% block content %}
+<section>
+	<form method="post" action="">
+		{% csrf_token %}
+
+		{% for hidden in form.hidden_fields %}
+			{{ hidden }}
+		{% endfor %}
+
+		<table>
+			<tr>
+				<th>{% trans "Username" %}</th>
+				<td>{{ user.username }}</th>
+			</tr>
+
+			<tr>
+				<th>{% trans "Room" %}</th>
+				<td>
+					{% if user.get_profile.room %}
+					{{ user.get_profile.room }}
+					{% else %}
+					{% trans "(No room assigned)" %}
+					{% endif %}
+				</td>
+			</tr>
+
+			<tr>
+				<th>{% trans "Password" %}:</th>
+				<td><a href="{% url register-pwchange %}">{% trans "Change password" %}</a></td>
+			</tr>
+
+			{{ form.as_table }}
+			<tr>
+				<td colspan="2"><input type="submit" value="{% trans "Edit" %}" /></td>
+			</tr>
+		</table>
+	</form>
+</section>
+{% endblock %}
+

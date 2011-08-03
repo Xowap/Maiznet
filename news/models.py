@@ -17,17 +17,18 @@ from datetime import datetime
 
 class Category(models.Model):
 	name = models.CharField(max_length = 40)
+	slug = models.SlugField(max_length = 40)
 
 	def __unicode__(self):
 		return self.name
 	
 	class Meta:
-		verbose_name_plural = "Categories"
+		verbose_name_plural = _("Categories")
 
 class News(models.Model):
 	title = models.CharField(max_length = 40)
 	slug = models.SlugField(max_length = 40)
-	content = models.TextField(max_length = 140)
+	content = models.TextField(max_length = 1400)
 	category = models.ForeignKey(Category)
 	date_start = models.DateTimeField(default = datetime.now, blank = True)
 	date_end = models.DateTimeField(blank = True, null = True, default = None)
@@ -37,4 +38,4 @@ class News(models.Model):
 
 	class Meta:
 		ordering = ["-date_start"]
-		verbose_name_plural = "News"
+		verbose_name_plural = _("News")

@@ -13,5 +13,9 @@ from django.contrib import admin
 
 class NewsAdmin(admin.ModelAdmin):
 	prepopulated_fields = {"slug" : ("title",)}
-admin.site.register(Category)
+
+class CategoryAdmin(admin.ModelAdmin):
+	prepopulated_fields = {"slug" : ("name",)}
+
+admin.site.register(Category,CategoryAdmin)
 admin.site.register(News, NewsAdmin)

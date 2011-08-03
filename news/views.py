@@ -16,10 +16,11 @@ from datetime import datetime, timedelta
 from maiznet.news.models import News
 from django.shortcuts import render_to_response
 from django.db.models import Q
+from django.template import RequestContext
 
 def print_news(request):
 	news = News.objects.filter(
 		Q(date_end__gte =  datetime.now() - timedelta(hours=2)) | Q(date_end = None),
 		date_start__lte = datetime.now() + timedelta(days=3)
 	)[0:20]
-	return render_to_response('news/index.html', { 'news' : news })
+	return render_to_response('news/index.html', { 'news' : news },context_instance=RequestContext(request))

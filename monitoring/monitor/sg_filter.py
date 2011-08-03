@@ -1,3 +1,6 @@
+#-*- coding:utf-8 -*-
+# Code trouvé sur http://procoders.net. Licence non trouvée
+
 from math import *
 from numpy import *
 

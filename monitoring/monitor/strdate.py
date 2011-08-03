@@ -1,3 +1,12 @@
+########################################################################
+# vim: fileencoding=utf-8 ts=8 noexpandtab :
+#
+# ~~~~ Maiznet.fr ~~~~
+#
+# Copyright 2008 Arial Balkan http://aralbalkan.com
+#
+# This file is distributed under the terms of the Creative Commons Attribution-Noncommercial 2.0 UK: England License.
+########################################################################
 import re
 from datetime import datetime
  

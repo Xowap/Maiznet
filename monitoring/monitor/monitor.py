@@ -1,4 +1,14 @@
-#-*- coding:utf-8 -*-
+########################################################################
+# vim: fileencoding=utf-8 ts=8 noexpandtab :
+#
+# ~~~~ Maiznet.fr ~~~~
+#
+# Copyright 2011 Grégoire Leroy <gregoire.leroy@retenodus.net>
+#
+# This file is distributed under the terms of the WTFPL. For more
+# informations, see http://sam.zoy.org/wtfpl/COPYING
+########################################################################
+
 import config
 import socket
 from sqlite3 import dbapi2 as sqlite
@@ -58,7 +68,6 @@ class MonitorPlugin(object):
 	def __init__(self,plugin,monitorprotocol):
 		self.plugin = plugin
 		self.mp = monitorprotocol
-	
 
 	def fetchValue(self, function = lambda values : values):
 		"""

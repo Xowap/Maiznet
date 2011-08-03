@@ -1,4 +1,14 @@
-#-*- coding:utf-8 -*-
+########################################################################
+# vim: fileencoding=utf-8 ts=8 noexpandtab :
+#
+# ~~~~ Maiznet.fr ~~~~
+#
+# Copyright 2011 Grégoire Leroy <gregoire.leroy@retenodus.net>
+#
+# This file is distributed under the terms of the WTFPL. For more
+# informations, see http://sam.zoy.org/wtfpl/COPYING
+########################################################################
+
 import config
 import matplotlib
 matplotlib.use('Agg')
@@ -80,4 +90,4 @@ for plugin in config.PLUGINS :
 	mg.getData()
 	mg.positionToSpeed()
 	mg.gen_picture(config.IMAGES_PATH + '/' + plugin, width = 800, decoration = True)
-	m.gen_picture(config.IMAGES_PATH + '/mini_' + plugin, width = 200, decoration = False)
+	mg.gen_picture(config.IMAGES_PATH + '/mini_' + plugin, width = 200, decoration = False)

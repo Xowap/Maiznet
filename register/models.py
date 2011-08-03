@@ -48,3 +48,30 @@ def hack_user_get(*args, **kwargs):
 
 	return _tmp(*args, **kwargs)
 User.objects.get = hack_user_get
+
+# Là ça sert à avoir des mots de passe stockés en quasi-cleartext...
+# C'est pas une bonne idée je sais, un jour faudra faire mieux, mais là
+# c'est la moins pire qu'on ait pour pouvoir brancher sur la base des
+# services inconnus dont on ne sait pas s'ils vont gérer ce hash là en
+# particulier ou pas.
+
+from django.utils.encoding import smart_str
+import django.contrib.auth.models
+
+# Encodage d'une chaîne en hexadeciman
+def _hexstr(s):
+	return "".join([hex(ord(x))[2:] for x in smart_str(s)]).upper()
+
+# Remplacement pour la méthode de hashage
+def _hack_set_password(self, raw_password):
+	self.password = 'maiz$$%s' % _hexstr(raw_password)
+User.set_password = _hack_set_password
+
+# Remplacement pour la méthode de vérification du hash
+_orig_get_hexdigest = django.contrib.auth.models.get_hexdigest
+def _hack_get_hexdigest(algorithm, salt, raw_password):
+	if algorithm == 'maiz':
+		return _hexstr(raw_password)
+	else:
+		return _orig_get_hexdigest(algorithm, salt, raw_password)
+django.contrib.auth.models.get_hexdigest = _hack_get_hexdigest

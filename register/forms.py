@@ -80,6 +80,12 @@ class UserRegistrationForm(UserCreationForm):
 
 		return email
 
+	def clean_password2(self):
+		p = super(UserRegistrationForm, self).clean_password2()
+		if len(p) > 61:
+			raise ValidationError(_("Your password should not be longer than 61 characters"))
+		return p
+
 	def save(self):
 		user = super(UserRegistrationForm, self).save()
 

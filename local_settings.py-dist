@@ -1,5 +1,5 @@
 ########################################################################
-# vim: fileencoding=utf8 tw=72 ts=8 noexpandtab :
+# vim: fileencoding=utf8 ts=8 noexpandtab :
 #
 # ~~~~ Maiznet.fr ~~~~
 #
@@ -53,3 +53,22 @@ ADMIN_MEDIA_PREFIX = 'http://localhost/django-admin-media/'
 # à ne la montrer à personne !
 SECRET_KEY = 'plop'
 
+# L'URL par défaut sur laquelle les utilisateurs sont redirigés après le
+# login.
+LOGIN_REDIRECT_URL = '/register/'
+
+# L'URL à laquelle se trouve le formulaire de login
+LOGIN_URL = '/register/login/'
+
+# L'email à utiliser pour envoyer les mails automatiques pour les administrateurs
+SERVER_EMAIL = 'site-maiznet-auto@hyperthese.net'
+
+# L'email à utiliser dans les mails à destination des utilisateurs
+DEFAULT_FROM_EMAIL = 'site-maiznet-auto@hyperthese.net'
+
+# Serveur de correspondance IP/MAC
+TIPMAC_SERVER = "172.17.0.3"
+TIPMAC_PORT = 1337
+
+# IP invitées de Maiz
+MAIZ_IP_GUEST = '172.17.192.0/18'

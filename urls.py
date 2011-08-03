@@ -1,5 +1,5 @@
 ########################################################################
-# vim: fileencoding=utf-8 tw=72 ts=8 noexpandtab :
+# vim: fileencoding=utf-8 ts=8 noexpandtab :
 #
 # ~~~~ Maiznet.fr ~~~~
 #
@@ -15,7 +15,6 @@
 from django.conf.urls.defaults import *
 from django.views.generic.simple import redirect_to
 
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 

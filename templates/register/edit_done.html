@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %} - {% trans "Edition done" %}{% endblock %}
+{% block content-title %}{% trans "Your data have been edited" %}{% endblock %}
+
+{% block content %}
+<article>
+	{% blocktrans with user as user %}
+	<p>Congratulations <strong>{{ user }}</strong>, your account has
+	been updated. If you added a network card in the list, you can
+	wait a few minutes and re-start the network connection of the
+	computer that you added, in order to have Internet enabled on
+	it.</p>
+	{% endblocktrans %}
+
+	<p><a href="{% url register-edit %}">{% trans "Back to profile edition" %}</a></p>
+</article>
+{% endblock %}
+

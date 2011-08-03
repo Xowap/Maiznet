@@ -1,5 +1,5 @@
 ########################################################################
-# vim: fileencoding=utf-8 tw=72 ts=8 noexpandtab :
+# vim: fileencoding=utf-8 ts=8 noexpandtab :
 #
 # ~~~~ Maiznet.fr ~~~~
 #
@@ -22,7 +22,12 @@ MANAGERS = ADMINS
 SITE_ID = 1
 
 # Code de langage
-LANGUAGE_CODE = 'fr'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = (
+	('fr', 'Français'),
+	('en', 'English'),
+)
 
 # On utilise l'internationalisation (et oui, il y a des étranger qui
 # viennent à Maiz, il est important d'avoir au moins une version
@@ -37,6 +42,9 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = relpath + '/media/'
 
+# Profil des utilisateurs
+AUTH_PROFILE_MODULE = "register.Presence"
+
 # Liste des fonctions qui peuvent importer des templates depuis diverses
 # sources.
 TEMPLATE_LOADERS = (
@@ -45,8 +53,9 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-	'django.middleware.common.CommonMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.locale.LocaleMiddleware',
+	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',

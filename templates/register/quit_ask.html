@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %} - {% trans "Leaving Maiz" %}{% endblock %}
+{% block content-title %}{% trans "Leaving Maiz" %}{% endblock %}
+
+{% block content %}
+<section>
+	<p>{% trans "This will free your room, and disable your Internet access. You should only use this when leaving Maiz." %}</p>
+
+	<ul>
+		<li><a href="{% url register-quit do='do' %}">{% trans "Procceed" %}</a></li>
+		<li><a href="{% url register-index %}">{% trans "Take me back" %}</a></li>
+	</ul>
+</section>
+{% endblock %}

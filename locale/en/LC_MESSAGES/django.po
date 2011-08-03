@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-30 21:37+0200\n"
+"POT-Creation-Date: 2011-08-02 01:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,30 +17,329 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: templates/main.html:7 templates/main.html.py:31
+#: register/forms.py:27
+msgid "The ticket should be formated like xxxx-xxxx-xxxx, with x being a digit"
+msgstr ""
+
+#: register/forms.py:33
+msgid "No room exists with this ticket"
+msgstr ""
+
+#: register/forms.py:59
+msgid "Username"
+msgstr ""
+
+#: register/forms.py:60
+msgid ""
+"Required. 30 characters or fewer. Begins and ends with a letter and can "
+"contain letters, digits, _ and -."
+msgstr ""
+
+#: register/forms.py:61
+msgid ""
+"This value must begin and end with a letter and can contain letters, digits, "
+"and _/-"
+msgstr ""
+
+#: register/forms.py:62
+msgid "Firstname"
+msgstr ""
+
+#: register/forms.py:63
+msgid "Lastname"
+msgstr ""
+
+#: register/forms.py:64
+msgid "Email"
+msgstr ""
+
+#: register/forms.py:65
+msgid "Promo"
+msgstr ""
+
+#: register/forms.py:65
+msgid "(None)"
+msgstr ""
+
+#: register/forms.py:67
+msgid "MAC Address"
+msgstr ""
+
+#: register/forms.py:67
+msgid ""
+"This is the MAC address of your network card. If unsure, keep the default "
+"value."
+msgstr ""
+
+#: register/forms.py:77
+msgid "A user with that email already exists."
+msgstr ""
+
+#: register/models.py:19
+msgid "room number"
+msgstr ""
+
+#: register/models.py:19
+msgid "Number of the room, written on the door."
+msgstr ""
+
+#: register/models.py:20
+msgid "ticket"
+msgstr ""
+
+#: register/models.py:20
+msgid "A unique identifier that was given to you with your key."
+msgstr ""
+
+#: register/models.py:28
+msgid "network interface"
+msgstr ""
+
+#: register/models.py:32
+#, python-format
+msgid "Room %(room)s"
+msgstr ""
+
+#: register/models.py:34
+msgid "(No room assigned)"
+msgstr ""
+
+#: templates/base.html:7 templates/base.html.py:31
 msgid "Maiznet"
 msgstr ""
 
-#: templates/main.html:32
+#: templates/base.html:32
 msgid "The website that's good"
 msgstr ""
 
-#: templates/main.html:37
+#: templates/base.html:36
+msgid "Main Menu"
+msgstr ""
+
+#: templates/base.html:39 templates/news/index.html:5
+#: templates/news/index.html.py:6
 msgid "News"
 msgstr ""
 
-#: templates/main.html:38
+#: templates/base.html:40 templates/register/index.html:5
+#: templates/register/index.html.py:6
 msgid "Register"
 msgstr ""
 
-#: templates/main.html:39
+#: templates/base.html:41
 msgid "About"
 msgstr ""
 
-#: templates/main.html:40
+#: templates/base.html:42
 msgid "Monitoring"
 msgstr ""
 
-#: templates/main.html:47
+#: templates/base.html:45
+msgid "Log Out"
+msgstr ""
+
+#: templates/base.html:47 templates/register/login.html:5
+#: templates/register/login.html.py:6 templates/register/login.html:28
+#: templates/register/ticket.html:5 templates/register/ticket.html.py:6
+msgid "Log In"
+msgstr ""
+
+#: templates/base.html:55
 msgid "What a wonderful sidebar"
+msgstr ""
+
+#: templates/register/changeroom.html:5
+msgid "Room Change"
+msgstr ""
+
+#: templates/register/changeroom.html:6
+msgid "Your Room Has Been Changed"
+msgstr ""
+
+#: templates/register/changeroom.html:10
+#, python-format
+msgid ""
+"\n"
+"\t<p>The ticket you have entered has been taken in account. You\n"
+"\tare now registered in room <strong>%(room)s</strong>.</p>\n"
+"\n"
+"\t<p>In order for the modification to take effect, please wait a\n"
+"\tfew minutes, and restart your network connection.</p>\n"
+"\t"
+msgstr ""
+
+#: templates/register/index.html:10
+msgid "Welcome to Maiz's network !"
+msgstr ""
+
+#: templates/register/index.html:12
+msgid ""
+"\n"
+"\t<p>We want Maiznet to be as near as possible to the network that\n"
+"\tyou could have at home. However, there is 150 persons in Maiz,\n"
+"\twhich draws some constraints. Therefore, to ensure a network of\n"
+"\tgood quality and well secured, users are required to register on\n"
+"\tthis website before they can access the Internet.</p>\n"
+"\n"
+"\t<p>It should be quick and painless !</p>\n"
+"\t"
+msgstr ""
+
+#: templates/register/index.html:22
+msgid "What is your situation ?"
+msgstr ""
+
+#: templates/register/index.html:25
+msgid "I'm coming to Maiz for the first time"
+msgstr ""
+
+#: templates/register/index.html:26
+msgid "I changed my room and I don't have Internet anymore"
+msgstr ""
+
+#: templates/register/index.html:27
+msgid "I would like to change informations regarding myself"
+msgstr ""
+
+#: templates/register/index.html:28
+msgid "I lost my password !"
+msgstr ""
+
+#: templates/register/index.html:29
+msgid "I'm going away from Maiz."
+msgstr ""
+
+#: templates/register/login.html:11
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: templates/register/password.html:5 templates/register/password.html.py:6
+#: templates/register/password_confirm.html:5
+msgid "Password Reset"
+msgstr ""
+
+#: templates/register/password.html:10
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/register/password.html:14
+msgid "E-mail address:"
+msgstr ""
+
+#: templates/register/password.html:14
+msgid "Reset my password"
+msgstr ""
+
+#: templates/register/password_complete.html:5
+#: templates/register/password_complete.html:6
+msgid "Password Reset Complete"
+msgstr ""
+
+#: templates/register/password_complete.html:10
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: templates/register/password_confirm.html:9
+msgid "Enter new password"
+msgstr ""
+
+#: templates/register/password_confirm.html:11
+msgid "Invalid Reset Link"
+msgstr ""
+
+#: templates/register/password_confirm.html:18
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: templates/register/password_confirm.html:22
+msgid "New password:"
+msgstr ""
+
+#: templates/register/password_confirm.html:24
+msgid "Confirm password:"
+msgstr ""
+
+#: templates/register/password_confirm.html:25
+msgid "Change my password"
+msgstr ""
+
+#: templates/register/password_confirm.html:28
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: templates/register/password_done.html:5
+#: templates/register/password_done.html:6
+msgid "Password Reset Successful"
+msgstr ""
+
+#: templates/register/password_done.html:10
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+
+#: templates/register/quit_ask.html:5 templates/register/quit_ask.html.py:6
+#: templates/register/quit_done.html:5 templates/register/quit_done.html:6
+msgid "Leaving Maiz"
+msgstr ""
+
+#: templates/register/quit_ask.html:10
+msgid ""
+"This will free your room, and disable your Internet access. You should only "
+"use this when leaving Maiz."
+msgstr ""
+
+#: templates/register/quit_ask.html:13
+msgid "Procceed"
+msgstr ""
+
+#: templates/register/quit_ask.html:14
+msgid "Take me back"
+msgstr ""
+
+#: templates/register/quit_done.html:10
+msgid ""
+"You are no longer registered in a room, however your account remains "
+"available. You will be able to use it again next year with a new ticket."
+msgstr ""
+
+#: templates/register/signup.html:5 templates/register/signup.html.py:16
+msgid "Sign Up"
+msgstr ""
+
+#: templates/register/signup.html:6
+msgid "Sign Up to Maiz Network"
+msgstr ""
+
+#: templates/register/ticket.html:11
+msgid "Your ticket is invalid."
+msgstr ""
+
+#: templates/register/ticket.html:21
+msgid "Change Room"
+msgstr ""
+
+#: templates/register/welcome.html:5
+msgid "Welcome"
+msgstr ""
+
+#: templates/register/welcome.html:6
+msgid "Welcome to Maiz's Network"
+msgstr ""
+
+#: templates/register/welcome.html:10
+#, python-format
+msgid ""
+"\n"
+"\t<p>Congratulations <strong>%(user)s</strong>, you have now signed up\n"
+"\tto Maiz's Network!  Now you should wait a few minutes, restart your\n"
+"\tnetwork connection (simply re-plug the cable!), and you should be able\n"
+"\tto access the Internet!</p>\n"
+"\t"
 msgstr ""

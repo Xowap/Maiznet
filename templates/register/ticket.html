@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %} - {% trans "Log In" %}{% endblock %}
+{% block content-title %}{% trans "Log In" %}{% endblock %}
+
+{% block content %}
+<section>
+	{% if form.errors %}
+	<p>{% trans "Your ticket is invalid." %}</p>
+	{% endif %}
+
+	<form method="post" action="{% url register-ticket %}">
+		{% csrf_token %}
+
+		<table>
+			{{ form.as_table }}
+		</table>
+
+		<input type="submit" value="{% trans "Change Room" %}" />
+	</form>
+</section>
+{% endblock %}
+

@@ -3,7 +3,7 @@
 #
 # ~~~~ Maiznet.fr ~~~~
 #
-#  -> news/urls.py
+#  -> register/fields.py
 #
 #
 # Copyright 2011 Rémy Sanchez <remy.sanchez@hyperthese.net>
@@ -12,9 +12,12 @@
 # informations, see http://sam.zoy.org/wtfpl/COPYING
 ########################################################################
 
-from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
+from django.forms import RegexField
 
-urlpatterns = patterns('',
-	url(r'^$', 'maiznet.news.views.print_news', name="news-index")
-)
+class MacAddressField(RegexField):
+	def __init__(self, *args, **kwargs):
+		super(MacAddressField, self).__init__(regex = r'^(([0-9a-f]{2}:){5}[0-9a-f]{2},)*([0-9a-f]{2}:){5}[0-9a-f]{2}$', *args, **kwargs)
+
+	def clean(self, value):
+		value = value.replace(" ", "").replace("-", ":").lower()
+		return super(MacAddressField, self).clean(value)

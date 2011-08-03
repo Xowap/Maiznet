@@ -1,19 +1,17 @@
 #-*- coding:utf-8 -*-
+import config
 import socket
 from sqlite3 import dbapi2 as sqlite
 from datetime import datetime, timedelta
-import os
-
-relpath = os.path.dirname(os.path.realpath(__file__))
 
 class MonitorProtocol(object):
 	"""
 	Je gère le protocole de Monitor. Je prend en paramètre l'adresse IP et le port auxquels me connecter.
 	"""
-	def __init__(self,port=4949,ip_server="192.168.0.1",basepath):
-		self.ip_server = ip_server
-		self.port = port
-		self.connection = sqlite.connect(basepath)
+	def __init__(self):
+		self.ip_server = config.IP_MUNIN
+		self.port = config.PORT_MUNIN
+		self.connection = sqlite.connect(config.DATABASE)
 		self.cursor = self.connection.cursor()
 
 	def fetchValue(self, plugin):
@@ -39,7 +37,7 @@ class MonitorProtocol(object):
 			raise Exception("Mauvaises données reçues")
 
 		# Le protocole Munin contient la commande fetch qui permet de récupérer des données
-		s.send("fetch " + plugin + '\r\n')
+		s.send("fetch %s \r\n" % plugin)
 		try : 
 			# La fin de la sortie d'une commande se termine toujours par "\n.\n"
 			while "\n.\n" not in data :
@@ -51,10 +49,6 @@ class MonitorProtocol(object):
 		s.send("quit\n")
 		s.close()
 		return values
-
-	def commitDB(self):
-		self.connection.commit()
-		
 
 	def closeDB(self):
 		self.connection.commit()
@@ -77,8 +71,7 @@ class MonitorPlugin(object):
 		"""
 		Insère les valeurs dans la base de données
 		"""
-		week = (datetime.now() - timedelta(days=7),)
-		hours = (datetime.now() - timedelta(hours=2),)
+		hours = (datetime.now() - timedelta(hours=config.TIME/60),)
 		now = (datetime.now(),)
 		self.mp.cursor.execute('INSERT INTO ' + self.plugin + ' VALUES (null, "' + '", "'.join(self.values) + '", datetime(?))',(now))
 		self.mp.cursor.execute('DELETE FROM ' + self.plugin + ' WHERE datetime(date) <  datetime(?)', hours)
@@ -87,22 +80,23 @@ class MonitorPlugin(object):
 		""" Utilisé pour les tests uniquement """
 		self.mp.cursor.execute('SELECT * FROM if_re1')
 
-def ifacePluginDB(names,basepath = "/root/monitor/monitor.db"):
-	connection = sqlite.connect(basepath)
+def ifacePluginDB(names):
+	connection = sqlite.connect(config.DATABASE)
 	cursor = connection.cursor()
 	for name in names :
 		cursor.execute('CREATE TABLE ' + name + ' (id INTEGER PRIMARY KEY, `in` INTEGER, out INTEGER, date DATETIME)')
 	connection.commit()
 	connection.close()
 
-# La ligne suivante ne doit être décommentée que s'il faut réinstalle la bdd
-#ifacePluginDB(["if_re1","if_re2","if_re3"])
-ifaceplugins = ["if_re1","if_re2","if_re3"]
+try :
+	rfile = open(config.DATABASE,"r")
+	rfile.close()
+except:
+	ifacePluginDB(config.PLUGINS)
+
 mprot = MonitorProtocol()
-for plugin in ifaceplugins :
-	mplug = MonitorPlugin(plugin,mprot,relpath+"/monitor.db")
+for plugin in config.PLUGINS :
+	mplug = MonitorPlugin(plugin,mprot)
 	mplug.fetchValue(function= lambda values : [str(int(value)/1024) for value in values])
 	mplug.insertValues()
-	mprot.commitDB()
-#mplug.retreiveValues()
 mprot.closeDB()

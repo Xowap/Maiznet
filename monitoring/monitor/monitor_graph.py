@@ -1,4 +1,5 @@
 #-*- coding:utf-8 -*-
+import config
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -6,21 +7,17 @@ import sg_filter
 from sqlite3 import dbapi2 as sqlite
 from strdate import parseDateTime  
 import datetime
-import os
-
-relpath = os.path.dirname(os.path.realpath(__file__))
 
 class MonitorGraph(object):
 	"""
 	Je trace le graphe
 	"""
-	def __init__(self,plugin,basepath,savepath):
-		self.connection = sqlite.connect(basepath)
+	def __init__(self,plugin):
+		self.connection = sqlite.connect(config.DATABASE)
 		self.cursor = self.connection.cursor()
 		self.plugin = plugin
 		self.now = datetime.datetime.now()
-		self.coeff = sg_filter.calc_coeff(30,19)
-		self.savepath = svepath
+		self.coeff = sg_filter.calc_coeff(config.LISSAGE_NUM_POINTS,config.LISSAGE_COEFF)
 	
 	def getData(self):
 		"""
@@ -51,32 +48,36 @@ class MonitorGraph(object):
 				(datetime.datetime.now()-date1).seconds/60
 				
 			])
-	
-	def miniature(self,width):
-		plt.savefig(self.savepath+"mini_"+self.plugin+".png",dpi=width/8)
 
-	def traceSpeed(self,minutes):
+	def gen_picture(file_,width,decoration):
 		"""
-			Trace le graphe.
+		Génère une image
 		"""
+
 		times = [speed[2] for speed in self.speed]
+
+		# Lissage de la courbe
 		intrafic = sg_filter.smooth([speed[0] for speed in self.speed],self.coeff)
 		outtrafic = sg_filter.smooth([speed[1] for speed in self.speed],self.coeff)
+		
 		plt.plot(times, intrafic,"k-",
 			times, outtrafic,"b-")
 		plt.fill_between(times,intrafic,0,color='g')
-		debitmax = max([max(intrafic),max(outtrafic)])
-		plt.axis([minutes,0,0,debitmax + debitmax/10])
 		
-		self.miniature(200)
+		# Calcul des axes
+		debitmax = max([max(intrafic),max(outtrafic)])
+		plt.axis([config.TIME,0,0,debitmax + debitmax/10])
+		
+		if not decoration:
+			plt.axis('off')
+		else :
+			plt.xlabel("Temps ecoule(en minutes)")
+			plt.ylabel("Debit (en ko/s)")
+		plt.savefig(file_,dpi=width/8)
 
-		plt.xlabel("Temps ecoule(en minutes)")
-		plt.ylabel("Debit (en ko/s)")
-		plt.savefig(self.savepath+self.plugin+".png")
-
-ifaces=["if_re1","if_re2","if_re3"]
-for iface in ifaces :
-	mg = MonitorGraph(iface,relpath+"/monitor.db",relpath+"../../templates/monitoring/")
+for plugin in config.PLUGINS :
+	mg = MonitorGraph(plugin)
 	mg.getData()
 	mg.positionToSpeed()
-	mg.traceSpeed(120)
+	mg.gen_picture(config.IMAGES_PATH + '/' + plugin, width = 800, decoration = True)
+	m.gen_picture(config.IMAGES_PATH + '/mini_' + plugin, width = 200, decoration = False)

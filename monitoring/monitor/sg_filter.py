@@ -50,24 +50,3 @@ def smooth(signal, coeff):
     N = (size(coeff)-1)/2
     res = convolve(signal, coeff)
     return res[N:-N]
-
-#if __name__ == "__main__":
-#
-#    x=arange(0, 10., .1)
-#    y=sin(x)
-#    coeff = calc_coeff(5, 2, diff_order=1)
-#    yPrime=smooth(y, coeff)
-#
-#    # calibrate due to unknown correction
-#    # factor:
-#    N = len(x)
-#    dy =cos(x)  # exakt
-#    corrfac = dy[N/2]/yPrime[N/2]
-#
-#    import pylab
-#    pylab.plot(x,y)
-#    pylab.plot(x,corrfac*yPrime)
-#    pylab.show()
-
-
-    

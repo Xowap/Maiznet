@@ -2,12 +2,15 @@
 import socket
 from sqlite3 import dbapi2 as sqlite
 from datetime import datetime, timedelta
+import os
+
+relpath = os.path.dirname(os.path.realpath(__file__))
 
 class MonitorProtocol(object):
 	"""
 	Je gère le protocole de Monitor. Je prend en paramètre l'adresse IP et le port auxquels me connecter.
 	"""
-	def __init__(self,port=4949,ip_server="192.168.0.1",basepath="/root/monitor/monitor.db"):
+	def __init__(self,port=4949,ip_server="192.168.0.1",basepath):
 		self.ip_server = ip_server
 		self.port = port
 		self.connection = sqlite.connect(basepath)
@@ -97,7 +100,7 @@ def ifacePluginDB(names,basepath = "/root/monitor/monitor.db"):
 ifaceplugins = ["if_re1","if_re2","if_re3"]
 mprot = MonitorProtocol()
 for plugin in ifaceplugins :
-	mplug = MonitorPlugin(plugin,mprot)
+	mplug = MonitorPlugin(plugin,mprot,relpath+"/monitor.db")
 	mplug.fetchValue(function= lambda values : [str(int(value)/1024) for value in values])
 	mplug.insertValues()
 	mprot.commitDB()

@@ -6,17 +6,21 @@ import sg_filter
 from sqlite3 import dbapi2 as sqlite
 from strdate import parseDateTime  
 import datetime
+import os
+
+relpath = os.path.dirname(os.path.realpath(__file__))
 
 class MonitorGraph(object):
 	"""
 	Je trace le graphe
 	"""
-	def __init__(self,plugin,basepath="/root/monitor/monitor.db"):
+	def __init__(self,plugin,basepath,savepath):
 		self.connection = sqlite.connect(basepath)
 		self.cursor = self.connection.cursor()
 		self.plugin = plugin
 		self.now = datetime.datetime.now()
 		self.coeff = sg_filter.calc_coeff(30,19)
+		self.savepath = svepath
 	
 	def getData(self):
 		"""
@@ -49,7 +53,7 @@ class MonitorGraph(object):
 			])
 	
 	def miniature(self,width):
-		plt.savefig("mini_"+self.plugin+".png",dpi=width/8)
+		plt.savefig(self.savepath+"mini_"+self.plugin+".png",dpi=width/8)
 
 	def traceSpeed(self,minutes):
 		"""
@@ -68,9 +72,11 @@ class MonitorGraph(object):
 
 		plt.xlabel("Temps ecoule(en minutes)")
 		plt.ylabel("Debit (en ko/s)")
-		plt.savefig("re1.png")
+		plt.savefig(self.savepath+self.plugin+".png")
 
-mg = MonitorGraph("if_re1")
-mg.getData()
-mg.positionToSpeed()
-mg.traceSpeed(120)
+ifaces=["if_re1","if_re2","if_re3"]
+for iface in ifaces :
+	mg = MonitorGraph(iface,relpath+"/monitor.db",relpath+"../../templates/monitoring/")
+	mg.getData()
+	mg.positionToSpeed()
+	mg.traceSpeed(120)

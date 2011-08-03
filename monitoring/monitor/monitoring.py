@@ -1,5 +1,8 @@
 import commands
 import json
+import os
+
+relpath = os.path.dirname(os.path.realpath(__file__))
 
 class Monitoring(object):
 	def __init__(self):
@@ -21,5 +24,5 @@ class Monitoring(object):
 
 m = Monitoring()
 services = {"ADSL1":m.xDSL(1),"ADSL2":m.xDSL(2),"SDSL":m.xDSL(3),"jabber":m.jabber()}
-wfile = open("state","w")
+wfile = open(relpath+"/state","w")
 wfile.write(json.dumps(services))

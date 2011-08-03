@@ -14,9 +14,12 @@
 
 from django.shortcuts import render_to_response
 import json
+import os
+
+relpath = os.path.dirname(os.path.realpath(__file__))
 
 def checkbox(request):
-	rfile = open("monitor/state","r")
+	rfile = open(relpath+"/monitor/state","r")
 	strjson = rfile.read()
 	services = json.loads(strjson)
 	return render_to_response('monitoring/checkbox.html', { 'services' : services })

@@ -19,8 +19,13 @@ from django.db.models import Q
 from django.template import RequestContext
 
 def print_news(request):
+	print "plop"
 	news = News.objects.filter(
 		Q(date_end__gte =  datetime.now() - timedelta(hours=2)) | Q(date_end = None),
 		date_start__lte = datetime.now() + timedelta(days=3)
 	)[0:20]
 	return render_to_response('news/index.html', { 'news' : news },context_instance=RequestContext(request))
+
+def readnews(request,slug):
+	news = News.objects.filter(slug = slug)
+	return render_to_response('news/read.html', { 'news' : news[0] }, context_instance=RequestContext(request))

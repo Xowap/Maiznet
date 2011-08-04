@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %}- {% trans "News" %}{% endblock %}
+{% block content-title %}{% trans "News" %}{% endblock %}
+
+{% block content %}
+
+<header> <h1>{{news.title}}</h1> </header>
+<article> <p>{{news.content}}</p>
+<p>{% if news.date_end %}
+	{% trans "From" %} {{news.date_start}} {% trans "to" %} {{news.date_end}}.
+{% else %}
+	{% trans "Posted the" %} {{news.date_start}}.
+{% endif %}</p></article>
+
+{% endblock %}

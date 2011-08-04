@@ -27,7 +27,7 @@ class Category(models.Model):
 
 class News(models.Model):
 	title = models.CharField(max_length = 40)
-	slug = models.SlugField(max_length = 40)
+	slug = models.SlugField(max_length = 40, unique = True)
 	content = models.TextField(max_length = 1400)
 	category = models.ForeignKey(Category)
 	date_start = models.DateTimeField(default = datetime.now, blank = True)

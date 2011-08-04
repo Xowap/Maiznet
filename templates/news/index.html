@@ -8,20 +8,25 @@
 {% block content %}
 {% for new in news %}
 	{% if new.category.slug == "maintenance" %}
-	<header> <h1>{{new.title}}</h1> </header>
-	<article> <p>{{new.content}}</p>
-	<p>À partir du {{new.date_start}} {%if new.date_end %} au {{new.date_end}} {%endif%} </p></article>
-	{% endif %}
+	<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
+	<article> <p>{{new.content|truncatewords:20}}</p>
+	<p>{% if new.date_end %}
+		{% trans "From" %} {{new.date_start}} {% trans "to" %} {{new.date_end}}.
+	{% else %}
+		{% trans "Posted the" %} {{new.date_start}}.
+	{% endif %}</p></article>
+	{%endif%}
 {% endfor %}
 {% for new in news %}
 	{% if new.category.slug != "maintenance" %}
-	<header> <h1>{{new.title}}</h1> </header>
-	<article> <p>{{new.content}}</p>
+	<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
+	<article> <p>{{new.content|truncatewords:20}}</p>
 
 	<p>{% if new.date_end %}
 		{% trans "From" %} {{new.date_start}} {% trans "to" %} {{new.date_end}}.
 	{% else %}
 		{% trans "Posted the" %} {{new.date_start}}.
 	{% endif %}</p></article>
+	{%endif%}
 {% endfor %}
 {% endblock %}

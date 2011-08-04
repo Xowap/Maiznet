@@ -22,6 +22,29 @@ class Room(models.Model):
 	def __unicode__(self):
 		return self.number
 
+	def _gen_rand_ticket(self):
+		from random import randrange
+		part1 = randrange(0, 9999)
+
+		from time import time
+		part2 = (time() * 10000) % 10000
+
+		part3 = ((int(time() * 100) % 100) * randrange(0, 99) + randrange(0, 4200)) % 10000
+
+		return "%04d-%04d-%04d" % (part1, part2, part3)
+
+	def get_new_ticket(self, commit=True):
+		while True:
+			t = self._gen_rand_ticket()
+			if Room.objects.filter(ticket=t).count() == 0:
+				break
+
+		self.ticket = t
+		if commit:
+			self.save()
+
+		return t
+
 class Presence(models.Model):
 	user = models.ForeignKey(User, unique = True)
 	room = models.ForeignKey(Room, unique = True, blank = True, null = True)

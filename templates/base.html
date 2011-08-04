@@ -8,10 +8,18 @@
 
 		<!-- CSS -->
 		<!-- <link rel="stylesheet" href="{{ MEDIA_URL }}/static/css/reset.css" /> -->
-		<link rel="stylesheet" href="{{ MEDIA_URL }}/static/css/style.css" />
+		<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/style.css" />
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="{{ MEDIA_URL }}/static/images/favicon.ico" />
+		<link rel="shortcut icon" href="{{ MEDIA_URL }}static/images/favicon.ico" />
+
+		<!-- JQuery -->
+		<script src="{{ MEDIA_URL}}static/js/jquery.js" lang="text/javascript"></script>
+
+		{% if form %}
+		<!-- Form required media -->
+		{{ form.media }}
+		{% endif %}
 
 		<!--
 		Un script pour "activer" HTML5 dans les versions d'IE<9.
@@ -19,7 +27,7 @@
 		http://remysharp.com/2009/01/07/html5-enabling-script/
 		-->
 		<!--[if lt IE 9]>
-		<script src="{{ MEDIA_URL }}/static/js/ie-html5.js"></script>
+		<script src="{{ MEDIA_URL }}static/js/ie-html5.js" lang="text/javascript"></script>
 		<![endif]-->
 
 		{% block head-feed %}{% endblock %}

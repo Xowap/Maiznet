@@ -34,6 +34,21 @@ def validate_ticket(value):
 	except Room.DoesNotExist:
 		raise ValidationError(_("No room exists with this ticket"))
 
+def validate_mac(value, presence=None):
+	if isinstance(presence, Presence):
+		qs = Presence.objects.exclude(pk=presence.pk)
+	else:
+		qs = Presence.objects
+
+	macs = value.split(",")
+
+	if len(macs) > 30:
+		raise ValidationError(_('You cannot register more than 30 MAC addresses'))
+
+	for mac in macs:
+		if qs.filter(netif__contains=mac).count() > 0:
+			raise ValidationError(_('Somebody is already using the MAC address %(mac)s') % {'mac': mac})
+
 class TicketForm(Form):
 	ticket = CharField(max_length = 14, validators = [validate_ticket])
 
@@ -57,6 +72,17 @@ class TicketForm(Form):
 		p.room = room
 		p.save()
 
+class PresenceForm(ModelForm):
+	netif = MacAddressField(label = _("MAC Address"), help_text = _("This is the MAC address of your network card. If unsure, keep the default value."), required = False)
+
+	class Meta:
+		model = Presence
+
+	def clean_netif(self):
+		netif = self.cleaned_data["netif"]
+		validate_mac(netif, self.instance)
+		return netif
+
 class UserRegistrationForm(UserCreationForm):
 	username   = RegexField(label = _("Username"), max_length = 30, regex = r'^[a-zA-Z][a-zA-Z0-9\-_]+[a-zA-Z]$',
 		help_text = _("Required. 30 characters or fewer. Begins and ends with a letter and can contain letters, digits, _ and -."),
@@ -66,7 +92,7 @@ class UserRegistrationForm(UserCreationForm):
 	email      = EmailField(label = _("Email"))
 	promo      = ModelChoiceField(label = _("Promo"), help_text = _('Your promo'), queryset = Promo.objects.all(), empty_label = _("(None)"), required = False)
 	ticket     = CharField(max_length = 14, validators = [validate_ticket])
-	netif      = MacAddressField(label = _("MAC Address"), help_text = _("This is the MAC address of your network card. If unsure, keep the default value."), required = False)
+	netif      = MacAddressField(label = _("MAC Address"), help_text = _("This is the MAC address of your network card. If unsure, keep the default value."), validators = [validate_mac], required = False)
 
 	class Meta:
 		model = User
@@ -166,6 +192,14 @@ class UserModificationForm(ModelForm):
 				raise ValidationError(_("A user with that email already exists."))
 
 		return email
+
+	def clean_netif(self):
+		netif = self.cleaned_data["netif"]
+		try:
+			validate_mac(netif, self.instance.get_profile())
+		except Presence.DoesNotExist:
+			validate_mac(netif)
+		return netif
 
 	def save(self):
 		user = super(UserModificationForm, self).save()

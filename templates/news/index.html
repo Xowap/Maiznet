@@ -6,27 +6,33 @@
 {% block content-title %}{% trans "News" %}{% endblock %}
 
 {% block content %}
-{% for new in news %}
-	{% if new.category.slug == "maintenance" %}
-	<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
-	<article> <p>{{new.content|truncatewords:20}}</p>
-	<p>{% if new.date_end %}
-		{% trans "From" %} {{new.date_start}} {% trans "to" %} {{new.date_end}}.
-	{% else %}
-		{% trans "Posted the" %} {{new.date_start}}.
-	{% endif %}</p></article>
-	{%endif%}
-{% endfor %}
-{% for new in news %}
-	{% if new.category.slug != "maintenance" %}
-	<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
-	<article> <p>{{new.content|truncatewords:20}}</p>
+	{% for new in news %}
+		{% if new.category.slug == "maintenance" %}
+			<article> 
+				<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
+	
+				<p>{{new.content|truncatewords:20}}</p>
+				<p>{% if new.date_end %}
+					{% trans "From" %} <time datetime="{{new.date_start|date:"c"}}" pubdate>{{new.date_start|date:"DATETIME_FORMAT"}} </time>
+					{% trans "to" %} <time datetime="{{new.date_end|date:"c"}}" >{{new.date_end|date:"DATETIME_FORMAT"}} </time>.
+				{% else %}
+					{% trans "Posted the" %} <time datetime="{{new.date_start|date:"c"}}" pubdate>{{new.date_start|date:"DATETIME_FORMAT"}} </time>.
+				{% endif %}</p>
+			</article>
+		{%endif%}
+	{% endfor %}
+	{% for new in news %}
+		{% if new.category.slug != "maintenance" %}
+	<article> 
+		<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
+		<p>{{new.content|truncatewords:20}}</p>
 
-	<p>{% if new.date_end %}
-		{% trans "From" %} {{new.date_start}} {% trans "to" %} {{new.date_end}}.
-	{% else %}
-		{% trans "Posted the" %} {{new.date_start}}.
-	{% endif %}</p></article>
-	{%endif%}
-{% endfor %}
+		<p>{% if new.date_end %}
+				{% trans "From" %} <time datetime="{{new.date_start|date:"c"}}" pubdate>{{new.date_start|date:"DATETIME_FORMAT"}} </time> 
+				{% trans "to" %} <time datetime="{{new.date_end|date:"c"}}" >{{new.date_end|date:"DATETIME_FORMAT"}} </time>.
+			{% else %}
+				{% trans "Posted the" %} <time datetime="{{new.date_start|date:"c"}}" pubdate>{{new.date_start|date:"DATETIME_FORMAT"}} </time>.
+			{% endif %}</p></article>
+		{%endif%}
+	{% endfor %}
 {% endblock %}

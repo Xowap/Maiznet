@@ -14,12 +14,11 @@
 
 from datetime import datetime, timedelta
 from maiznet.news.models import News
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.template import RequestContext
 
 def print_news(request):
-	print "plop"
 	news = News.objects.filter(
 		Q(date_end__gte =  datetime.now() - timedelta(hours=2)) | Q(date_end = None),
 		date_start__lte = datetime.now() + timedelta(days=3)
@@ -27,5 +26,5 @@ def print_news(request):
 	return render_to_response('news/index.html', { 'news' : news },context_instance=RequestContext(request))
 
 def readnews(request,slug):
-	news = News.objects.filter(slug = slug)
-	return render_to_response('news/read.html', { 'news' : news[0] }, context_instance=RequestContext(request))
+	news = get_object_or_404(News, slug = slug)
+	return render_to_response('news/read.html', { 'news' : news }, context_instance=RequestContext(request))

@@ -89,5 +89,5 @@ for plugin in config.PLUGINS :
 	mg = MonitorGraph(plugin)
 	mg.getData()
 	mg.positionToSpeed()
-	mg.gen_picture(config.IMAGES_PATH + '/' + plugin, width = 800, decoration = True)
-	mg.gen_picture(config.IMAGES_PATH + '/mini_' + plugin, width = 200, decoration = False)
+	mg.gen_picture(config.IMAGES_PATH + '/' + plugin + ".png", width = 800, decoration = True)
+	mg.gen_picture(config.IMAGES_PATH + '/mini_' + plugin + ".png", width = 200, decoration = False)

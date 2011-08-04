@@ -20,18 +20,19 @@ class Monitoring(object):
 	def xDSL(self,line):
 		c = commands.getoutput('ping -c 1 -S ' + config.IP_xDSL[line-1] + ' google.fr | grep "0%"')
 		state = c.split()
-		if state[5] == "0%"!
+		if state[5] == "0%":
 			return "OK"
 		return "KO"
 	
 	def jabber(self):
-		c = commands.getoutput("check_jabber -H " + config.JABBER_SERVER + " -p " + config.JABBER_PORT)
+		c = commands.getoutput("/usr/lib/nagios/plugins/check_tcp -H " + config.JABBER_SERVER + " -p " + str(config.JABBER_PORT) + """ -s "<stream:stream to='host' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams'>" -e "<?xml version='1.0' encoding='UTF-8'?><stream:stream xmlns:stream=\\"http://etherx.jabber.org/streams" xmlns="jabber:client\\"" -w 3 -c 5 -v """)
 		state = c.split()
 		if state[1] == 'OK':
 			return "OK"
 		return "KO"
 
 m = Monitoring()
-services = {"ADSL1":m.xDSL(1),"ADSL2":m.xDSL(2),"SDSL":m.xDSL(3),"jabber":m.jabber()}
-wfile = open(config.STATE_PATH,"w")
-wfile.write(json.dumps(services))
+print m.jabber()
+#services = {"ADSL1":m.xDSL(1),"ADSL2":m.xDSL(2),"SDSL":m.xDSL(3),"jabber":m.jabber()}
+#wfile = open(config.STATE_PATH,"w")
+#wfile.write(json.dumps(services))

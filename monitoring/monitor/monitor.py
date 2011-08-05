@@ -93,7 +93,7 @@ def ifacePluginDB(names):
 	connection = sqlite.connect(config.DATABASE)
 	cursor = connection.cursor()
 	for name in names :
-		cursor.execute('CREATE TABLE (?) (id INTEGER PRIMARY KEY, `in` INTEGER, out INTEGER, date DATETIME)', (name,))
+		cursor.execute('CREATE TABLE %s (id INTEGER PRIMARY KEY, `in` INTEGER, out INTEGER, date DATETIME)' % name)
 	connection.commit()
 	connection.close()
 

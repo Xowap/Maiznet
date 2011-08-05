@@ -28,19 +28,22 @@ class MonitorGraph(object):
 		self.plugin = plugin
 		self.now = datetime.datetime.now()
 		self.coeff = sg_filter.calc_coeff(config.LISSAGE_NUM_POINTS,config.LISSAGE_COEFF)
+		self.speed = False
+		self.real_data = []
 	
 	def getData(self):
 		"""
 		Récupère les données de la base de données
 		"""
-		self.cursor.execute("SELECT * FROM (?) ORDER BY date DESC", (self.plugin,)) 
-		self.data = self.cursor.fetchall()
+		self.cursor.execute("SELECT * FROM %s ORDER BY date DESC" % self.plugin[0]) 
+		self.data = self.cursor.fetchall()[1:]
 	
 	def positionToSpeed(self):
 		"""
 		Calcule une liste de vitesse depuis une liste de positions
 		"""
-		self.speed = []
+		self.real_data = []
+		self.speed = True
 
 		for data in self.data:
 			if self.data.index(data) == 0:
@@ -52,42 +55,57 @@ class MonitorGraph(object):
 			date2 = parseDateTime(str(data[3]))
 			times = (date1-date2).seconds
 			
-			self.speed.append([
+			self.real_data.append([
 				(d[1] - data[1])/times,
 				(d[2] - data[2])/times,
 				(datetime.datetime.now()-date1).seconds/60
 				
 			])
+	
+	def process_data(self):
+		p = False
+		if not self.real_data:
+			p = True
+			self.real_data.extend(self.data)
+		self.real_data = zip(*self.real_data)
+		self.real_data = [ list(data) for data in self.real_data]
 
-	def gen_picture(file_,width,decoration):
+		if not self.speed :
+			self.real_data = self.real_data[1:]
+			self.real_data[2] = [(datetime.datetime.now() - parseDateTime(str(date))).seconds/60 for date in self.real_data[-1]]
+
+	def gen_picture(self,file_,width,decoration):
 		"""
 		Génère une image
 		"""
-
-		times = [speed[2] for speed in self.speed]
-
+		self.process_data()
 		# Lissage de la courbe
-		intrafic = sg_filter.smooth([speed[0] for speed in self.speed],self.coeff)
-		outtrafic = sg_filter.smooth([speed[1] for speed in self.speed],self.coeff)
+		self.real_data[0] = sg_filter.smooth(self.real_data[0],self.coeff)
+		self.real_data[1] = sg_filter.smooth(self.real_data[1],self.coeff)
+
+		plt.clf()
+		plt.cla()
 		
-		plt.plot(times, intrafic,"k-",
-			times, outtrafic,"b-")
-		plt.fill_between(times,intrafic,0,color='g')
+		plt.plot(self.real_data[-1], self.real_data[0],"k-",
+			self.real_data[-1], self.real_data[1],"b-")
+		plt.fill_between(self.real_data[-1],self.real_data[0],0,color='g')
 		
+
 		# Calcul des axes
-		debitmax = max([max(intrafic),max(outtrafic)])
-		plt.axis([config.TIME,0,0,debitmax + debitmax/10])
+		debitmax = max([max(self.real_data[0]),max(self.real_data[1])])
+		plt.axis([config.TIME,1,0,debitmax + debitmax/10])
 		
 		if not decoration:
 			plt.axis('off')
 		else :
 			plt.xlabel("Temps ecoule(en minutes)")
-			plt.ylabel("Debit (en ko/s)")
+			plt.ylabel(self.plugin[1])
 		plt.savefig(file_,dpi=width/8)
 
 for plugin in config.PLUGINS :
 	mg = MonitorGraph(plugin)
 	mg.getData()
-	mg.positionToSpeed()
-	mg.gen_picture(config.IMAGES_PATH + '/' + plugin + ".png", width = 800, decoration = True)
-	mg.gen_picture(config.IMAGES_PATH + '/mini_' + plugin + ".png", width = 200, decoration = False)
+	if "if_" in plugin[0] :
+		mg.positionToSpeed()
+	mg.gen_picture(file_ = "%s/%s.png" % (config.IMAGES_PATH,plugin[0]), width = 800, decoration = True)
+	#mg.gen_picture(file_ = config.IMAGES_PATH + '/mini_' + plugin + ".png", width = 200, decoration = False)

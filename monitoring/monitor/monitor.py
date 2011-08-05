@@ -73,8 +73,10 @@ class MonitorPlugin(object):
 		"""
 		Récupère et modifie éventuellement les valeurs
 		"""
-		self.values = self.mp.fetchValue(self.plugin)
+		self.values = self.mp.fetchValue(self.plugin[0])
 		self.values = function(self.values)
+		if self.plugin in config.PLUGINS_REVERSE:
+			self.values.reverse()
 	
 	def insertValues(self):
 		"""
@@ -82,18 +84,25 @@ class MonitorPlugin(object):
 		"""
 		hours = (datetime.now() - timedelta(hours=config.TIME/60),)
 		now = (datetime.now(),)
-		self.mp.cursor.execute('INSERT INTO (?) VALUES (null, "(?)", datetime(?))', (self.plugin,), ('", "'.join(self.values),), (now))
-		self.mp.cursor.execute('DELETE FROM (?) WHERE datetime(date) <  datetime(?)', (self.plugin,), hours)
+		a = "?,"*(len(self.values)-1) + "?"
+		self.values.append(datetime.now())
+		t_values = tuple(self.values)
+		request = 'INSERT INTO %s VALUES (null, %s, datetime(?))' % (self.plugin[0], a)
+		self.mp.cursor.execute(request, tuple(self.values))
+		self.mp.cursor.execute('DELETE FROM %s WHERE datetime(date) <  datetime(?)' % (self.plugin[0],), hours)
 	
 	def retreiveValues(self):
 		""" Utilisé pour les tests uniquement """
-		self.mp.cursor.execute('SELECT * FROM if_re1')
+		a = self.mp.cursor.execute('SELECT * FROM ping_re1').fetchall()
 
 def ifacePluginDB(names):
 	connection = sqlite.connect(config.DATABASE)
 	cursor = connection.cursor()
 	for name in names :
-		cursor.execute('CREATE TABLE %s (id INTEGER PRIMARY KEY, `in` INTEGER, out INTEGER, date DATETIME)' % name)
+		if "if_" in name[0] :
+			cursor.execute('CREATE TABLE %s (id INTEGER PRIMARY KEY, `in` INTEGER, out INTEGER, date DATETIME)' % name[0])
+		else :
+			cursor.execute('CREATE TABLE %s (id INTEGER PRIMARY KEY, `packetloss` INTEGER, ping INTEGER, date DATETIME)' % name[0])
 	connection.commit()
 	connection.close()
 
@@ -106,6 +115,9 @@ except:
 mprot = MonitorProtocol()
 for plugin in config.PLUGINS :
 	mplug = MonitorPlugin(plugin,mprot)
-	mplug.fetchValue(function= lambda values : [str(int(value)/1024) for value in values])
+	if "if_" in plugin[0] :
+		mplug.fetchValue(function= lambda values : [str(int(value)/1024) for value in values])
+	else :
+		mplug.fetchValue(function  = lambda values : [values[0],str(int(float(values[1])*1000))])
 	mplug.insertValues()
 mprot.closeDB()

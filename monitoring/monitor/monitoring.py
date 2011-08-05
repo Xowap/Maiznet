@@ -34,5 +34,6 @@ class Monitoring(object):
 m = Monitoring()
 print m.jabber()
 #services = {"ADSL1":m.xDSL(1),"ADSL2":m.xDSL(2),"SDSL":m.xDSL(3),"jabber":m.jabber()}
-#wfile = open(config.STATE_PATH,"w")
-#wfile.write(json.dumps(services))
+services = {"ADSL1":"OK","ADSL2":"OK","SDSL":"KO","jabber":"OK"}
+wfile = open(config.STATE_PATH,"w")
+wfile.write(json.dumps(services))

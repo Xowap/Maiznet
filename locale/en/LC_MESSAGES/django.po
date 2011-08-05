@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-02 01:34+0200\n"
+"POT-Creation-Date: 2011-08-05 02:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,62 +17,90 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: register/forms.py:27
+#: register/admin.py:14
+msgid "Generate tickets"
+msgstr ""
+
+#: register/forms.py:29
 msgid "The ticket should be formated like xxxx-xxxx-xxxx, with x being a digit"
 msgstr ""
 
-#: register/forms.py:33
+#: register/forms.py:35
 msgid "No room exists with this ticket"
 msgstr ""
 
-#: register/forms.py:59
-msgid "Username"
+#: register/forms.py:46
+msgid "You cannot register more than 30 MAC addresses"
 msgstr ""
 
-#: register/forms.py:60
-msgid ""
-"Required. 30 characters or fewer. Begins and ends with a letter and can "
-"contain letters, digits, _ and -."
+#: register/forms.py:50
+#, python-format
+msgid "Somebody is already using the MAC address %(mac)s"
 msgstr ""
 
-#: register/forms.py:61
-msgid ""
-"This value must begin and end with a letter and can contain letters, digits, "
-"and _/-"
-msgstr ""
-
-#: register/forms.py:62
-msgid "Firstname"
-msgstr ""
-
-#: register/forms.py:63
-msgid "Lastname"
-msgstr ""
-
-#: register/forms.py:64
-msgid "Email"
-msgstr ""
-
-#: register/forms.py:65
-msgid "Promo"
-msgstr ""
-
-#: register/forms.py:65
-msgid "(None)"
-msgstr ""
-
-#: register/forms.py:67
+#: register/forms.py:76 register/forms.py:95 register/forms.py:143
 msgid "MAC Address"
 msgstr ""
 
-#: register/forms.py:67
+#: register/forms.py:76 register/forms.py:95
 msgid ""
 "This is the MAC address of your network card. If unsure, keep the default "
 "value."
 msgstr ""
 
-#: register/forms.py:77
+#: register/forms.py:87 templates/register/edit.html:19
+msgid "Username"
+msgstr ""
+
+#: register/forms.py:88
+msgid ""
+"Required. 30 characters or fewer. Begins and ends with a letter and can "
+"contain letters, digits, _ and -."
+msgstr ""
+
+#: register/forms.py:89
+msgid ""
+"This value must begin and end with a letter and can contain letters, digits, "
+"and _/-"
+msgstr ""
+
+#: register/forms.py:90 register/forms.py:139
+msgid "Firstname"
+msgstr ""
+
+#: register/forms.py:91 register/forms.py:140
+msgid "Lastname"
+msgstr ""
+
+#: register/forms.py:92 register/forms.py:141
+msgid "Email"
+msgstr ""
+
+#: register/forms.py:93 register/forms.py:142
+msgid "Promo"
+msgstr ""
+
+#: register/forms.py:93 register/forms.py:142
+msgid "Your promo"
+msgstr ""
+
+#: register/forms.py:93 register/forms.py:142
+msgid "(None)"
+msgstr ""
+
+#: register/forms.py:105 register/forms.py:192
 msgid "A user with that email already exists."
+msgstr ""
+
+#: register/forms.py:112
+msgid "Your password should not be longer than 61 characters"
+msgstr ""
+
+#: register/forms.py:143
+msgid ""
+"This is the MAC address of your network card. If unsure, keep the default "
+"value. If you are using a new mac address, it has been added to the list, "
+"but you should still save."
 msgstr ""
 
 #: register/models.py:19
@@ -91,60 +119,60 @@ msgstr ""
 msgid "A unique identifier that was given to you with your key."
 msgstr ""
 
-#: register/models.py:28
+#: register/models.py:51
 msgid "network interface"
 msgstr ""
 
-#: register/models.py:32
+#: register/models.py:55
 #, python-format
 msgid "Room %(room)s"
 msgstr ""
 
-#: register/models.py:34
+#: register/models.py:57 templates/register/edit.html:29
 msgid "(No room assigned)"
 msgstr ""
 
-#: templates/base.html:7 templates/base.html.py:31
+#: templates/base.html:7 templates/base.html.py:39
 msgid "Maiznet"
 msgstr ""
 
-#: templates/base.html:32
+#: templates/base.html:40
 msgid "The website that's good"
 msgstr ""
 
-#: templates/base.html:36
+#: templates/base.html:44
 msgid "Main Menu"
 msgstr ""
 
-#: templates/base.html:39 templates/news/index.html:5
+#: templates/base.html:47 templates/news/index.html:5
 #: templates/news/index.html.py:6
 msgid "News"
 msgstr ""
 
-#: templates/base.html:40 templates/register/index.html:5
+#: templates/base.html:48 templates/register/index.html:5
 #: templates/register/index.html.py:6
 msgid "Register"
 msgstr ""
 
-#: templates/base.html:41
+#: templates/base.html:49
 msgid "About"
 msgstr ""
 
-#: templates/base.html:42
+#: templates/base.html:50
 msgid "Monitoring"
 msgstr ""
 
-#: templates/base.html:45
+#: templates/base.html:53
 msgid "Log Out"
 msgstr ""
 
-#: templates/base.html:47 templates/register/login.html:5
+#: templates/base.html:55 templates/register/login.html:5
 #: templates/register/login.html.py:6 templates/register/login.html:28
 #: templates/register/ticket.html:5 templates/register/ticket.html.py:6
 msgid "Log In"
 msgstr ""
 
-#: templates/base.html:55
+#: templates/base.html:63
 msgid "What a wonderful sidebar"
 msgstr ""
 
@@ -166,6 +194,54 @@ msgid ""
 "\t<p>In order for the modification to take effect, please wait a\n"
 "\tfew minutes, and restart your network connection.</p>\n"
 "\t"
+msgstr ""
+
+#: templates/register/edit.html:5
+msgid "Info Edit"
+msgstr ""
+
+#: templates/register/edit.html:6
+msgid "Edit your informations"
+msgstr ""
+
+#: templates/register/edit.html:24
+msgid "Room"
+msgstr ""
+
+#: templates/register/edit.html:35
+msgid "Password"
+msgstr ""
+
+#: templates/register/edit.html:36
+msgid "Change password"
+msgstr ""
+
+#: templates/register/edit.html:41
+msgid "Edit"
+msgstr ""
+
+#: templates/register/edit_done.html:5
+msgid "Edition done"
+msgstr ""
+
+#: templates/register/edit_done.html:6
+msgid "Your data have been edited"
+msgstr ""
+
+#: templates/register/edit_done.html:10
+#, python-format
+msgid ""
+"\n"
+"\t<p>Congratulations <strong>%(user)s</strong>, your account has\n"
+"\tbeen updated. If you added a network card in the list, you can\n"
+"\twait a few minutes and re-start the network connection of the\n"
+"\tcomputer that you added, in order to have Internet enabled on\n"
+"\tit.</p>\n"
+"\t"
+msgstr ""
+
+#: templates/register/edit_done.html:18
+msgid "Back to profile edition"
 msgstr ""
 
 #: templates/register/index.html:10
@@ -232,6 +308,40 @@ msgstr ""
 msgid "Reset my password"
 msgstr ""
 
+#: templates/register/password_change_done.html:5
+#: templates/register/password_change_done.html:6
+msgid "Password change successful"
+msgstr ""
+
+#: templates/register/password_change_done.html:10
+msgid "Your password was changed."
+msgstr ""
+
+#: templates/register/password_change_form.html:5
+msgid "Password Change"
+msgstr ""
+
+#: templates/register/password_change_form.html:6
+msgid "Change your password"
+msgstr ""
+
+#: templates/register/password_change_form.html:13
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/register/password_change_form.html:17
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: templates/register/password_change_form.html:23
+#: templates/register/password_confirm.html:25
+msgid "Change my password"
+msgstr ""
+
 #: templates/register/password_complete.html:5
 #: templates/register/password_complete.html:6
 msgid "Password Reset Complete"
@@ -261,10 +371,6 @@ msgstr ""
 
 #: templates/register/password_confirm.html:24
 msgid "Confirm password:"
-msgstr ""
-
-#: templates/register/password_confirm.html:25
-msgid "Change my password"
 msgstr ""
 
 #: templates/register/password_confirm.html:28

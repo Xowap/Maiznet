@@ -15,6 +15,8 @@ generate_tickets.short_description = _('Generate tickets')
 
 class RoomAdmin(admin.ModelAdmin):
 	actions = [generate_tickets]
+	search_fields = ['number']
+	list_per_page = 20
 
 class UserProfileInline(admin.StackedInline):
 	model = Presence

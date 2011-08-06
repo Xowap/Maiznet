@@ -63,9 +63,7 @@ class MonitorGraph(object):
 			])
 	
 	def process_data(self):
-		p = False
 		if not self.real_data:
-			p = True
 			self.real_data.extend(self.data)
 		self.real_data = zip(*self.real_data)
 		self.real_data = [ list(data) for data in self.real_data]
@@ -85,7 +83,6 @@ class MonitorGraph(object):
 
 		plt.clf()
 		plt.cla()
-		
 		plt.plot(self.real_data[-1], self.real_data[0],"k-",
 			self.real_data[-1], self.real_data[1],"b-")
 		plt.fill_between(self.real_data[-1],self.real_data[0],0,color='g')

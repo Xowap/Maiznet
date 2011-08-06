@@ -2,14 +2,15 @@
 
 {% load i18n %}
 
-{% block head-title %}- {% trans "News" %}{% endblock %}
+{% block head-title %}- {{news.title}}{% endblock %}
 {% block content-title %}{% trans "News" %}{% endblock %}
 
 {% block content %}
 
-<header> <h1>{{news.title}}</h1> </header>
-<article> <p>{{news.content}}</p>
-<p>{% if news.date_end %}
+<article> 
+	<header> <h1>{{news.title}}</h1> </header>
+	<p>{{news.content}}</p>
+	<p>{% if news.date_end %}
 	{% trans "From" %} <time datetime="{{news.date_start|date:"c"}}" pubdate>{{news.date_start|date:"DATETIME_FORMAT"}} </time>
 	{% trans "to" %} <time datetime="{{news.date_end|date:"c"}}" >{{news.date_end|date:"DATETIME_FORMAT"}} </time>.
 {% else %}

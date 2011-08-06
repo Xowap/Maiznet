@@ -11,8 +11,6 @@ class CheckboxNode(Node):
 		strjson = rfile.read()
 		services = json.loads(strjson)
 		context['services'] = services
-		print "services :"
-		print services
 		return ''
 	
 def get_checkbox(parser,token):

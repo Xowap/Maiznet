@@ -12,15 +12,17 @@
 import commands
 import json
 import config
+from sqlite3 import dbapi2 as sqlite
+
 
 class Monitoring(object):
 	def __init__(self):
-		pass
+		self.connection = sqlite.connect(config.DATABASE)
+		self.cursor = self.connection.cursor()
 	
 	def xDSL(self,line):
-		c = commands.getoutput('ping -c 1 -S ' + config.IP_xDSL[line-1] + ' google.fr | grep "0%"')
-		state = c.split()
-		if state[5] == "0%":
+		value = self.mp.cursor.execute('SELECT `packetloss` FROM ping_re%s ORDER BY date DESC' % str(line)).fetchone()
+		if value != 0:
 			return "OK"
 		return "KO"
 	
@@ -32,8 +34,6 @@ class Monitoring(object):
 		return "KO"
 
 m = Monitoring()
-print m.jabber()
-#services = {"ADSL1":m.xDSL(1),"ADSL2":m.xDSL(2),"SDSL":m.xDSL(3),"jabber":m.jabber()}
-services = {"ADSL1":"OK","ADSL2":"OK","SDSL":"KO","jabber":"OK"}
+services = {"ADSL1":m.xDSL(1),"ADSL2":m.xDSL(2),"SDSL":m.xDSL(3),"jabber":m.jabber()}
 wfile = open(config.STATE_PATH,"w")
 wfile.write(json.dumps(services))

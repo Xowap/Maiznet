@@ -74,14 +74,14 @@ class MonitorGraph(object):
 			self.real_data = self.real_data[1:]
 			self.real_data[2] = [(datetime.datetime.now() - parseDateTime(str(date))).seconds/60 for date in self.real_data[-1]]
 
+		# Lissage de la courbe
+		self.real_data[0] = sg_filter.smooth(self.real_data[0],self.coeff)
+		self.real_data[1] = sg_filter.smooth(self.real_data[1],self.coeff)
+
 	def gen_picture(self,file_,width,decoration):
 		"""
 		Génère une image
 		"""
-		self.process_data()
-		# Lissage de la courbe
-		self.real_data[0] = sg_filter.smooth(self.real_data[0],self.coeff)
-		self.real_data[1] = sg_filter.smooth(self.real_data[1],self.coeff)
 
 		plt.clf()
 		plt.cla()
@@ -107,5 +107,6 @@ for plugin in config.PLUGINS :
 	mg.getData()
 	if "if_" in plugin[0] :
 		mg.positionToSpeed()
+	mg.process_data()
 	mg.gen_picture(file_ = "%s/%s.png" % (config.IMAGES_PATH,plugin[0]), width = 800, decoration = True)
-	#mg.gen_picture(file_ = config.IMAGES_PATH + '/mini_' + plugin + ".png", width = 200, decoration = False)
+	mg.gen_picture(file_ = config.IMAGES_PATH + '/mini_' + plugin[0] + ".png", width = 200, decoration = False)

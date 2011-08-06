@@ -36,6 +36,6 @@ class Monitoring(object):
 m = Monitoring()
 services = {}
 for key,value in config.SERVICES:
-	services[key] = value()
+	services[key] = m.value[0](value[1])
 wfile = open(config.STATE_PATH,"w")
 wfile.write(json.dumps(services))

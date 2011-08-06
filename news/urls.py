@@ -16,6 +16,6 @@ from django.conf.urls.defaults import *
 from django.views.generic.simple import direct_to_template
 
 urlpatterns = patterns('',
-	url(r'^$', direct_to_template, {'template': 'news/index.html'},
-	    name="news-index"),
+	url(r'^$', 'maiznet.news.views.print_news', name="news-index"),
+	url(r'^readnews/(?P<slug>[a-zA-Z0-9\-]+)/$', 'maiznet.news.views.readnews', name = "news-read"),
 )

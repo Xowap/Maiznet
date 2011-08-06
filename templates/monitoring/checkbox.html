@@ -1,0 +1,9 @@
+{% load checkbox %}
+{% get_checkbox %}
+{% for service,status in services.items %}
+<header> {{service}} : {{status}} </header>
+{% endfor %}
+
+<img src="{{ MEDIA_URL }}/static/mini_if_re1.png">
+<img src="{{ MEDIA_URL }}/static/mini_if_re2.png">
+<img src="{{ MEDIA_URL }}/static/mini_if_re3.png">

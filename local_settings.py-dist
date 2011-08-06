@@ -21,7 +21,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-	('Rémy Sanchez', 'remy.sanchez@hyperthese.net'),
+	('Grégoire Leroy', 'gregoire.leroy@retenodus.net'),
 )
 
 DATABASES = {
@@ -51,7 +51,7 @@ ADMIN_MEDIA_PREFIX = 'http://localhost/django-admin-media/'
 
 # Une clef secrète pour divers chiffrements. Attention à la changer, et
 # à ne la montrer à personne !
-SECRET_KEY = '-=n$s1dyv_owh*ljvn9s5c^k42r$lcmokd!9(e6e@0^a9sme8v'
+SECRET_KEY = 'plop'
 
 # L'URL par défaut sur laquelle les utilisateurs sont redirigés après le
 # login.

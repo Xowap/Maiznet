@@ -60,7 +60,9 @@
 
 		<div id="wrapper">
 			<aside id="sidebar">
-				<p>{% trans "What a wonderful sidebar" %}</p>
+				{% block sidebar %}
+					{% include "monitoring/checkbox.html" %}
+				{% endblock %}
 			</aside>
 
 			<section id="content">

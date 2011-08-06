@@ -76,6 +76,7 @@ INSTALLED_APPS = (
 	'django.contrib.admin',
 
 	'maiznet.news',
+	'maiznet.monitoring',
 	'maiznet.register',
 	'maiznet.dhcp',
 )

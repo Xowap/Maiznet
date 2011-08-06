@@ -77,4 +77,5 @@ INSTALLED_APPS = (
 
 	'maiznet.news',
 	'maiznet.register',
+	'maiznet.dhcp',
 )

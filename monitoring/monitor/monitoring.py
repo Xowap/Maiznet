@@ -34,6 +34,8 @@ class Monitoring(object):
 		return "KO"
 
 m = Monitoring()
-services = {"ADSL1":m.xDSL(1),"ADSL2":m.xDSL(2),"SDSL":m.xDSL(3),"jabber":m.jabber()}
+services = {}
+for key,value in config.SERVICES:
+	services[key] = value()
 wfile = open(config.STATE_PATH,"w")
 wfile.write(json.dumps(services))

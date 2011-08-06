@@ -1,1 +1,1 @@
-{"jabber": "OK", "SDSL": "KO", "ADSL2": "OK", "ADSL1": "OK"}
+{"SDSL": "OK", "jabber": "KO", "ADSL2": "OK", "ADSL1": "OK"}

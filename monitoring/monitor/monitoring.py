@@ -21,7 +21,7 @@ class Monitoring(object):
 		self.cursor = self.connection.cursor()
 	
 	def xDSL(self,line):
-		value = self.mp.cursor.execute('SELECT `packetloss` FROM ping_re%s ORDER BY date DESC' % str(line)).fetchone()
+		value = self.cursor.execute('SELECT `packetloss` FROM ping_re%s ORDER BY date DESC' % str(line)).fetchone()
 		if value != 0:
 			return "OK"
 		return "KO"
@@ -35,7 +35,11 @@ class Monitoring(object):
 
 m = Monitoring()
 services = {}
-for key,value in config.SERVICES:
-	services[key] = m.value[0](value[1])
+for key in config.SERVICES:
+	method = getattr(m,config.SERVICES[key][0])
+	if config.SERVICES[key][1]:
+		services[key] = method(config.SERVICES[key][1])
+	else :
+		services[key] = method()
 wfile = open(config.STATE_PATH,"w")
 wfile.write(json.dumps(services))

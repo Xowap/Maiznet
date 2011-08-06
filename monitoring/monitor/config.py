@@ -29,4 +29,4 @@ JABBER_SERVER = "192.168.0.10"
 JABBER_PORT=5222
 IP_xDSL = ["192.168.1.10","192.168.2.10","192.168.3.10"]
 STATE_PATH = relpath + "/state"
-SERVICES = {"ADSL1":[xDSL,1],"ADSL2":[xDSL,2],"SDSL":[xDSL,3],"jabber":[jabber,]}
+SERVICES = {"ADSL1":["xDSL",1],"ADSL2":["xDSL",2],"SDSL":["xDSL",3],"jabber":["jabber",None]}

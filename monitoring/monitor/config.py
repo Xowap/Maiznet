@@ -22,7 +22,7 @@ ylabel2 = "Latence (en ms)"
 PLUGINS_REVERSE=[("ping_re1",ylabel2),("ping_re2",ylabel2),("ping_re3",ylabel2)]
 PLUGINS = [("if_re1",ylabel1),("if_re2",ylabel1),("if_re3",ylabel1)]
 PLUGINS.extend(PLUGINS_REVERSE)
-IMAGES_PATH = relpath + "/../../media/"
+IMAGES_PATH = relpath + "/../../media/monitoring/"
 LISSAGE_NUM_POINTS = 10
 LISSAGE_COEFF = 10
 JABBER_SERVER = "192.168.0.10"

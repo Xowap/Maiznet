@@ -3,4 +3,4 @@
 *.pyc
 *.mo
 local_settings.py
-maiznet.db
+*.db

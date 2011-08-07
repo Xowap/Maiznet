@@ -20,7 +20,9 @@ from django.contrib.auth import login
 from maiznet.register.forms import UserRegistrationForm, UserModificationForm, TicketForm
 from maiznet.register.models import Promo, Presence
 from maiznet.register.tipmac import ip_to_mac
+from maiznet.register.decorators import anonymous_required
 
+@anonymous_required
 def signup(request):
 	if request.method == "POST":
 		form = UserRegistrationForm(request.POST)

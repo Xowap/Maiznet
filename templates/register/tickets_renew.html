@@ -1,0 +1,5 @@
+<ul>
+{% for r in rooms %}
+	<li>{{ r }}: {{ r.get_new_ticket }}</li>
+{% endfor %}
+</ul>

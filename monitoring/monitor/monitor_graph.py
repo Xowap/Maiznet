@@ -26,18 +26,17 @@ class MonitorGraph(object):
 		self.connection = sqlite.connect(config.DATABASE)
 		self.cursor = self.connection.cursor()
 		self.plugin = plugin
-		self.now = datetime.datetime.now()
 		self.coeff = sg_filter.calc_coeff(config.LISSAGE_NUM_POINTS,config.LISSAGE_COEFF)
 		self.speed = False
 		self.real_data = []
-	
+
 	def getData(self):
 		"""
 		Récupère les données de la base de données
 		"""
 		self.cursor.execute("SELECT * FROM %s ORDER BY date DESC" % self.plugin[0]) 
-		self.data = self.cursor.fetchall()[1:]
-	
+		self.data = self.cursor.fetchall()
+
 	def positionToSpeed(self):
 		"""
 		Calcule une liste de vitesse depuis une liste de positions
@@ -45,24 +44,25 @@ class MonitorGraph(object):
 		self.real_data = []
 		self.speed = True
 
-		for data in self.data:
-			if self.data.index(data) == 0:
-				continue
-			d = self.data[self.data.index(data)-1]
-			if d[1] < data[1] or d[2] < data[2]:
+		origin = parseDateTime(self.data[0][-1])
+
+		for i in xrange(1, len(self.data)):
+			d = self.data[i-1]
+			if d[1] < self.data[i][1] or d[2] < self.data[i][2]:
 				continue
 			date1 = parseDateTime(str(d[3]))
-			date2 = parseDateTime(str(data[3]))
+			date2 = parseDateTime(str(self.data[i][3]))
 			times = (date1-date2).seconds
 			
 			self.real_data.append([
-				(d[1] - data[1])/times,
-				(d[2] - data[2])/times,
-				(datetime.datetime.now()-date1).seconds/60
-				
+				(d[1] - self.data[i][1])/times,
+				(d[2] - self.data[i][2])/times,
+				(origin-date1).seconds/60
 			])
-	
+
 	def process_data(self):
+		origin = parseDateTime(self.data[0][-1])
+
 		if not self.real_data:
 			self.real_data.extend(self.data)
 		self.real_data = zip(*self.real_data)
@@ -70,7 +70,7 @@ class MonitorGraph(object):
 
 		if not self.speed :
 			self.real_data = self.real_data[1:]
-			self.real_data[2] = [(datetime.datetime.now() - parseDateTime(str(date))).seconds/60 for date in self.real_data[-1]]
+			self.real_data[2] = [(origin - parseDateTime(str(date))).seconds/60 for date in self.real_data[-1]]
 
 		# Lissage de la courbe
 		self.real_data[0] = sg_filter.smooth(self.real_data[0],self.coeff)
@@ -83,15 +83,15 @@ class MonitorGraph(object):
 
 		plt.clf()
 		plt.cla()
+
 		plt.plot(self.real_data[-1], self.real_data[0],"k-",
 			self.real_data[-1], self.real_data[1],"b-")
 		plt.fill_between(self.real_data[-1],self.real_data[0],0,color='g')
-		
 
 		# Calcul des axes
 		debitmax = max([max(self.real_data[0]),max(self.real_data[1])])
-		plt.axis([config.TIME,1,0,debitmax + debitmax/10])
-		
+		plt.axis([config.TIME, 1, 0, debitmax * 1.1])
+
 		if not decoration:
 			plt.axis('off')
 		else :
@@ -106,4 +106,4 @@ for plugin in config.PLUGINS :
 		mg.positionToSpeed()
 	mg.process_data()
 	mg.gen_picture(file_ = "%s/%s.png" % (config.IMAGES_PATH,plugin[0]), width = 800, decoration = True)
-	mg.gen_picture(file_ = config.IMAGES_PATH + '/mini_' + plugin[0] + ".png", width = 200, decoration = False)
+	mg.gen_picture(file_ = "%s/mini_%s.png" % (config.IMAGES_PATH, plugin[0]), width = 200, decoration = False)

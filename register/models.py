@@ -22,6 +22,29 @@ class Room(models.Model):
 	def __unicode__(self):
 		return self.number
 
+	def _gen_rand_ticket(self):
+		from random import randrange
+		part1 = randrange(0, 9999)
+
+		from time import time
+		part2 = (time() * 10000) % 10000
+
+		part3 = ((int(time() * 100) % 100) * randrange(0, 99) + randrange(0, 4200)) % 10000
+
+		return "%04d-%04d-%04d" % (part1, part2, part3)
+
+	def get_new_ticket(self, commit=True):
+		while True:
+			t = self._gen_rand_ticket()
+			if Room.objects.filter(ticket=t).count() == 0:
+				break
+
+		self.ticket = t
+		if commit:
+			self.save()
+
+		return t
+
 class Presence(models.Model):
 	user = models.ForeignKey(User, unique = True)
 	room = models.ForeignKey(Room, unique = True, blank = True, null = True)
@@ -41,11 +64,37 @@ class Promo(Group):
 # Ça sert à avoir une authentification insensible à la casse. On ne pose
 # pas de questions, merci.
 
-tmp = User.objects.get
+_tmp = User.objects.get
 def hack_user_get(*args, **kwargs):
 	if 'username' in kwargs:
-		kwargs['username__iexact'] = kwargs['username']
-		del kwargs['username']
+		kwargs['username__iexact'] = kwargs.pop('username')
 
-	return tmp(*args, **kwargs)
+	return _tmp(*args, **kwargs)
 User.objects.get = hack_user_get
+
+# Là ça sert à avoir des mots de passe stockés en quasi-cleartext...
+# C'est pas une bonne idée je sais, un jour faudra faire mieux, mais là
+# c'est la moins pire qu'on ait pour pouvoir brancher sur la base des
+# services inconnus dont on ne sait pas s'ils vont gérer ce hash là en
+# particulier ou pas.
+
+from django.utils.encoding import smart_str
+import django.contrib.auth.models
+
+# Encodage d'une chaîne en hexadeciman
+def _hexstr(s):
+	return "".join([hex(ord(x))[2:] for x in smart_str(s)]).upper()
+
+# Remplacement pour la méthode de hashage
+def _hack_set_password(self, raw_password):
+	self.password = 'maiz$$%s' % _hexstr(raw_password)
+User.set_password = _hack_set_password
+
+# Remplacement pour la méthode de vérification du hash
+_orig_get_hexdigest = django.contrib.auth.models.get_hexdigest
+def _hack_get_hexdigest(algorithm, salt, raw_password):
+	if algorithm == 'maiz':
+		return _hexstr(raw_password)
+	else:
+		return _orig_get_hexdigest(algorithm, salt, raw_password)
+django.contrib.auth.models.get_hexdigest = _hack_get_hexdigest

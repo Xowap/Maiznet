@@ -10,9 +10,21 @@
 ########################################################################
 from maiznet.news.models import News, Category
 from django.contrib import admin
+from django import forms
+from django.core.validators import ValidationError
 
+class NewsAdminForm(forms.ModelForm):
+	class Meta:
+		model = News
+	
+	def clean(self):
+		cleaned_data = super(NewsAdminForm, self).clean()
+		if cleaned_data["category"].slug == "maintenance" and not self.cleaned_data["date_end"]:
+			raise forms.ValidationError(u"Le champ date_end n'est pas renseigné")
+		return cleaned_data
 class NewsAdmin(admin.ModelAdmin):
 	prepopulated_fields = {"slug" : ("title",)}
+	form = NewsAdminForm
 
 class CategoryAdmin(admin.ModelAdmin):
 	prepopulated_fields = {"slug" : ("name",)}

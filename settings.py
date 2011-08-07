@@ -52,6 +52,10 @@ TEMPLATE_LOADERS = (
 	'django.template.loaders.app_directories.Loader',
 )
 
+FIXTURE_DIRS = (
+	relpath + '/news/fixtures',
+)
+
 MIDDLEWARE_CLASSES = (
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.locale.LocaleMiddleware',

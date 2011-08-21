@@ -4,3 +4,4 @@
 *.mo
 local_settings.py
 *.db
+media/monitoring

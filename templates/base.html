@@ -7,7 +7,7 @@
 		<title>{% trans "Maiznet" %}{% block head-title %}{% endblock %}</title>
 
 		<!-- CSS -->
-		<!-- <link rel="stylesheet" href="{{ MEDIA_URL }}/static/css/reset.css" /> -->
+		<link rel="stylesheet" href="{{ MEDIA_URL }}/static/css/reset.css" />
 		<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/style.css" />
 
 		<!-- Favicon -->
@@ -36,8 +36,7 @@
 	<body>
 		<header>
 			<hgroup>
-				<h1>{% trans "Maiznet" %}</h1>
-				<h2>{% trans "The website that's good" %}</h2>
+				<h1><img src="{{ MEDIA_URL }}/static/images/logo.png" alt="{% trans "Maiznet" %}" /></h1>
 			</hgroup>
 
 			<nav>

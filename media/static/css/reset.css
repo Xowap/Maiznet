@@ -29,6 +29,7 @@ time, mark, audio, video {
 
 body {
 	line-height:1;
+	font-family: sans-serif;
 }
 
 article,aside,details,figcaption,figure,
@@ -87,6 +88,10 @@ table {
 	border-spacing:0;
 }
 
+table td {
+	vertical-align: middle;
+}
+
 /* change border colour to suit your needs */
 hr {
 	display:block;
@@ -99,4 +104,8 @@ hr {
 
 input, select {
 	vertical-align:middle;
+}
+
+input:focus {
+	outline: none;
 }

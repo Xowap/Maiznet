@@ -17,6 +17,8 @@ class RoomAdmin(admin.ModelAdmin):
 	actions = [generate_tickets]
 	search_fields = ['number']
 	list_per_page = 20
+	list_display = ['number', 'ticket']
+	ordering = ('number',)
 
 class UserProfileInline(admin.StackedInline):
 	model = Presence

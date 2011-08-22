@@ -44,6 +44,7 @@ html {
 	position: absolute;
 	width: 250px;
 	right: 0;
+	top: 0;
 }
 
 #content {
@@ -59,6 +60,8 @@ html {
 input {
 	border: 1px solid #3a3c41;
 	border-radius: 4px;
+	-moz-border-radius: 4px;
+
 	background-color: white;
 	line-height: 150%;
 	padding: 3px;
@@ -104,6 +107,7 @@ body > header nav li {
 	padding: 0 13px;
 
 	border-radius: 15px 15px 0 0;
+	-moz-border-radius: 15px 15px 0 0;
 
 	display: inline-block;
 }
@@ -143,6 +147,7 @@ body > header a {
 	background: linear-gradient(top, rgba(192,192,192,1) 0%,rgba(255,255,255,1) 100%); /* W3C */
 
 	border-radius: 20px;
+	-moz-border-radius: 20px;
 	padding: 15px;
 
 	margin-bottom: 15px;
@@ -166,6 +171,7 @@ body > header a {
 	margin-bottom: 10px;
 
 	border-radius: 20px 20px 0 0;
+	-moz-border-radius: 20px 20px 0 0;
 
 	font-size: 105%;
 	text-align: center;
@@ -204,6 +210,8 @@ body > header a {
 	background: linear-gradient(top, rgba(192,192,192,1) 0%,rgba(255,255,255,1) 100%); /* W3C */
 
 	border-radius: 20px;
+	-moz-border-radius: 20px;
+
 	padding: 15px;
 
 	margin-bottom: 15px;
@@ -229,6 +237,7 @@ body > header a {
 	margin-bottom: 10px;
 
 	border-radius: 20px 20px 0 0;
+	-moz-border-radius: 20px 20px 0 0;
 
 	font-size: 105%;
 	text-align: center;

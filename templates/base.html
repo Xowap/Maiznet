@@ -56,17 +56,17 @@
 		</header>
 
 		<div id="wrapper">
-			<aside id="sidebar">
-				{% block sidebar %}
-					{% include "monitoring/checkbox.html" %}
-				{% endblock %}
-			</aside>
-
 			<section id="content">
 				<h1>{% block content-title %}{% endblock %}</h1>
 
 				{% block content %}{% endblock %}
 			</section>
+
+			<aside id="sidebar">
+				{% block sidebar %}
+					{% include "monitoring/checkbox.html" %}
+				{% endblock %}
+			</aside>
 		</div>
 	</body>
 </html>

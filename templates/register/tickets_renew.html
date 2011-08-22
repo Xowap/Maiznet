@@ -1,5 +1,103 @@
-<ul>
-{% for r in rooms %}
-	<li>{{ r }}: {{ r.get_new_ticket }}</li>
-{% endfor %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+{% load i18n %}
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<title>Maiznet - Renouvellement des tickets</title>
+
+		<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}static/css/ticket.css" />
+
+		<!-- JQuery -->
+		<script src="{{ MEDIA_URL}}static/js/jquery.js" type="text/javascript"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				window.print();
+			});
+		</script>
+	</head>
+
+	<body>
+		{% for r in rooms %}
+		<div class="page">
+			<div class="header">
+				<table>
+					<tr>
+						<td class="image"><img src="{{ MEDIA_URL }}static/images/logo_print.png" alt="{% trans "Maiznet" %}" /></td>
+						<td><h1>{% trans "Bienvenue sur le réseau de Maiz" %}</h1></td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="welcome">
+				{% blocktrans %}
+				<h2>Bienvenue</h2>
+
+				<p>Il y a fort à parier que si tu lis ce document, c'est que tu veux
+				Internet tout de suite et maintenant. Mais attends un peu avant et
+				lis ces quelques lignes pour découvrir rapidement ce que te propose
+				le réseau Maiznet.</p>
+
+				<ul>
+					<li><strong>La TNT</strong>&nbsp;: tu peux recevoir la TNT
+					directement sur ton PC. Plus d'infos sur
+					<em>http://maiznet.fr/pages/maiztnt</em></li>
+
+					<li><strong>La messagerie instantanée</strong>&nbsp;: Maiz
+					dispose d'un serveur Jabber. Qu'est-ce que c'est ?  C'est un
+					équivalent libre et ouvert de MSN, mais il y a un petit
+					bonus&nbsp;: avec l'adresse que Maiznet te fournit, tous les
+					occupants de Maiz sont automatiquement dans tes
+					contacts&nbsp;!  Pratique la veille d'un TOP ou pour
+					s'organiser avant d'aller manger ;) On notera aussi cette
+					adresse te permet de parler à des contacts Google Talk par
+					exemple. Plus d'infos sur
+					<em>http://maiznet.fr/pages/jabber</em>.</li>
+				</ul>
+
+				<p> Le but de Maiznet est de fournir à tous les résidents un service
+				d'aussi bonne qualité et aussi complet que possible&nbsp;! Nous
+				espérons que tu te plairas sur le réseau :)&nbsp;. Si tu as des
+				problèmes ou des suggestions tu peux nous en parler à l'adresse
+				<em>maiznet@googlegroups.com</em></p>
+
+				<h2>Accéder au net</h2>
+
+				<p>La partie intéressante, enfin&nbsp;!</p>
+
+				<p>On peut résumer ça en quelques grandes étapes&nbsp;:</p>
+
+				<ol>
+					<li>S'inscrire sur Register
+					(<em>http://maiznet.fr/register</em>).  Là tu vas avoir
+					besoin du « ticket » qui est inscrit au bas de cette page.
+					C'est une étape importante : grâce au nom d'utilisateur/mot
+					de passe que tu vas entrer, tu auras accès aux autres
+					services de Maiznet qui demandent un mot de passe.
+					J'insiste&nbsp;: <strong>retiens bien ce mot de
+					passe&nbsp;!</strong> Et en particulier jusqu'à l'an
+					prochain, où il te sera nécessaire pour te
+					re-connecter.</li>
+					<li>Attendre cinq minutes et redémarrer sa connexion réseau,
+					en débranchant/rebranchant ton câble réseau par exemple.
+					Sans ça, ton PC ne prendra pas en compte ton inscription et
+					tu n'auras pas Internet&nbsp;!</li>
+					<li>C'est bon ça marche&nbsp;! Tu peux par exemple aller
+					faire un tour sur Karibou
+					(<em>http://karibou.telecom-lille1.eu</em>)... Tu pourras
+					t'y connecter dès que tu auras ton mot de passe TL1 ;)</li>
+				</ol>
+				{% endblocktrans %}
+			</div>
+
+			<div class="ticket">
+				<h2>{% trans "Ticket de connexion" %}</h2>
+				<p>{% blocktrans with r as room %}Tu es dans la chambre <strong>{{ room }}</strong>. Le ticket associé est&nbsp;:{% endblocktrans %}</p>
+				<div>{{ r.get_new_ticket }}</div>
+			</div>
+		</div>
+		{% endfor %}
+	</body>
 </ul>

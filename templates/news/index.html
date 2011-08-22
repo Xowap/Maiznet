@@ -8,31 +8,52 @@
 {% block content %}
 	{% for new in news %}
 		{% if new.category.slug == "maintenance" %}
-			<article> 
+			<article class="maintenance">
 				<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
-	
-				<p>{{new.content|truncatewords:20}}</p>
-				<p>{% if new.date_end %}
-					{% trans "From" %} <time datetime="{{new.date_start|date:"c"}}" pubdate>{{new.date_start|date:"DATETIME_FORMAT"}} </time>
-					{% trans "to" %} <time datetime="{{new.date_end|date:"c"}}" >{{new.date_end|date:"DATETIME_FORMAT"}} </time>.
+
+				{% autoescape off %}
+				<div class="article_text">
+					{{new.content}}
+				</div>
+				{% endautoescape %}
+
+				<footer>
+				{% if new.date_end %}
+					{% blocktrans with new.date_start|date:"DATETIME_FORMAT" as from and new.date_end|date:"DATETIME_FORMAT" as to and new.date_start|date:"c" as machine_from and new.date_end|date:"c" as machine_to %}
+					From <time datetime="{{ machine_from }}" pubdate>{{ from }}</time> to <time datetime="{{ machine_to }}" >{{ to }}</time>.
+					{% endblocktrans %}
 				{% else %}
-					{% trans "Posted the" %} <time datetime="{{new.date_start|date:"c"}}" pubdate>{{new.date_start|date:"DATETIME_FORMAT"}} </time>.
-				{% endif %}</p>
+					{% blocktrans with new.date_start|date:"DATETIME_FORMAT" as from and new.date_start|date:"c" as machine_from %}
+					Posted <time datetime="{{ machine_from }}" pubdate>{{ from }}</time>.
+					{% endblocktrans %}
+				{% endif %}
+				</footer>
 			</article>
 		{%endif%}
 	{% endfor %}
 	{% for new in news %}
 		{% if new.category.slug != "maintenance" %}
-	<article> 
-		<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
-		<p>{{new.content|truncatewords:20}}</p>
+			<article>
+				<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
 
-		<p>{% if new.date_end %}
-				{% trans "From" %} <time datetime="{{new.date_start|date:"c"}}" pubdate>{{new.date_start|date:"DATETIME_FORMAT"}} </time> 
-				{% trans "to" %} <time datetime="{{new.date_end|date:"c"}}" >{{new.date_end|date:"DATETIME_FORMAT"}} </time>.
-			{% else %}
-				{% trans "Posted the" %} <time datetime="{{new.date_start|date:"c"}}" pubdate>{{new.date_start|date:"DATETIME_FORMAT"}} </time>.
-			{% endif %}</p></article>
+				{% autoescape off %}
+				<div class="article_text">
+					{{new.content}}
+				</div>
+				{% endautoescape %}
+
+				<footer>
+				{% if new.date_end %}
+					{% blocktrans with new.date_start|date:"DATETIME_FORMAT" as from and new.date_end|date:"DATETIME_FORMAT" as to and new.date_start|date:"c" as machine_from and new.date_end|date:"c" as machine_to %}
+					From <time datetime="{{ machine_from }}" pubdate>{{ from }}</time> to <time datetime="{{ machine_to }}" >{{ to }}</time>.
+					{% endblocktrans %}
+				{% else %}
+					{% blocktrans with new.date_start|date:"DATETIME_FORMAT" as from and new.date_start|date:"c" as machine_from %}
+					Posted <time datetime="{{ machine_from }}" pubdate>{{ from }}</time>.
+					{% endblocktrans %}
+				{% endif %}
+				</footer>
+			</article>
 		{%endif%}
 	{% endfor %}
 {% endblock %}

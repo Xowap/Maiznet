@@ -7,14 +7,26 @@
 
 {% block content %}
 
-<article> 
-	<header> <h1>{{news.title}}</h1> </header>
-	<p>{{news.content}}</p>
-	<p>{% if news.date_end %}
-	{% trans "From" %} <time datetime="{{news.date_start|date:"c"}}" pubdate>{{news.date_start|date:"DATETIME_FORMAT"}} </time>
-	{% trans "to" %} <time datetime="{{news.date_end|date:"c"}}" >{{news.date_end|date:"DATETIME_FORMAT"}} </time>.
-{% else %}
-	{% trans "Posted the" %} <time datetime="{{news.date_start|date:"c"}}" pubdate>{{news.date_start|date:"DATETIME_FORMAT"}} </time>.
-{% endif %}</p></article>
+<article{% if news.category.slug == "maintenance" %} class="maintenance"{% endif %}>
+	<header><h1><a href="{% url news-read slug=news.slug %}">{{news.title}}</a></h1></header>
+
+	{% autoescape off %}
+	<div class="article_text">
+		{{news.content}}
+	</div>
+	{% endautoescape %}
+
+	<footer>
+	{% if news.date_end %}
+		{% blocktrans with news.date_start|date:"DATETIME_FORMAT" as from and news.date_end|date:"DATETIME_FORMAT" as to and news.date_start|date:"c" as machine_from and news.date_end|date:"c" as machine_to %}
+		From <time datetime="{{ machine_from }}" pubdate>{{ from }}</time> to <time datetime="{{ machine_to }}" >{{ to }}</time>.
+		{% endblocktrans %}
+	{% else %}
+		{% blocktrans with news.date_start|date:"DATETIME_FORMAT" as from and news.date_start|date:"c" as machine_from %}
+		Posted <time datetime="{{ machine_from }}" pubdate>{{ from }}</time>.
+		{% endblocktrans %}
+	{% endif %}
+	</footer>
+</article>
 
 {% endblock %}

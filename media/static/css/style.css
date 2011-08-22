@@ -239,11 +239,40 @@ body > header a {
 	color: #ebecec;
 }
 
-#content h2 {
+#content h2, #content header > h1 {
 	font-size: 105%;
 	margin-top: 1.3em;
 	margin-bottom: 0.7em;
 	border-bottom: 1px solid #3a3c41;
+}
+
+#content h1 a, #content h2 a {
+	border-bottom: none;
+}
+
+#content article time {
+	font-weight: bold;
+}
+
+#content article footer {
+	font-size: 80%;
+	color: #666;
+}
+
+#content article .article_text {
+	margin: 0 10px;
+	padding-left: 5px;
+	border-left: 1px dashed #aaa;
+}
+
+#content article.maintenance h1, #content article.maintenance h1 a {
+	color: #a40505;
+}
+
+#content article.maintenance h1:before {
+	content: url('../images/warning.png');
+	vertical-align: middle;
+	margin-right: 4px;
 }
 
 #content ul {

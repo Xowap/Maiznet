@@ -44,13 +44,13 @@
 
 				<ul>
 					<li><a href="{% url news-index %}">{% trans "News" %}</a></li>
-					<li><a href="{% url register-index %}">{% trans "Register" %}</a></li>
 					<li><a href="{% url page-display slug="about" %}">{% trans "About" %}</a></li>
 
 					{% if user.is_authenticated %}
-					<li><a href="{% url register-edit %}">{{ user }}</a> (<a href="{% url logout %}">{% trans "Log Out" %}</a>)</li>
+					<li><a href="{% url register-index %}">{{ user }}</a> (<a href="{% url logout %}">{% trans "Log Out" %}</a>)</li>
 					{% else %}
 					<li><a href="{% url login %}">{% trans "Log In" %}</a></li>
+					<li><a href="{% url register-index %}">{% trans "Register" %}</a></li>
 					{% endif %}
 				</ul>
 			</nav>

@@ -79,8 +79,13 @@ INSTALLED_APPS = (
 	'django.contrib.messages',
 	'django.contrib.admin',
 
+	'modeltranslation',
+
 	'maiznet.news',
 	'maiznet.monitoring',
 	'maiznet.register',
 	'maiznet.dhcp',
+	'maiznet.pages',
 )
+
+MODELTRANSLATION_TRANSLATION_REGISTRY = 'maiznet.translation'

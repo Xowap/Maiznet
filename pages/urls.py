@@ -3,7 +3,7 @@
 #
 # ~~~~ Maiznet.fr ~~~~
 #
-#  -> urls.py
+#  -> pages/urls.py
 #
 #
 # Copyright 2011 Rémy Sanchez <remy.sanchez@hyperthese.net>
@@ -13,19 +13,7 @@
 ########################################################################
 
 from django.conf.urls.defaults import *
-from django.views.generic.simple import redirect_to
-
-from django.contrib import admin
-admin.autodiscover()
 
 urlpatterns = patterns('',
-	(r'^admin/', include(admin.site.urls)),
-
-	(r'^news/',     include('maiznet.news.urls')),
-	(r'^register/', include('maiznet.register.urls')),
-	(r'^dhcp/',     include('maiznet.dhcp.urls')),
-	(r'^pages/',    include('maiznet.pages.urls')),
-
-	# The index page is actualy the news index page
-	(r'^$', redirect_to, {'url': '/news/', 'permanent': True}),
+	url(r'^(?P<slug>[-\w]+)$', 'maiznet.pages.views.display', name="page-display"),
 )

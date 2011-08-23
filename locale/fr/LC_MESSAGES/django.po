@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-23 04:12+0200\n"
-"PO-Revision-Date: 2011-08-23 04:16+0100\n"
+"PO-Revision-Date: 2011-08-23 04:46+0100\n"
 "Last-Translator: Rémy Sanchez <remy.sanchez@hyperthese.net>\n"
 "Language-Team: Maiznet <maiznet@googlegroups.com>\n"
 "Language: \n"
@@ -72,7 +72,7 @@ msgstr "Ceci est la valeur de l'adresse MAC de ta carte réseau. Dans le doute, 
 #: register/forms.py:87
 #: templates/register/edit.html:19
 msgid "Username"
-msgstr "Nom&nbsp;d'utilisateur"
+msgstr "Nom d'utilisateur"
 
 #: register/forms.py:88
 msgid "Required. 30 characters or fewer. Begins and ends with a letter and can contain letters, digits, _ and -."
@@ -90,7 +90,7 @@ msgstr "Prénom"
 #: register/forms.py:91
 #: register/forms.py:140
 msgid "Lastname"
-msgstr "Nom&nbsp;de&nbsp;famille"
+msgstr "Nom de famille"
 
 #: register/forms.py:92
 #: register/forms.py:141
@@ -308,7 +308,7 @@ msgstr "Chambre"
 
 #: templates/register/edit.html:35
 msgid "Password"
-msgstr "Mot&nbsp;de&nbsp;passe"
+msgstr "Mot de passe"
 
 #: templates/register/edit.html:36
 msgid "Change password"
@@ -466,11 +466,11 @@ msgstr "Merci d'entrer ton nouveau mot de passe deux fois pour être sûr de le 
 
 #: templates/register/password_confirm.html:22
 msgid "New password:"
-msgstr "Nouveau&nbsp;mot&nbsp;de&nbsp;passe"
+msgstr "Nouveau mot de passe"
 
 #: templates/register/password_confirm.html:24
 msgid "Confirm password:"
-msgstr "Confirme&nbsp;le&nbsp;mot&nbsp;de&nbsp;passe"
+msgstr "Confirme le mot de passe"
 
 #: templates/register/password_confirm.html:28
 msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."

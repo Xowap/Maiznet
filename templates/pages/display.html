@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %} - {{ page.title }}{% endblock %}
+{% block content-title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+<article>
+
+	<div class="page_text">
+	{% autoescape off %}
+		{{ content }}
+	{% endautoescape %}
+	</div>
+
+	<footer>
+		{% blocktrans with page.mod_date|date:"DATETIME_FORMAT" as pub_date and page.mod_date|date:"c" as machine_pub_date %}
+		Published <time pubdate datetime="{{ machine_pub_date }}">{{ pub_date }}</time>.
+		{% endblocktrans %}
+		
+	</footer>
+
+</article>
+{% endblock %}
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-23 04:03+0200\n"
+"POT-Creation-Date: 2011-08-23 04:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,6 +151,7 @@ msgid "(No room assigned)"
 msgstr ""
 
 #: templates/base.html:7 templates/base.html.py:39
+#: templates/register/tickets_renew.html:28
 msgid "Maiznet"
 msgstr ""
 
@@ -167,15 +168,11 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: templates/base.html:49
-msgid "Monitoring"
-msgstr ""
-
-#: templates/base.html:52
+#: templates/base.html:51
 msgid "Log Out"
 msgstr ""
 
-#: templates/base.html:54 templates/register/login.html:5
+#: templates/base.html:53 templates/register/login.html:5
 #: templates/register/login.html.py:6 templates/register/login.html:28
 #: templates/register/ticket.html:5 templates/register/ticket.html.py:6
 msgid "Log In"
@@ -193,27 +190,59 @@ msgstr ""
 msgid "ADSL 1"
 msgstr ""
 
+#: templates/monitoring/checkbox.html:22
+msgid "ADSL 1 Bandwidth Usage"
+msgstr ""
+
 #: templates/monitoring/checkbox.html:23
 msgid "ADSL 2"
+msgstr ""
+
+#: templates/monitoring/checkbox.html:24
+msgid "ADSL 2 Bandwidth Usage"
 msgstr ""
 
 #: templates/monitoring/checkbox.html:25
 msgid "SDSL"
 msgstr ""
 
-#: templates/news/index.html:16 templates/news/index.html.py:31
-#: templates/news/read.html:14
-msgid "From"
+#: templates/monitoring/checkbox.html:26
+msgid "SDSL Bandwidth Usage"
 msgstr ""
 
-#: templates/news/index.html:17 templates/news/index.html.py:32
-#: templates/news/read.html:15
-msgid "to"
+#: templates/news/index.html:22 templates/news/index.html.py:47
+#, python-format
+msgid ""
+"\n"
+"\t\t\t\t\tFrom <time datetime=\"%(machine_from)s\" pubdate>%(from)s</time> "
+"to <time datetime=\"%(machine_to)s\" >%(to)s</time>.\n"
+"\t\t\t\t\t"
 msgstr ""
 
-#: templates/news/index.html:19 templates/news/index.html.py:34
-#: templates/news/read.html:17
-msgid "Posted the"
+#: templates/news/index.html:26 templates/news/index.html.py:51
+#, python-format
+msgid ""
+"\n"
+"\t\t\t\t\tPosted <time datetime=\"%(machine_from)s\" pubdate>%(from)s</"
+"time>.\n"
+"\t\t\t\t\t"
+msgstr ""
+
+#: templates/news/read.html:21
+#, python-format
+msgid ""
+"\n"
+"\t\tFrom <time datetime=\"%(machine_from)s\" pubdate>%(from)s</time> to "
+"<time datetime=\"%(machine_to)s\" >%(to)s</time>.\n"
+"\t\t"
+msgstr ""
+
+#: templates/news/read.html:25
+#, python-format
+msgid ""
+"\n"
+"\t\tPosted <time datetime=\"%(machine_from)s\" pubdate>%(from)s</time>.\n"
+"\t\t"
 msgstr ""
 
 #: templates/pages/display.html:18
@@ -314,23 +343,23 @@ msgstr ""
 msgid "What is your situation ?"
 msgstr ""
 
-#: templates/register/index.html:25
+#: templates/register/index.html:26
 msgid "I'm coming to Maiz for the first time"
 msgstr ""
 
-#: templates/register/index.html:26
+#: templates/register/index.html:29
 msgid "I changed my room and I don't have Internet anymore"
 msgstr ""
 
-#: templates/register/index.html:27
+#: templates/register/index.html:30
 msgid "I would like to change informations regarding myself"
 msgstr ""
 
-#: templates/register/index.html:28
+#: templates/register/index.html:33
 msgid "I lost my password !"
 msgstr ""
 
-#: templates/register/index.html:29
+#: templates/register/index.html:36
 msgid "I'm going away from Maiz."
 msgstr ""
 
@@ -478,6 +507,83 @@ msgstr ""
 
 #: templates/register/ticket.html:21
 msgid "Change Room"
+msgstr ""
+
+#: templates/register/tickets_renew.html:29
+msgid "Bienvenue sur le réseau de Maiz"
+msgstr ""
+
+#: templates/register/tickets_renew.html:35
+msgid ""
+"\n"
+"\t\t\t\t<h2>Bienvenue</h2>\n"
+"\n"
+"\t\t\t\t<p>Il y a fort à parier que si tu lis ce document, c'est que tu "
+"veux\n"
+"\t\t\t\tInternet tout de suite et maintenant. Mais attends un peu avant et\n"
+"\t\t\t\tlis ces quelques lignes pour découvrir rapidement ce que te propose\n"
+"\t\t\t\tle réseau Maiznet.</p>\n"
+"\n"
+"\t\t\t\t<ul>\n"
+"\t\t\t\t\t<li><strong>La TNT</strong>&nbsp;: tu peux recevoir la TNT\n"
+"\t\t\t\t\tdirectement sur ton PC. Plus d'infos sur\n"
+"\t\t\t\t\t<em>http://maiznet.fr/pages/maiztnt</em></li>\n"
+"\n"
+"\t\t\t\t\t<li><strong>La messagerie instantanée</strong>&nbsp;: Maiz\n"
+"\t\t\t\t\tdispose d'un serveur Jabber. Qu'est-ce que c'est ?  C'est un\n"
+"\t\t\t\t\téquivalent libre et ouvert de MSN, mais il y a un petit\n"
+"\t\t\t\t\tbonus&nbsp;: avec l'adresse que Maiznet te fournit, tous les\n"
+"\t\t\t\t\toccupants de Maiz sont automatiquement dans tes\n"
+"\t\t\t\t\tcontacts&nbsp;!  Pratique la veille d'un TOP ou pour\n"
+"\t\t\t\t\ts'organiser avant d'aller manger ;) On notera aussi cette\n"
+"\t\t\t\t\tadresse te permet de parler à des contacts Google Talk par\n"
+"\t\t\t\t\texemple. Plus d'infos sur\n"
+"\t\t\t\t\t<em>http://maiznet.fr/pages/jabber</em>.</li>\n"
+"\t\t\t\t</ul>\n"
+"\n"
+"\t\t\t\t<p> Le but de Maiznet est de fournir à tous les résidents un service\n"
+"\t\t\t\td'aussi bonne qualité et aussi complet que possible&nbsp;! Nous\n"
+"\t\t\t\tespérons que tu te plairas sur le réseau :)&nbsp;. Si tu as des\n"
+"\t\t\t\tproblèmes ou des suggestions tu peux nous en parler à l'adresse\n"
+"\t\t\t\t<em>maiznet@googlegroups.com</em></p>\n"
+"\n"
+"\t\t\t\t<h2>Accéder au net</h2>\n"
+"\n"
+"\t\t\t\t<p>La partie intéressante, enfin&nbsp;!</p>\n"
+"\n"
+"\t\t\t\t<p>On peut résumer ça en quelques grandes étapes&nbsp;:</p>\n"
+"\n"
+"\t\t\t\t<ol>\n"
+"\t\t\t\t\t<li>S'inscrire sur Register\n"
+"\t\t\t\t\t(<em>http://maiznet.fr/register</em>).  Là tu vas avoir\n"
+"\t\t\t\t\tbesoin du « ticket » qui est inscrit au bas de cette page.\n"
+"\t\t\t\t\tC'est une étape importante : grâce au nom d'utilisateur/mot\n"
+"\t\t\t\t\tde passe que tu vas entrer, tu auras accès aux autres\n"
+"\t\t\t\t\tservices de Maiznet qui demandent un mot de passe.\n"
+"\t\t\t\t\tJ'insiste&nbsp;: <strong>retiens bien ce mot de\n"
+"\t\t\t\t\tpasse&nbsp;!</strong> Et en particulier jusqu'à l'an\n"
+"\t\t\t\t\tprochain, où il te sera nécessaire pour te\n"
+"\t\t\t\t\tre-connecter.</li>\n"
+"\t\t\t\t\t<li>Attendre cinq minutes et redémarrer sa connexion réseau,\n"
+"\t\t\t\t\ten débranchant/rebranchant ton câble réseau par exemple.\n"
+"\t\t\t\t\tSans ça, ton PC ne prendra pas en compte ton inscription et\n"
+"\t\t\t\t\ttu n'auras pas Internet&nbsp;!</li>\n"
+"\t\t\t\t\t<li>C'est bon ça marche&nbsp;! Tu peux par exemple aller\n"
+"\t\t\t\t\tfaire un tour sur Karibou\n"
+"\t\t\t\t\t(<em>http://karibou.telecom-lille1.eu</em>)... Tu pourras\n"
+"\t\t\t\t\tt'y connecter dès que tu auras ton mot de passe TL1 ;)</li>\n"
+"\t\t\t\t</ol>\n"
+"\t\t\t\t"
+msgstr ""
+
+#: templates/register/tickets_renew.html:96
+msgid "Ticket de connexion"
+msgstr ""
+
+#: templates/register/tickets_renew.html:97
+#, python-format
+msgid ""
+"Tu es dans la chambre <strong>%(room)s</strong>. Le ticket associé est&nbsp;:"
 msgstr ""
 
 #: templates/register/welcome.html:5

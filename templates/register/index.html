@@ -26,14 +26,18 @@
 		<li><a href="{% url register-signup %}">{% trans "I'm coming to Maiz for the first time" %}</a></li>
 		{% endif %}
 
+		{% if not user.room %}
 		<li><a href="{% url register-ticket %}">{% trans "I changed my room and I don't have Internet anymore" %}</a></li>
+		{% else %}
+		<li><a href="{% url register-quit %}">{% trans "I'm going away from Maiz." %}</a></li>
+		{% endif %}
+
 		<li><a href="{% url register-edit %}">{% trans "I would like to change informations regarding myself" %}</a></li>
-		
+
 		{% if not user.is_authenticated %}
 		<li><a href="{% url register-pwreset %}">{% trans "I lost my password !" %}</a></li>
 		{% endif %}
 
-		<li><a href="{% url register-quit %}">{% trans "I'm going away from Maiz." %}</a></li>
 	</ul>
 </article>
 {% endblock %}

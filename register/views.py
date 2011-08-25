@@ -24,6 +24,15 @@ from maiznet.register.decorators import anonymous_required
 
 @anonymous_required
 def signup(request):
+	"""
+	Affiche le formulaire d'enregistrement, et si la requête est de
+	type POST, valide le formulaire puis l'enregistre.
+
+	La vue se charge aussi de pré-remplir certaines valeurs, comme
+	la promo (si l'utilisateur n'est pas encore inscrit, il est
+	probablement dans la promo la plus récente), et l'adresse MAC
+	(en faisant appel à l'outil :ref:`tipmac <intro-tipmac>`)
+	"""
 	if request.method == "POST":
 		form = UserRegistrationForm(request.POST)
 		if form.is_valid():
@@ -53,6 +62,10 @@ def signup(request):
 
 @login_required
 def edit(request):
+	"""
+	Permet l'édition du profil utilisateur.
+	"""
+
 	if request.method == "POST":
 		form = UserModificationForm(data = request.POST, instance = request.user)
 		if form.is_valid():
@@ -67,10 +80,18 @@ def edit(request):
 
 @login_required
 def welcome(request):
+	"""
+	Affiche un message de bienvenue à l'utilisateur, une fois qu'il
+	a réussi son inscription.
+	"""
 	return render_to_response("register/welcome.html", {}, RequestContext(request))
 
 @login_required
 def ticket(request):
+	"""
+	Permet à l'utilisateur de saisir un nouveau ticket et de le
+	valider.
+	"""
 	if request.method == "POST":
 		form = TicketForm(request.POST)
 		if form.is_valid():
@@ -85,6 +106,10 @@ def ticket(request):
 
 @login_required
 def quit(request, do = None):
+	"""
+	Libère la chambre, pour quand un utilisateur décide de quitter
+	Maiz. À priori, c'est **la** fonction qui ne va jamais servir.
+	"""
 	if do == "do":
 		try:
 			p = request.user.get_profile()

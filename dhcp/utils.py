@@ -17,13 +17,32 @@
 # été adaptée ici à la rache.
 
 class BinString(object):
+	"""
+	Une classe d'aide pour aider à manipuler simplement des chaînes
+	de bits.
+
+	Issue du mini-projet `JSZ <https://github.com/EquiNux/JSZ>`_
+
+	.. automethod:: __add__
+	.. automethod:: __getitem__
+	.. automethod:: __iadd__
+	.. automethod:: __init__
+	.. automethod:: __len__
+	"""
 	def __init__(self, value = ""):
+		"""
+		Initialise, la classe, avec éventuellement une valeur
+		initiale à prendre en compte.
+		"""
 		self.bytes = bytearray()
 		self.size = 0
 
 		self.append(value)
 
 	def append_bit(self, bit):
+		"""
+		Ajoute un bit à la fin de la chaîne
+		"""
 		if not isinstance(bit, (int, bool)):
 			raise TypeError('Trying to append invalid bit')
 
@@ -40,6 +59,9 @@ class BinString(object):
 		self.size += 1
 
 	def append(self, other):
+		"""
+		Concatène la chaîne avec une autre chaîne binaire.
+		"""
 		if isinstance(other, str):
 			for i in other:
 				if i != '0' and i != '1':
@@ -56,6 +78,9 @@ class BinString(object):
 			raise TypeError('Unable to add this to the binary string')
 
 	def __add__(self, other):
+		"""
+		Concatène les chaînes additionnées.
+		"""
 		out = BinString()
 		out.bytes = self.bytes
 		out.size = self.size
@@ -65,16 +90,28 @@ class BinString(object):
 		return out
 
 	def __iadd__(self, other):
+		"""
+		Raccourci pour ajouter une chaîne à la fin de celle ci.
+		"""
 		self.append(other)
 		return self
 
 	def get_bit(self, idx):
+		"""
+		Retourne un bit à un index précis.
+		"""
 		return self.bytes[int(idx / 8)] & (128 >> (idx % 8)) != 0
 
 	def __len__(self):
+		"""
+		Retourne le nombre de bits dans la chaîne.
+		"""
 		return self.size
 
 	def __getitem__(self, key):
+		"""
+		Accède à un bit en particulier.
+		"""
 		if not isinstance(key, int):
 			raise TypeError("Indice must be int")
 
@@ -84,6 +121,10 @@ class BinString(object):
 		return self.get_bit(key)
 
 	def bin(self):
+		"""
+		Retourne une représentation de la chaîne sous la forme
+		d'une chaîne composée de 0 et de 1.
+		"""
 		out = ""
 		for i in range(0, len(self)):
 			if self[i]:
@@ -94,6 +135,10 @@ class BinString(object):
 		return out
 
 	def encode(self):
+		"""
+		Encode la chaîne dans un format spécial, fait pour être
+		embarqué dans un commentaire de Javascript.
+		"""
 		from struct import pack
 		out = bytearray()
 
@@ -117,6 +162,9 @@ class BinString(object):
 		return out
 
 	def to_int(self):
+		"""
+		Converti les 4 premiers octets de la chaîne en entier.
+		"""
 		from struct import unpack
 		return unpack('!I', str(self.bytes[0:4]))[0]
 

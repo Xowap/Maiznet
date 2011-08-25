@@ -15,6 +15,9 @@ from modeltranslation.translator import translator, TranslationOptions
 from maiznet.pages.models import Page
 
 class PageTranslationOptions(TranslationOptions):
+	"""
+	Indique à modeltranslation de traduire les pages.
+	"""
 	fields = ('title', 'content')
 
 translator.register(Page, PageTranslationOptions)

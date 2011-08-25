@@ -16,6 +16,13 @@ from django.shortcuts import render_to_response, get_object_or_404
 from maiznet.pages.models import Page
 
 def display(request, slug):
+	"""
+	Affiche une page.
+
+	Avant l'affichage, le contenu de la page est passé au moteur de
+	rendu de template, au cas où la page aurait besoin de certaines
+	fonctions, comme par exemple la génération d'URL.
+	"""
 	page = get_object_or_404(Page, slug = slug)
 
 	t = Template(page.content)

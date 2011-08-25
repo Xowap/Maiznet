@@ -14,6 +14,14 @@
 from django.db import models
 
 class Page(models.Model):
+	"""
+	Contient une page statique du contenu. Les pages doivent être
+	traduites pour le côté international de certains étudiants, et
+	sont accessibles à l'URL http://maiznet.fr/pages/slug
+
+	Le contenu des pages est rendu en utilisant le moteur de
+	template django.
+	"""
 	title = models.CharField(max_length = 100)
 	slug = models.SlugField(unique = True)
 	content = models.TextField()

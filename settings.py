@@ -63,6 +63,7 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
+	'piwik.django.middleware.PiwikMiddleware',
 )
 
 ROOT_URLCONF = 'maiznet.urls'
@@ -80,6 +81,7 @@ INSTALLED_APPS = (
 	'django.contrib.admin',
 
 	'modeltranslation',
+	'piwik.django',
 
 	'maiznet.news',
 	'maiznet.monitoring',

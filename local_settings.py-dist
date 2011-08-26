@@ -75,3 +75,7 @@ MAIZ_IP_GUEST = '172.17.192.0/18'
 
 # Autorisé à consulter la configuration DHCP
 MAIZ_DHCP_REQUESTER = '172.17.0.0/18'
+
+# Piwik (statistiques du site)
+PIWIK_TOKEN = ''
+PIWIK_URL = 'http://maiznet.fr/piwik/'

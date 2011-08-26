@@ -69,5 +69,9 @@
 				{% endblock %}
 			</aside>
 		</div>
+
+	{% autoescape off %}
+	{{ piwik_tag }}
+	{% endautoescape %}
 	</body>
 </html>

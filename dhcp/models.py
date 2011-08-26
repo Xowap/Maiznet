@@ -122,6 +122,12 @@ class Slot(models.Model):
 		fonction, ne l'appellez pas, ne cherchez pas à savoir
 		comment elle fonctionne.
 		"""
+		if self.presence.netif == "":
+			self.assign = _enc({})
+			if commit:
+				self.save()
+			return
+
 		try:
 			m = _dec(self.assign)
 		except:

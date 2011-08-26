@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-23 04:12+0200\n"
-"PO-Revision-Date: 2011-08-23 04:46+0100\n"
+"PO-Revision-Date: 2011-08-26 23:45+0100\n"
 "Last-Translator: Rémy Sanchez <remy.sanchez@hyperthese.net>\n"
 "Language-Team: Maiznet <maiznet@googlegroups.com>\n"
 "Language: \n"
@@ -56,7 +56,7 @@ msgstr "Tu ne peux pas enregistrer plus de 30 adresses MAC"
 #: register/forms.py:50
 #, python-format
 msgid "Somebody is already using the MAC address %(mac)s"
-msgstr "Quelqu'un a déjà enregistré cette l'adresse MAC %(mac)s"
+msgstr "Quelqu'un a déjà enregistré l'adresse MAC %(mac)s"
 
 #: register/forms.py:76
 #: register/forms.py:95

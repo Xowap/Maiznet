@@ -19,6 +19,7 @@ Table des matières
    dhcp
    pages
    tipmac
+   news
 
 .. Indices and tables
    ==================

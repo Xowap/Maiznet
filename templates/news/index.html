@@ -32,7 +32,7 @@
 		{%endif%}
 	{% endfor %}
 	{% for new in news %}
-		{% if new.category.slug != "maintenance" %}
+		{% if new.category.slug == "probleme" %}
 			<article>
 				<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
 
@@ -55,5 +55,28 @@
 				</footer>
 			</article>
 		{%endif%}
+	{% endfor %}
+	{% for new in news %}
+			<article>
+				<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
+
+				{% autoescape off %}
+				<div class="article_text">
+					{{new.content}}
+				</div>
+				{% endautoescape %}
+
+				<footer>
+				{% if new.date_end %}
+					{% blocktrans with new.date_start|date:"DATETIME_FORMAT" as from and new.date_end|date:"DATETIME_FORMAT" as to and new.date_start|date:"c" as machine_from and new.date_end|date:"c" as machine_to %}
+					From <time datetime="{{ machine_from }}" pubdate>{{ from }}</time> to <time datetime="{{ machine_to }}" >{{ to }}</time>.
+					{% endblocktrans %}
+				{% else %}
+					{% blocktrans with new.date_start|date:"DATETIME_FORMAT" as from and new.date_start|date:"c" as machine_from %}
+					Posted <time datetime="{{ machine_from }}" pubdate>{{ from }}</time>.
+					{% endblocktrans %}
+				{% endif %}
+				</footer>
+			</article>
 	{% endfor %}
 {% endblock %}

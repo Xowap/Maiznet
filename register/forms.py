@@ -35,6 +35,9 @@ def validate_ticket(value):
 		raise ValidationError(_("No room exists with this ticket"))
 
 def validate_mac(value, presence=None):
+	if value == "":
+		return
+
 	if isinstance(presence, Presence):
 		qs = Presence.objects.exclude(pk=presence.pk)
 	else:

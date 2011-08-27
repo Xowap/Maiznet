@@ -3,18 +3,18 @@
 {% load i18n %}
 
 	<head>
-		<meta charset="utf8" />
+		<meta charset="utf-8" />
 		<title>{% trans "Maiznet" %}{% block head-title %}{% endblock %}</title>
 
 		<!-- CSS -->
-		<link rel="stylesheet" href="{{ MEDIA_URL }}/static/css/reset.css" />
+		<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/reset.css" />
 		<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/style.css" />
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="{{ MEDIA_URL }}static/images/favicon.ico" />
 
 		<!-- JQuery -->
-		<script src="{{ MEDIA_URL}}static/js/jquery.js" lang="text/javascript"></script>
+		<script src="{{ MEDIA_URL}}static/js/jquery.js" type="text/javascript"></script>
 
 		{% if form %}
 		<!-- Form required media -->
@@ -36,7 +36,7 @@
 	<body>
 		<header>
 			<hgroup>
-				<h1><img src="{{ MEDIA_URL }}/static/images/logo.png" alt="{% trans "Maiznet" %}" /></h1>
+				<h1><img src="{{ MEDIA_URL }}static/images/logo.png" alt="{% trans "Maiznet" %}" /></h1>
 			</hgroup>
 
 			<nav>
@@ -44,31 +44,34 @@
 
 				<ul>
 					<li><a href="{% url news-index %}">{% trans "News" %}</a></li>
-					<li><a href="{% url register-index %}">{% trans "Register" %}</a></li>
-					<li><a href="#">{% trans "About" %}</a></li>
-					<li><a href="#">{% trans "Monitoring" %}</a></li>
+					<li><a href="{% url page-display slug="about" %}">{% trans "About" %}</a></li>
 
 					{% if user.is_authenticated %}
-					<li>{{ user }} (<a href="{% url logout %}">{% trans "Log Out" %}</a>)</li>
+					<li><a href="{% url register-index %}">{{ user }}</a> (<a href="{% url logout %}">{% trans "Log Out" %}</a>)</li>
 					{% else %}
 					<li><a href="{% url login %}">{% trans "Log In" %}</a></li>
+					<li><a href="{% url register-index %}">{% trans "Register" %}</a></li>
 					{% endif %}
 				</ul>
 			</nav>
 		</header>
 
 		<div id="wrapper">
-			<aside id="sidebar">
-				{% block sidebar %}
-					{% include "monitoring/checkbox.html" %}
-				{% endblock %}
-			</aside>
-
 			<section id="content">
 				<h1>{% block content-title %}{% endblock %}</h1>
 
 				{% block content %}{% endblock %}
 			</section>
+
+			<aside id="sidebar">
+				{% block sidebar %}
+					{% include "monitoring/checkbox.html" %}
+				{% endblock %}
+			</aside>
 		</div>
+
+	{% autoescape off %}
+	{{ piwik_tag }}
+	{% endautoescape %}
 	</body>
 </html>

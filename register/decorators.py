@@ -13,10 +13,16 @@
 ########################################################################
 
 from django.http import HttpResponseRedirect
+from functools import wraps
 
-def anonymous_required(view_func, redirect_to = '/'):
-	def _wrapped_view(request, *args, **kwargs):
+def anonymous_required(f, redirect_to = '/'):
+	"""
+	Si l'utilisateur est authentifié, on le redirige vers une autre
+	page ('/' par défaut).
+	"""
+	@wraps(f)
+	def wrapper(request, *args, **kwargs):
 		if request.user.is_authenticated():
 			return HttpResponseRedirect(redirect_to)
-		return view_func(request, *args, **kwargs)
-	return _wrapped_view
+		return f(request, *args, **kwargs)
+	return wrapper

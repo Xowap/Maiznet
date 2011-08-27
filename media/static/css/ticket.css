@@ -1,0 +1,40 @@
+body {
+	font-family: serif;
+	font-size: 11pt;
+	text-align: justify;
+}
+
+h2 {
+	border-bottom: 1px solid #aaa;
+}
+
+.header {
+	text-align: center;
+	overflow: hidden;
+	border: 1px solid #888;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.header td.image {
+	width: 300px;
+}
+
+.header td.image img {
+	margin-top: -15px;
+	width: 300px;
+}
+
+.header table {
+	width: 100%;
+}
+
+.ticket div {
+	text-align: center;
+	font-size: 150%;
+	font-weight: bold;
+}
+
+.page {
+	page-break-after: always;
+}

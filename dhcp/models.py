@@ -122,6 +122,12 @@ class Slot(models.Model):
 		fonction, ne l'appellez pas, ne cherchez pas à savoir
 		comment elle fonctionne.
 		"""
+		if self.presence.netif == "":
+			self.assign = _enc({})
+			if commit:
+				self.save()
+			return
+
 		try:
 			m = _dec(self.assign)
 		except:
@@ -160,7 +166,7 @@ class Slot(models.Model):
 		"""
 		Ça, c'est la fonction qui retourne la liste des IP d'une
 		Presence. Elle se charge toute seule d'appeller
-		get_attribution().
+		_get_attribution().
 		"""
 		attrs = self._get_attribution(commit)
 
@@ -178,6 +184,9 @@ class Slot(models.Model):
 
 # Bon, si je met pas ça là, j'ai une boucle d'import. C'est crade, soit.
 def presence_get_slot(self):
+	"""
+	Retourne l'objet Slot associé à la Presence.
+	"""
 	try:
 		s = Slot.objects.get(presence=self)
 	except Slot.DoesNotExist:

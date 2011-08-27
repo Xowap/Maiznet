@@ -19,6 +19,9 @@ from django.template import RequestContext
 from django.conf import settings
 
 def conf(request):
+	"""
+	Génère le fichier *dhcpd.conf*.
+	"""
 	ip = request.META['REMOTE_ADDR']
 	if IPy.IPint(settings.MAIZ_DHCP_REQUESTER).overlaps(ip) != 1:
 		return redirect('/')

@@ -16,6 +16,13 @@ from django.contrib.auth.models import User, Group
 from django.utils.translation import ugettext as _
 
 class Room(models.Model):
+	"""
+	Représente une chambre de Maiz.
+
+	Accessoirement, il n'y a qu'une chambre par utilisateur, donc
+	pour les chambres du style Cyclament où on met plusieurs
+	résidents, il faut créer plusieurs chambres.
+	"""
 	number = models.CharField(max_length = 20, name = _("room number"), help_text = _("Number of the room, written on the door."))
 	ticket = models.CharField(max_length = 14, name = _("ticket"), help_text = _("A unique identifier that was given to you with your key."), unique  = True, blank = True, null = True)
 
@@ -34,6 +41,12 @@ class Room(models.Model):
 		return "%04d-%04d-%04d" % (part1, part2, part3)
 
 	def get_new_ticket(self, commit=True):
+		"""
+		Génère un nouveau ticket, l'enregistre, et le retourne.
+
+		Le ticket est enregistré uniquement si *commit* vaut
+		*True*. Sinon il faut appeller *save()* à la main.
+		"""
 		while True:
 			t = self._gen_rand_ticket()
 			if Room.objects.filter(ticket=t).count() == 0:
@@ -46,6 +59,11 @@ class Room(models.Model):
 		return t
 
 class Presence(models.Model):
+	"""
+	Représente la présence d'un utilisateur à Maiz. C'est ce qui
+	fait office de profil utilisateur au sens de Django. La présence
+	lie un utilisateur à une chambre et des cartes réseau.
+	"""
 	user = models.ForeignKey(User, unique = True)
 	room = models.ForeignKey(Room, unique = True, blank = True, null = True)
 	netif = models.TextField(name = _("network interface"), help_text = ("The MAC adress(es) of your network card. If unsure, keep the pre-filled value"))
@@ -57,6 +75,12 @@ class Presence(models.Model):
 			return _('(No room assigned)')
 
 class Promo(Group):
+	"""
+	Une promo. Fondamentalement, c'est exactement pareil qu'un
+	groupe, et d'ailleurs quand une promo est créée, un groupe est
+	créé en conséquence. Mais on demande aux utilisateurs de choisir
+	une promo, pas un groupe.
+	"""
 	class Meta:
 		ordering = ['name']
 
@@ -66,6 +90,12 @@ class Promo(Group):
 
 _tmp = User.objects.get
 def hack_user_get(*args, **kwargs):
+	"""
+	Ce hack permet de rendre la recherche d'utilisateurs insensible
+	à la casse. Particulièrement utile pour l'authentification des
+	utilisateurs avec des moteurs SQL sensibles à la casse, comme
+	sqlite par exemple.
+	"""
 	if 'username' in kwargs:
 		kwargs['username__iexact'] = kwargs.pop('username')
 

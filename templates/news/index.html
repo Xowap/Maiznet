@@ -57,6 +57,7 @@
 		{%endif%}
 	{% endfor %}
 	{% for new in news %}
+		{% if new.category.slug != "probleme" and new.category.slug != "maintenance" %}
 			<article>
 				<header> <h1><a href="{% url news-read slug=new.slug %}">{{new.title}}</a></h1> </header>
 
@@ -78,5 +79,6 @@
 				{% endif %}
 				</footer>
 			</article>
+		{% endif %}
 	{% endfor %}
 {% endblock %}

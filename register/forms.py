@@ -134,7 +134,8 @@ class UserRegistrationForm(UserCreationForm):
 		p.save()
 
 		# On l'ajoute à sa promo
-		user.groups.add(self.cleaned_data["promo"])
+		if self.cleaned_data['promo'] != None:
+			user.groups.add(self.cleaned_data["promo"])
 
 		return user
 
@@ -211,7 +212,9 @@ class UserModificationForm(ModelForm):
 		promo = self._get_user_promo(user)
 		if promo != self.cleaned_data['promo']:
 			user.groups.remove(promo)
-			user.groups.add(self.cleaned_data['promo'])
+
+			if self.cleaned_data['promo'] != None:
+				user.groups.add(self.cleaned_data['promo'])
 
 		# Et on met à jour sa carte réseau
 		p = user.get_profile()

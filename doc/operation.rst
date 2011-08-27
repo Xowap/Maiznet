@@ -21,7 +21,11 @@ Pour fonctionner, différents modules sont nécessaires :
   - :py:mod:`IPy` est utilisé pour diverses opération de calcul sur les
     adresses IP.
   - :py:mod:`matplotlib` pour tracer les graphes du monitoring.
+  - :py:mod:`simplejson` sert lors de la communication avec du
+    javascript.
   - :py:mod:`modeltranslation` s'occuper de traduire certains modèles.
+  - :py:mod:`piwik` permet l'intégration à Piwik, pour les stats du
+    site.
 
 De plus, *gettext* et nécessaire pour les traductions.
 
@@ -29,7 +33,7 @@ Sous debian,
 
 .. code-block:: bash
 
- aptitude install python-django python-ipy python-matplotlib gettext
+ aptitude install python-django python-ipy python-matplotlib gettext python-pip python-simplejson
 
 De plus il faut installer modeltranslation à la main. Pour cela, le
 télécharger sur son site
@@ -39,6 +43,12 @@ aller dans le répertoire ainsi créé, puis en tant que root
 .. code-block:: bash
 
  ./setup.py install
+
+Et enfin, l'installation de :py:mod:`piwik` se fait avec Pip :
+
+.. code-block:: bash
+
+ pip install piwik
 
 Copie du code
 ~~~~~~~~~~~~~
@@ -158,7 +168,23 @@ Arrivé à ce stade, quelques éléments restent encore à configurer.
   - :ref:`Compiler les traductions <compil-trad>`.
   - Faire un *runserver* si c'est une plateforme de dev.
   - S'assurer que les chambres sont correctes.
+  - Dans l'interface d'administration, configurer correctement le nom du
+    site.
   - Et peut être même :ref:`générer la documentation <gen-doc>`.
+
+Intégration à Piwik
+~~~~~~~~~~~~~~~~~~~
+
+Ceci nécessite qu'un Piwik soit installé. Une fois que cela est fait, et
+qu'un site maiznet.fr a été créé dans Piwik, il faut mettre à jour
+:file:`local_settings.py` :
+
+  - **PIWIK_TOKEN** est la valeur donnée par Piwik dans la section
+    "API".
+  - **PIWIK_URL** correspond à l'URL à laquelle le Piwik est installé.
+
+Ces opérations étant effectuées, il faut aller dans l'interface
+d'administration de Maiznet.fr pour créer le site Piwik.
 
 .. _site-update:
 

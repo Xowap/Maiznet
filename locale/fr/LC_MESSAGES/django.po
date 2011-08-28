@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-23 04:12+0200\n"
-"PO-Revision-Date: 2011-08-26 23:45+0100\n"
+"PO-Revision-Date: 2011-08-28 21:09+0100\n"
 "Last-Translator: Rémy Sanchez <remy.sanchez@hyperthese.net>\n"
 "Language-Team: Maiznet <maiznet@googlegroups.com>\n"
 "Language: \n"
@@ -177,7 +177,7 @@ msgstr "À propos"
 
 #: templates/base.html:51
 msgid "Log Out"
-msgstr "Se déconnecter"
+msgstr "Déconnexion"
 
 #: templates/base.html:53
 #: templates/register/login.html:5
@@ -186,7 +186,7 @@ msgstr "Se déconnecter"
 #: templates/register/ticket.html:5
 #: templates/register/ticket.html.py:6
 msgid "Log In"
-msgstr "Se connecter"
+msgstr "Connexion"
 
 #: templates/monitoring/checkbox.html:6
 msgid "Services' State"

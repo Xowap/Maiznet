@@ -18,8 +18,8 @@ Table des matières
    register
    dhcp
    pages
-   tipmac
    news
+   tipmac
 
 .. Indices and tables
    ==================

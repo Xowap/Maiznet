@@ -6,7 +6,7 @@ informer les utilisateurs des nouveautés, pannes ou opérations de
 maintenance.
 
 Partie administrateur
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 La gestion des news se fait pas l'interface d'administration de Django.
 Il y a trois catégories de news :

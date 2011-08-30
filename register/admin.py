@@ -62,6 +62,12 @@ class UserProfileAdmin(UserAdmin):
 	classe qui inclue les présences en inline.
 	"""
 	inlines = [UserProfileInline]
+	list_display = ('username', 'room', 'email', 'first_name', 'last_name', 'is_staff')
+	search_fields = ('username', 'first_name', 'last_name', 'email', 'presence__room__number')
+
+	def room(self, obj):
+		return obj.get_profile().room.number
+	room.short_description = _('Room')
 
 admin.site.unregister(User)
 admin.site.register(User, UserProfileAdmin)

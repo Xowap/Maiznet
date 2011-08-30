@@ -45,6 +45,16 @@
 				<ul>
 					<li><a href="{% url news-index %}">{% trans "News" %}</a></li>
 					<li><a href="{% url page-display slug="about" %}">{% trans "About" %}</a></li>
+					<li>
+						<a href="{% url page-display slug="services" %}">{% trans "Services" %}</a>
+
+						<div class="submenu">
+							<ul>
+								<li><a href="{% url page-display slug="maiztnt" %}">TNT</a></li>
+								<li><a href="{% url page-display slug="jabber" %}">Jabber</a></li>
+							</ul>
+						</div>
+					</li>
 
 					{% if user.is_authenticated %}
 					<li><a href="{% url register-index %}">{{ user }}</a> (<a href="{% url logout %}">{% trans "Log Out" %}</a>)</li>

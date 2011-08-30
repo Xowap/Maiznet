@@ -26,7 +26,7 @@ def display(request, slug):
 	page = get_object_or_404(Page, slug = slug)
 
 	t = Template(page.content)
-	c = Context({"user": request.user})
+	c = RequestContext(request)
 
 	return render_to_response("pages/display.html", {
 		"page": page,

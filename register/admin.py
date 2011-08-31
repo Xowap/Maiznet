@@ -19,7 +19,7 @@ from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.shortcuts import render_to_response
 from django.utils.translation import ugettext as _
 from maiznet.register.models import Presence, Room, Promo
-from maiznet.register.forms import PresenceForm
+from maiznet.register.forms import PresenceForm, get_user_promo
 
 def generate_tickets(modeladmin, request, queryset):
 	"""
@@ -62,12 +62,16 @@ class UserProfileAdmin(UserAdmin):
 	classe qui inclue les présences en inline.
 	"""
 	inlines = [UserProfileInline]
-	list_display = ('username', 'room', 'email', 'first_name', 'last_name', 'is_staff')
+	list_display = ('username', 'room', 'promo', 'email', 'first_name', 'last_name', 'is_staff')
 	search_fields = ('username', 'first_name', 'last_name', 'email', 'presence__room__number')
 
 	def room(self, obj):
 		return obj.get_profile().room.number
 	room.short_description = _('Room')
+
+	def promo(self, obj):
+		return get_user_promo(obj)
+	room.short_description = _('Promo')
 
 admin.site.unregister(User)
 admin.site.register(User, UserProfileAdmin)

@@ -52,6 +52,17 @@ def validate_mac(value, presence=None):
 		if qs.filter(netif__contains=mac).count() > 0:
 			raise ValidationError(_('Somebody is already using the MAC address %(mac)s') % {'mac': mac})
 
+def get_user_promo(user):
+	promo = None
+	for group in user.groups.all():
+		try:
+			promo = Promo.objects.get(pk = group.pk)
+			break
+		except Promo.DoesNotExist:
+			pass
+
+	return promo
+
 class TicketForm(Form):
 	ticket = CharField(max_length = 14, validators = [validate_ticket])
 
@@ -150,24 +161,13 @@ class UserModificationForm(ModelForm):
 		model = User
 		fields = ("id", "first_name", "last_name", "email")
 
-	def _get_user_promo(self, user):
-		promo = None
-		for group in user.groups.all():
-			try:
-				promo = Promo.objects.get(pk = group.pk)
-				break
-			except Promo.DoesNotExist:
-				pass
-
-		return promo
-
 	def __init__(self, data = None, files = None, instance = None, initial = None, remote_ip = None, *args, **kwargs):
 		if instance != None:
 			if initial == None:
 				initial = {}
 
 			# Il faut deviner la promo
-			initial['promo'] = self._get_user_promo(instance)
+			initial['promo'] = get_user_promo(instance)
 
 			try:
 				p = instance.get_profile()
@@ -209,7 +209,7 @@ class UserModificationForm(ModelForm):
 		user = super(UserModificationForm, self).save()
 
 		# Est-ce que l'utilisateur a changé de promo ?
-		promo = self._get_user_promo(user)
+		promo = get_user_promo(user)
 		if promo != self.cleaned_data['promo']:
 			user.groups.remove(promo)
 

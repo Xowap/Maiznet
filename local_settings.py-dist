@@ -79,3 +79,6 @@ MAIZ_DHCP_REQUESTER = '172.17.0.0/18'
 # Piwik (statistiques du site)
 PIWIK_TOKEN = ''
 PIWIK_URL = 'http://maiznet.fr/piwik/'
+
+# Admin Group Id
+ADMIN_GROUP_ID = 18

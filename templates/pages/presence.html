@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% load i18n %}
@@ -10,12 +9,13 @@
 <article>
 
 	<div class="page_text">
-	{% blocktrans %}
-		List of presence maizs' administrator : 		
-	{% endblocktrans %}
+		{% blocktrans %}
+		List of presence maizs' administrator :
+		{% endblocktrans %}
+
 		<ul>
 			{% for admin in admins %}
-			<li>{{admin.username}} {% blocktrans %}: room{% endblocktrans %}{{admin.room}}</li>
+			<li>{% blocktrans with admin.first_name as first and admin.last_name as last and admin.get_profile.room.number as room %}{{first}} {{last}} : room {{room}}{% endblocktrans %}</li>
 			{% endfor %}
 		</ul>
 	</div>

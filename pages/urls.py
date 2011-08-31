@@ -7,6 +7,7 @@
 #
 #
 # Copyright 2011 Rémy Sanchez <remy.sanchez@hyperthese.net>
+# Copyright 2011 Gilles Dehaudt <tonton1728@gmail.com>
 #
 # This file is distributed under the terms of the WTFPL. For more
 # informations, see http://sam.zoy.org/wtfpl/COPYING
@@ -15,5 +16,6 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
+	url(r'^presence$', 'maiznet.pages.views.presence', name="presence"),
 	url(r'^(?P<slug>[-\w]+)$', 'maiznet.pages.views.display', name="page-display"),
 )

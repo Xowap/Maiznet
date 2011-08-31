@@ -2,16 +2,18 @@
 
 {% load i18n %}
 
-{% block head-title %} - {{ title }}{% endblock %}
-{% block content-title %}{{ title }}{% endblock %}
+{% block head-title %} - {% trans "present administrators" %}{% endblock %}
+{% block content-title %}{% trans "present administrators" %}{% endblock %}
 
 {% block content %}
 <article>
 
 	<div class="page_text">
+		<p>
 		{% blocktrans %}
 		List of presence maizs' administrator :
 		{% endblocktrans %}
+		</p>
 
 		<ul>
 			{% for admin in admins %}

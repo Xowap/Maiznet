@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-23 04:12+0200\n"
-"PO-Revision-Date: 2011-08-28 21:09+0100\n"
+"POT-Creation-Date: 2011-08-31 14:53+0200\n"
+"PO-Revision-Date: 2011-08-31 14:55+0100\n"
 "Last-Translator: Rémy Sanchez <remy.sanchez@hyperthese.net>\n"
 "Language-Team: Maiznet <maiznet@googlegroups.com>\n"
 "Language: \n"
@@ -37,9 +37,20 @@ msgstr "Catégories"
 msgid "News"
 msgstr "Actu"
 
-#: register/admin.py:14
+#: register/admin.py:39
 msgid "Generate tickets"
 msgstr "Générer les tickets"
+
+#: register/admin.py:70
+#: templates/register/edit.html:24
+msgid "Room"
+msgstr "Chambre"
+
+#: register/admin.py:74
+#: register/forms.py:107
+#: register/forms.py:157
+msgid "Promo"
+msgstr "Promotion"
 
 #: register/forms.py:29
 msgid "The ticket should be formated like xxxx-xxxx-xxxx, with x being a digit"
@@ -49,108 +60,103 @@ msgstr "Ton ticket devrait ressembler à « xxxx-xxxx-xxxx », x étant un chiff
 msgid "No room exists with this ticket"
 msgstr "Il n'existe aucune chambre avec ce ticket."
 
-#: register/forms.py:46
+#: register/forms.py:49
 msgid "You cannot register more than 30 MAC addresses"
 msgstr "Tu ne peux pas enregistrer plus de 30 adresses MAC"
 
-#: register/forms.py:50
+#: register/forms.py:53
 #, python-format
 msgid "Somebody is already using the MAC address %(mac)s"
 msgstr "Quelqu'un a déjà enregistré l'adresse MAC %(mac)s"
 
-#: register/forms.py:76
-#: register/forms.py:95
-#: register/forms.py:143
+#: register/forms.py:90
+#: register/forms.py:109
+#: register/forms.py:158
 msgid "MAC Address"
 msgstr "Adresse MAC"
 
-#: register/forms.py:76
-#: register/forms.py:95
+#: register/forms.py:90
+#: register/forms.py:109
 msgid "This is the MAC address of your network card. If unsure, keep the default value."
 msgstr "Ceci est la valeur de l'adresse MAC de ta carte réseau. Dans le doute, garde la valeur par défaut."
 
-#: register/forms.py:87
+#: register/forms.py:101
 #: templates/register/edit.html:19
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: register/forms.py:88
+#: register/forms.py:102
 msgid "Required. 30 characters or fewer. Begins and ends with a letter and can contain letters, digits, _ and -."
 msgstr "Obligatoire. Commence et finit par une lettre, et peut contenir des lettres, des chiffres, _ et -"
 
-#: register/forms.py:89
+#: register/forms.py:103
 msgid "This value must begin and end with a letter and can contain letters, digits, and _/-"
 msgstr "Cette valeur doit commencer et finir par une lettre, et peut contenir des lettres, des chiffres, _ et -"
 
-#: register/forms.py:90
-#: register/forms.py:139
+#: register/forms.py:104
+#: register/forms.py:154
 msgid "Firstname"
 msgstr "Prénom"
 
-#: register/forms.py:91
-#: register/forms.py:140
+#: register/forms.py:105
+#: register/forms.py:155
 msgid "Lastname"
 msgstr "Nom de famille"
 
-#: register/forms.py:92
-#: register/forms.py:141
+#: register/forms.py:106
+#: register/forms.py:156
 msgid "Email"
 msgstr "Courriel"
 
-#: register/forms.py:93
-#: register/forms.py:142
-msgid "Promo"
-msgstr "Promotion"
-
-#: register/forms.py:93
-#: register/forms.py:142
+#: register/forms.py:107
+#: register/forms.py:157
 msgid "Your promo"
 msgstr "Ta promotion"
 
-#: register/forms.py:93
-#: register/forms.py:142
+#: register/forms.py:107
+#: register/forms.py:157
 msgid "(None)"
 msgstr "(Aucune)"
 
-#: register/forms.py:105
-#: register/forms.py:192
+#: register/forms.py:119
+#: register/forms.py:196
 msgid "A user with that email already exists."
 msgstr "Il existe déjà un utilisateur avec ce courriel."
 
-#: register/forms.py:112
+#: register/forms.py:126
 msgid "Your password should not be longer than 61 characters"
 msgstr "Ton mot de passe ne doit pas dépasser 61 caractères"
 
-#: register/forms.py:143
+#: register/forms.py:158
 msgid "This is the MAC address of your network card. If unsure, keep the default value. If you are using a new mac address, it has been added to the list, but you should still save."
 msgstr "Ceci est la valeur de l'adresse MAC de ta carte réseau. Dans le doute, garde la valeur par défaut."
 
-#: register/models.py:19
+#: register/models.py:26
 msgid "room number"
 msgstr "numéro de chambre"
 
-#: register/models.py:19
+#: register/models.py:26
 msgid "Number of the room, written on the door."
 msgstr "Numéro de la chambre, marqué sur la porte."
 
-#: register/models.py:20
+#: register/models.py:27
 msgid "ticket"
 msgstr "ticket"
 
-#: register/models.py:20
+#: register/models.py:27
 msgid "A unique identifier that was given to you with your key."
 msgstr "Un identifiant unique qui t'a été remis avec les clefs."
 
-#: register/models.py:51
+#: register/models.py:69
 msgid "network interface"
 msgstr "interface réseau"
 
-#: register/models.py:55
+#: register/models.py:73
 #, python-format
 msgid "Room %(room)s"
 msgstr "Chambre %(room)s"
 
-#: register/models.py:57
+#: register/models.py:75
 #: templates/register/edit.html:29
 msgid "(No room assigned)"
 msgstr "(Pas de chambre assignée)"
@@ -166,20 +172,30 @@ msgid "Main Menu"
 msgstr "Menu principal"
 
 #: templates/base.html:47
-#: templates/register/index.html:5
-#: templates/register/index.html.py:6
-msgid "Register"
-msgstr "Enregistrement"
-
-#: templates/base.html:48
 msgid "About"
 msgstr "À propos"
 
-#: templates/base.html:51
+#: templates/base.html:49
+msgid "Services"
+msgstr "Services"
+
+#: templates/base.html:53
+msgid "TV"
+msgstr "MaizTNT"
+
+#: templates/base.html:54
+msgid "Jabber"
+msgstr "Jabber"
+
+#: templates/base.html:55
+msgid "present administrators"
+msgstr "Administrateurs présents"
+
+#: templates/base.html:61
 msgid "Log Out"
 msgstr "Déconnexion"
 
-#: templates/base.html:53
+#: templates/base.html:63
 #: templates/register/login.html:5
 #: templates/register/login.html.py:6
 #: templates/register/login.html:28
@@ -187,6 +203,12 @@ msgstr "Déconnexion"
 #: templates/register/ticket.html.py:6
 msgid "Log In"
 msgstr "Connexion"
+
+#: templates/base.html:64
+#: templates/register/index.html:5
+#: templates/register/index.html.py:6
+msgid "Register"
+msgstr "Enregistrement"
 
 #: templates/monitoring/checkbox.html:6
 msgid "Services' State"
@@ -222,6 +244,7 @@ msgstr "Usage SDSL"
 
 #: templates/news/index.html:22
 #: templates/news/index.html.py:47
+#: templates/news/index.html:72
 #, python-format
 msgid ""
 "\n"
@@ -233,6 +256,7 @@ msgstr ""
 
 #: templates/news/index.html:26
 #: templates/news/index.html.py:51
+#: templates/news/index.html:76
 #, python-format
 msgid ""
 "\n"
@@ -272,6 +296,20 @@ msgstr ""
 "\n"
 "Publié le <time pubdate datetime=\"%(machine_pub_date)s\">%(pub_date)s</time>."
 
+#: templates/pages/presence.html:12
+msgid ""
+"\n"
+"\t\tList of presence maizs' administrator :\n"
+"\t\t"
+msgstr ""
+"\n"
+"Liste des administrateurs présents à Maiz :"
+
+#: templates/pages/presence.html:18
+#, python-format
+msgid "%(first)s %(last)s : room %(room)s"
+msgstr "%(first)s %(last)s, chambre %(room)s"
+
 #: templates/register/changeroom.html:5
 msgid "Room Change"
 msgstr "Changement de chambre"
@@ -301,10 +339,6 @@ msgstr "Édition des infos"
 #: templates/register/edit.html:6
 msgid "Edit your informations"
 msgstr "Éditer mes informations"
-
-#: templates/register/edit.html:24
-msgid "Room"
-msgstr "Chambre"
 
 #: templates/register/edit.html:35
 msgid "Password"
@@ -373,21 +407,25 @@ msgstr "Quelle est ta situation ?"
 msgid "I'm coming to Maiz for the first time"
 msgstr "J'arrive à Maiz pour la première fois."
 
-#: templates/register/index.html:29
+#: templates/register/index.html:30
 msgid "I changed my room and I don't have Internet anymore"
 msgstr "J'ai changé de chambre et je n'ai plus Internet."
 
-#: templates/register/index.html:30
+#: templates/register/index.html:32
+msgid "I'm going away from Maiz."
+msgstr "Je m'en vais de Maiz."
+
+#: templates/register/index.html:35
 msgid "I would like to change informations regarding myself"
 msgstr "Je voudrais changer des informations me concernant."
 
-#: templates/register/index.html:33
+#: templates/register/index.html:38
 msgid "I lost my password !"
 msgstr "J'ai perdu mon mot de passe !"
 
-#: templates/register/index.html:36
-msgid "I'm going away from Maiz."
-msgstr "Je m'en vais de Maiz."
+#: templates/register/index.html:41
+msgid "I'm looking for an adminstrator"
+msgstr "Je cherche l'aide d'un administrateur"
 
 #: templates/register/login.html:11
 msgid "Your username and password didn't match. Please try again."

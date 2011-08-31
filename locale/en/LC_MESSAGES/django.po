@@ -3,14 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-23 04:12+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-08-31 14:53+0200\n"
+"PO-Revision-Date: 2011-08-31 17:56+0100\n"
+"Last-Translator: Rémy Sanchez <remy.sanchez@hyperthese.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -24,19 +23,32 @@ msgstr ""
 
 #: news/admin.py:24
 msgid "Le champ date_end n'est pas renseigné"
-msgstr ""
+msgstr "The `date_end` field is empty"
 
 #: news/models.py:26
 msgid "Categories"
 msgstr ""
 
-#: news/models.py:41 templates/base.html:46 templates/news/index.html:5
+#: news/models.py:41
+#: templates/base.html:46
+#: templates/news/index.html:5
 #: templates/news/index.html.py:6
 msgid "News"
 msgstr ""
 
-#: register/admin.py:14
+#: register/admin.py:39
 msgid "Generate tickets"
+msgstr ""
+
+#: register/admin.py:70
+#: templates/register/edit.html:24
+msgid "Room"
+msgstr ""
+
+#: register/admin.py:74
+#: register/forms.py:107
+#: register/forms.py:157
+msgid "Promo"
 msgstr ""
 
 #: register/forms.py:29
@@ -47,110 +59,109 @@ msgstr ""
 msgid "No room exists with this ticket"
 msgstr ""
 
-#: register/forms.py:46
+#: register/forms.py:49
 msgid "You cannot register more than 30 MAC addresses"
 msgstr ""
 
-#: register/forms.py:50
+#: register/forms.py:53
 #, python-format
 msgid "Somebody is already using the MAC address %(mac)s"
 msgstr ""
 
-#: register/forms.py:76 register/forms.py:95 register/forms.py:143
+#: register/forms.py:90
+#: register/forms.py:109
+#: register/forms.py:158
 msgid "MAC Address"
 msgstr ""
 
-#: register/forms.py:76 register/forms.py:95
-msgid ""
-"This is the MAC address of your network card. If unsure, keep the default "
-"value."
+#: register/forms.py:90
+#: register/forms.py:109
+msgid "This is the MAC address of your network card. If unsure, keep the default value."
 msgstr ""
 
-#: register/forms.py:87 templates/register/edit.html:19
+#: register/forms.py:101
+#: templates/register/edit.html:19
 msgid "Username"
 msgstr ""
 
-#: register/forms.py:88
-msgid ""
-"Required. 30 characters or fewer. Begins and ends with a letter and can "
-"contain letters, digits, _ and -."
+#: register/forms.py:102
+msgid "Required. 30 characters or fewer. Begins and ends with a letter and can contain letters, digits, _ and -."
 msgstr ""
 
-#: register/forms.py:89
-msgid ""
-"This value must begin and end with a letter and can contain letters, digits, "
-"and _/-"
+#: register/forms.py:103
+msgid "This value must begin and end with a letter and can contain letters, digits, and _/-"
 msgstr ""
 
-#: register/forms.py:90 register/forms.py:139
+#: register/forms.py:104
+#: register/forms.py:154
 msgid "Firstname"
 msgstr ""
 
-#: register/forms.py:91 register/forms.py:140
+#: register/forms.py:105
+#: register/forms.py:155
 msgid "Lastname"
 msgstr ""
 
-#: register/forms.py:92 register/forms.py:141
+#: register/forms.py:106
+#: register/forms.py:156
 msgid "Email"
 msgstr ""
 
-#: register/forms.py:93 register/forms.py:142
-msgid "Promo"
-msgstr ""
-
-#: register/forms.py:93 register/forms.py:142
+#: register/forms.py:107
+#: register/forms.py:157
 msgid "Your promo"
 msgstr ""
 
-#: register/forms.py:93 register/forms.py:142
+#: register/forms.py:107
+#: register/forms.py:157
 msgid "(None)"
 msgstr ""
 
-#: register/forms.py:105 register/forms.py:192
+#: register/forms.py:119
+#: register/forms.py:196
 msgid "A user with that email already exists."
 msgstr ""
 
-#: register/forms.py:112
+#: register/forms.py:126
 msgid "Your password should not be longer than 61 characters"
 msgstr ""
 
-#: register/forms.py:143
-msgid ""
-"This is the MAC address of your network card. If unsure, keep the default "
-"value. If you are using a new mac address, it has been added to the list, "
-"but you should still save."
+#: register/forms.py:158
+msgid "This is the MAC address of your network card. If unsure, keep the default value. If you are using a new mac address, it has been added to the list, but you should still save."
 msgstr ""
 
-#: register/models.py:19
+#: register/models.py:26
 msgid "room number"
 msgstr ""
 
-#: register/models.py:19
+#: register/models.py:26
 msgid "Number of the room, written on the door."
 msgstr ""
 
-#: register/models.py:20
+#: register/models.py:27
 msgid "ticket"
 msgstr ""
 
-#: register/models.py:20
+#: register/models.py:27
 msgid "A unique identifier that was given to you with your key."
 msgstr ""
 
-#: register/models.py:51
+#: register/models.py:69
 msgid "network interface"
 msgstr ""
 
-#: register/models.py:55
+#: register/models.py:73
 #, python-format
 msgid "Room %(room)s"
 msgstr ""
 
-#: register/models.py:57 templates/register/edit.html:29
+#: register/models.py:75
+#: templates/register/edit.html:29
 msgid "(No room assigned)"
 msgstr ""
 
-#: templates/base.html:7 templates/base.html.py:39
+#: templates/base.html:7
+#: templates/base.html.py:39
 #: templates/register/tickets_renew.html:28
 msgid "Maiznet"
 msgstr ""
@@ -159,23 +170,43 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: templates/base.html:47 templates/register/index.html:5
-#: templates/register/index.html.py:6
-msgid "Register"
-msgstr ""
-
-#: templates/base.html:48
+#: templates/base.html:47
 msgid "About"
 msgstr ""
 
-#: templates/base.html:51
+#: templates/base.html:49
+msgid "Services"
+msgstr ""
+
+#: templates/base.html:53
+msgid "TV"
+msgstr ""
+
+#: templates/base.html:54
+msgid "Jabber"
+msgstr ""
+
+#: templates/base.html:55
+msgid "present administrators"
+msgstr "Present Administrators"
+
+#: templates/base.html:61
 msgid "Log Out"
 msgstr ""
 
-#: templates/base.html:53 templates/register/login.html:5
-#: templates/register/login.html.py:6 templates/register/login.html:28
-#: templates/register/ticket.html:5 templates/register/ticket.html.py:6
+#: templates/base.html:63
+#: templates/register/login.html:5
+#: templates/register/login.html.py:6
+#: templates/register/login.html:28
+#: templates/register/ticket.html:5
+#: templates/register/ticket.html.py:6
 msgid "Log In"
+msgstr ""
+
+#: templates/base.html:64
+#: templates/register/index.html:5
+#: templates/register/index.html.py:6
+msgid "Register"
 msgstr ""
 
 #: templates/monitoring/checkbox.html:6
@@ -210,21 +241,23 @@ msgstr ""
 msgid "SDSL Bandwidth Usage"
 msgstr ""
 
-#: templates/news/index.html:22 templates/news/index.html.py:47
+#: templates/news/index.html:22
+#: templates/news/index.html.py:47
+#: templates/news/index.html:72
 #, python-format
 msgid ""
 "\n"
-"\t\t\t\t\tFrom <time datetime=\"%(machine_from)s\" pubdate>%(from)s</time> "
-"to <time datetime=\"%(machine_to)s\" >%(to)s</time>.\n"
+"\t\t\t\t\tFrom <time datetime=\"%(machine_from)s\" pubdate>%(from)s</time> to <time datetime=\"%(machine_to)s\" >%(to)s</time>.\n"
 "\t\t\t\t\t"
 msgstr ""
 
-#: templates/news/index.html:26 templates/news/index.html.py:51
+#: templates/news/index.html:26
+#: templates/news/index.html.py:51
+#: templates/news/index.html:76
 #, python-format
 msgid ""
 "\n"
-"\t\t\t\t\tPosted <time datetime=\"%(machine_from)s\" pubdate>%(from)s</"
-"time>.\n"
+"\t\t\t\t\tPosted <time datetime=\"%(machine_from)s\" pubdate>%(from)s</time>.\n"
 "\t\t\t\t\t"
 msgstr ""
 
@@ -232,8 +265,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"\t\tFrom <time datetime=\"%(machine_from)s\" pubdate>%(from)s</time> to "
-"<time datetime=\"%(machine_to)s\" >%(to)s</time>.\n"
+"\t\tFrom <time datetime=\"%(machine_from)s\" pubdate>%(from)s</time> to <time datetime=\"%(machine_to)s\" >%(to)s</time>.\n"
 "\t\t"
 msgstr ""
 
@@ -249,10 +281,24 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"\t\tPublished <time pubdate datetime=\"%(machine_pub_date)s\">%(pub_date)s</"
-"time>.\n"
+"\t\tPublished <time pubdate datetime=\"%(machine_pub_date)s\">%(pub_date)s</time>.\n"
 "\t\t"
 msgstr ""
+
+#: templates/pages/presence.html:12
+msgid ""
+"\n"
+"\t\tList of presence maizs' administrator :\n"
+"\t\t"
+msgstr ""
+"\n"
+"\t\tCurently present Maiznet administrators:\n"
+"\t\t"
+
+#: templates/pages/presence.html:18
+#, python-format
+msgid "%(first)s %(last)s : room %(room)s"
+msgstr "%(first)s %(last)s, room %(room)s"
 
 #: templates/register/changeroom.html:5
 msgid "Room Change"
@@ -280,10 +326,6 @@ msgstr ""
 
 #: templates/register/edit.html:6
 msgid "Edit your informations"
-msgstr ""
-
-#: templates/register/edit.html:24
-msgid "Room"
 msgstr ""
 
 #: templates/register/edit.html:35
@@ -347,35 +389,38 @@ msgstr ""
 msgid "I'm coming to Maiz for the first time"
 msgstr ""
 
-#: templates/register/index.html:29
+#: templates/register/index.html:30
 msgid "I changed my room and I don't have Internet anymore"
 msgstr ""
 
-#: templates/register/index.html:30
+#: templates/register/index.html:32
+msgid "I'm going away from Maiz."
+msgstr ""
+
+#: templates/register/index.html:35
 msgid "I would like to change informations regarding myself"
 msgstr ""
 
-#: templates/register/index.html:33
+#: templates/register/index.html:38
 msgid "I lost my password !"
 msgstr ""
 
-#: templates/register/index.html:36
-msgid "I'm going away from Maiz."
+#: templates/register/index.html:41
+msgid "I'm looking for an adminstrator"
 msgstr ""
 
 #: templates/register/login.html:11
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 
-#: templates/register/password.html:5 templates/register/password.html.py:6
+#: templates/register/password.html:5
+#: templates/register/password.html.py:6
 #: templates/register/password_confirm.html:5
 msgid "Password Reset"
 msgstr ""
 
 #: templates/register/password.html:10
-msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
-"instructions for setting a new one."
+msgid "Forgotten your password? Enter your e-mail address below, and we'll e-mail instructions for setting a new one."
 msgstr ""
 
 #: templates/register/password.html:14
@@ -410,9 +455,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: templates/register/password_change_form.html:17
-msgid ""
-"Please enter your old password, for security's sake, and then enter your new "
-"password twice so we can verify you typed it in correctly."
+msgid "Please enter your old password, for security's sake, and then enter your new password twice so we can verify you typed it in correctly."
 msgstr ""
 
 #: templates/register/password_change_form.html:23
@@ -438,9 +481,7 @@ msgid "Invalid Reset Link"
 msgstr ""
 
 #: templates/register/password_confirm.html:18
-msgid ""
-"Please enter your new password twice so we can verify you typed it in "
-"correctly."
+msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr ""
 
 #: templates/register/password_confirm.html:22
@@ -452,9 +493,7 @@ msgid "Confirm password:"
 msgstr ""
 
 #: templates/register/password_confirm.html:28
-msgid ""
-"The password reset link was invalid, possibly because it has already been "
-"used.  Please request a new password reset."
+msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
 msgstr ""
 
 #: templates/register/password_done.html:5
@@ -463,20 +502,18 @@ msgid "Password Reset Successful"
 msgstr ""
 
 #: templates/register/password_done.html:10
-msgid ""
-"We've e-mailed you instructions for setting your password to the e-mail "
-"address you submitted. You should be receiving it shortly."
+msgid "We've e-mailed you instructions for setting your password to the e-mail address you submitted. You should be receiving it shortly."
 msgstr ""
 
-#: templates/register/quit_ask.html:5 templates/register/quit_ask.html.py:6
-#: templates/register/quit_done.html:5 templates/register/quit_done.html:6
+#: templates/register/quit_ask.html:5
+#: templates/register/quit_ask.html.py:6
+#: templates/register/quit_done.html:5
+#: templates/register/quit_done.html:6
 msgid "Leaving Maiz"
 msgstr ""
 
 #: templates/register/quit_ask.html:10
-msgid ""
-"This will free your room, and disable your Internet access. You should only "
-"use this when leaving Maiz."
+msgid "This will free your room, and disable your Internet access. You should only use this when leaving Maiz."
 msgstr ""
 
 #: templates/register/quit_ask.html:13
@@ -488,12 +525,11 @@ msgid "Take me back"
 msgstr ""
 
 #: templates/register/quit_done.html:10
-msgid ""
-"You are no longer registered in a room, however your account remains "
-"available. You will be able to use it again next year with a new ticket."
+msgid "You are no longer registered in a room, however your account remains available. You will be able to use it again next year with a new ticket."
 msgstr ""
 
-#: templates/register/signup.html:5 templates/register/signup.html.py:16
+#: templates/register/signup.html:5
+#: templates/register/signup.html.py:16
 msgid "Sign Up"
 msgstr ""
 
@@ -518,8 +554,7 @@ msgid ""
 "\n"
 "\t\t\t\t<h2>Bienvenue</h2>\n"
 "\n"
-"\t\t\t\t<p>Il y a fort à parier que si tu lis ce document, c'est que tu "
-"veux\n"
+"\t\t\t\t<p>Il y a fort à parier que si tu lis ce document, c'est que tu veux\n"
 "\t\t\t\tInternet tout de suite et maintenant. Mais attends un peu avant et\n"
 "\t\t\t\tlis ces quelques lignes pour découvrir rapidement ce que te propose\n"
 "\t\t\t\tle réseau Maiznet.</p>\n"
@@ -582,8 +617,7 @@ msgstr ""
 
 #: templates/register/tickets_renew.html:97
 #, python-format
-msgid ""
-"Tu es dans la chambre <strong>%(room)s</strong>. Le ticket associé est&nbsp;:"
+msgid "Tu es dans la chambre <strong>%(room)s</strong>. Le ticket associé est&nbsp;:"
 msgstr ""
 
 #: templates/register/welcome.html:5
@@ -604,3 +638,4 @@ msgid ""
 "\tto access the Internet!</p>\n"
 "\t"
 msgstr ""
+

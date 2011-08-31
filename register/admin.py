@@ -71,7 +71,7 @@ class UserProfileAdmin(UserAdmin):
 
 	def promo(self, obj):
 		return get_user_promo(obj)
-	room.short_description = _('Promo')
+	promo.short_description = _('Promo')
 
 admin.site.unregister(User)
 admin.site.register(User, UserProfileAdmin)

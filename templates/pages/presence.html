@@ -1,0 +1,24 @@
+
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %} - {{ title }}{% endblock %}
+{% block content-title %}{{ title }}{% endblock %}
+
+{% block content %}
+<article>
+
+	<div class="page_text">
+	{% blocktrans %}
+		List of presence maizs' administrator : 		
+	{% endblocktrans %}
+		<ul>
+			{% for admin in admins %}
+			<li>{{admin.username}} {% blocktrans %}: room{% endblocktrans %}{{admin.room}}</li>
+			{% endfor %}
+		</ul>
+	</div>
+</article>
+{% endblock %}
+

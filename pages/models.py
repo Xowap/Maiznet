@@ -26,5 +26,5 @@ class Page(models.Model):
 	slug = models.SlugField(unique = True)
 	content = models.TextField()
 
-	pub_date = models.DateTimeField(auto_now_add = True)
+	pub_date = models.DateTimeField(auto_now = True, auto_now_add = True)
 	mod_date = models.DateTimeField(auto_now = True, auto_now_add = True)

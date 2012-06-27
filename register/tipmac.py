@@ -16,6 +16,7 @@
 import socket
 import re
 from django.conf import settings
+import os
 
 def isMac(mac):
 	"""
@@ -44,6 +45,7 @@ def ip_to_mac(ip):
 	  - **TIPMAC_PORT**, le port du serveur.
 	"""
 
+	relpath = os.path.dirname(os.path.realpath(__file__))
 	# Teste si l'adresse IP est un invité de Maiz
 	import IPy
 	if ip == None or IPy.IPint(settings.MAIZ_IP_GUEST).overlaps(ip) != 1:
@@ -59,6 +61,9 @@ def ip_to_mac(ip):
 
 	try :
 		mac = s.recv(17)
+		a = open(relpath + "/tagaplop","w")
+		a.write(mac)
+		a.close()
 	except :
 		raise Exception("No data received")
 	if not isMac(mac):

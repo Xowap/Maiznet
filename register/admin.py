@@ -62,7 +62,7 @@ class UserProfileAdmin(UserAdmin):
 	classe qui inclue les présences en inline.
 	"""
 	inlines = [UserProfileInline]
-	list_display = ('username', 'room', 'promo', 'email', 'first_name', 'last_name', 'is_staff')
+	list_display = ('username', 'room', 'promo', 'email', 'talkings', 'first_name', 'last_name', 'is_staff')
 	search_fields = ('username', 'first_name', 'last_name', 'email', 'presence__room__number')
 
 	def room(self, obj):
@@ -72,6 +72,11 @@ class UserProfileAdmin(UserAdmin):
 	def promo(self, obj):
 		return get_user_promo(obj)
 	promo.short_description = _('Promo')
+
+	def talkings(self, obj):
+		return obj.get_profile().talkings
+	talkings.short_description = _('Talkings Mailing-List')
+	talkings.boolean = True
 
 admin.site.unregister(User)
 admin.site.register(User, UserProfileAdmin)

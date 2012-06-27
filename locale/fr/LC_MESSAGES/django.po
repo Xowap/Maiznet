@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-31 14:53+0200\n"
-"PO-Revision-Date: 2011-08-31 14:55+0100\n"
-"Last-Translator: Rémy Sanchez <remy.sanchez@hyperthese.net>\n"
+"POT-Creation-Date: 2012-06-25 17:55+0200\n"
+"PO-Revision-Date: 2012-06-25 17:58+0100\n"
+"Last-Translator: Grégoire Leroy <gregoire.leroy@retenodus.net>\n"
 "Language-Team: Maiznet <maiznet@googlegroups.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -48,9 +48,13 @@ msgstr "Chambre"
 
 #: register/admin.py:74
 #: register/forms.py:107
-#: register/forms.py:157
+#: register/forms.py:158
 msgid "Promo"
 msgstr "Promotion"
+
+#: register/admin.py:78
+msgid "Talkings Mailing-List"
+msgstr "Mailing List Discussions"
 
 #: register/forms.py:29
 msgid "The ticket should be formated like xxxx-xxxx-xxxx, with x being a digit"
@@ -71,7 +75,7 @@ msgstr "Quelqu'un a déjà enregistré l'adresse MAC %(mac)s"
 
 #: register/forms.py:90
 #: register/forms.py:109
-#: register/forms.py:158
+#: register/forms.py:159
 msgid "MAC Address"
 msgstr "Adresse MAC"
 
@@ -94,40 +98,55 @@ msgid "This value must begin and end with a letter and can contain letters, digi
 msgstr "Cette valeur doit commencer et finir par une lettre, et peut contenir des lettres, des chiffres, _ et -"
 
 #: register/forms.py:104
-#: register/forms.py:154
+#: register/forms.py:155
 msgid "Firstname"
 msgstr "Prénom"
 
 #: register/forms.py:105
-#: register/forms.py:155
+#: register/forms.py:156
 msgid "Lastname"
 msgstr "Nom de famille"
 
 #: register/forms.py:106
-#: register/forms.py:156
+#: register/forms.py:157
 msgid "Email"
 msgstr "Courriel"
 
-#: register/forms.py:107
+#: register/forms.py:106
 #: register/forms.py:157
+msgid "This email address is used by Maiz and Maiznet for official announces. You really should enter an address you use often. Please don't use hotmail or live addresses as our mails are considered as SPAM."
+msgstr "Cette adresse email est utilisée par Maiz et Maiznet pour les annonces officielles. Vous devriez vraiment indiquer une adresse que vous consultez souvent. Veuillez ne pas utiliser une adresse hotmail ou live, nos mails étant considéré comme du SPAM."
+
+#: register/forms.py:107
+#: register/forms.py:158
 msgid "Your promo"
 msgstr "Ta promotion"
 
 #: register/forms.py:107
-#: register/forms.py:157
+#: register/forms.py:158
 msgid "(None)"
 msgstr "(Aucune)"
 
-#: register/forms.py:119
-#: register/forms.py:196
+#: register/forms.py:110
+#: register/forms.py:160
+msgid "Subscribe to the talkings mailing-list"
+msgstr "S'inscrire à la mailing-list discussions"
+
+#: register/forms.py:110
+#: register/forms.py:160
+msgid "Whatever you choose, you will subscribe to the Maiznet and Maiz announces mailing-list. The talkings mailing-list is the maling-list between inhabitants of Maiz. You should let this check-in"
+msgstr "Quel que soit votre choix, vous serez inscrit à la liste annonces de Maiz et Maiznet. La mailing-list discussions permet aux résidents de discuter entre eux. Vous devriez laisser cette case cochée."
+
+#: register/forms.py:120
+#: register/forms.py:199
 msgid "A user with that email already exists."
 msgstr "Il existe déjà un utilisateur avec ce courriel."
 
-#: register/forms.py:126
+#: register/forms.py:127
 msgid "Your password should not be longer than 61 characters"
 msgstr "Ton mot de passe ne doit pas dépasser 61 caractères"
 
-#: register/forms.py:158
+#: register/forms.py:159
 msgid "This is the MAC address of your network card. If unsure, keep the default value. If you are using a new mac address, it has been added to the list, but you should still save."
 msgstr "Ceci est la valeur de l'adresse MAC de ta carte réseau. Dans le doute, garde la valeur par défaut."
 
@@ -151,12 +170,12 @@ msgstr "Un identifiant unique qui t'a été remis avec les clefs."
 msgid "network interface"
 msgstr "interface réseau"
 
-#: register/models.py:73
+#: register/models.py:74
 #, python-format
 msgid "Room %(room)s"
 msgstr "Chambre %(room)s"
 
-#: register/models.py:75
+#: register/models.py:76
 #: templates/register/edit.html:29
 msgid "(No room assigned)"
 msgstr "(Pas de chambre assignée)"
@@ -188,14 +207,20 @@ msgid "Jabber"
 msgstr "Jabber"
 
 #: templates/base.html:55
+msgid "File Sharing"
+msgstr "Partage de fichiers"
+
+#: templates/base.html:56
+#: templates/pages/presence.html:5
+#: templates/pages/presence.html.py:6
 msgid "present administrators"
 msgstr "Administrateurs présents"
 
-#: templates/base.html:61
+#: templates/base.html:62
 msgid "Log Out"
 msgstr "Déconnexion"
 
-#: templates/base.html:63
+#: templates/base.html:64
 #: templates/register/login.html:5
 #: templates/register/login.html.py:6
 #: templates/register/login.html:28
@@ -204,7 +229,7 @@ msgstr "Déconnexion"
 msgid "Log In"
 msgstr "Connexion"
 
-#: templates/base.html:64
+#: templates/base.html:65
 #: templates/register/index.html:5
 #: templates/register/index.html.py:6
 msgid "Register"
@@ -296,7 +321,7 @@ msgstr ""
 "\n"
 "Publié le <time pubdate datetime=\"%(machine_pub_date)s\">%(pub_date)s</time>."
 
-#: templates/pages/presence.html:12
+#: templates/pages/presence.html:13
 msgid ""
 "\n"
 "\t\tList of presence maizs' administrator :\n"
@@ -305,7 +330,7 @@ msgstr ""
 "\n"
 "Liste des administrateurs présents à Maiz :"
 
-#: templates/pages/presence.html:18
+#: templates/pages/presence.html:20
 #, python-format
 msgid "%(first)s %(last)s : room %(room)s"
 msgstr "%(first)s %(last)s, chambre %(room)s"
@@ -397,7 +422,8 @@ msgid ""
 msgstr ""
 "\n"
 "<p>Nous voulons que maiznet soit aussi proche que possible du réseau que tu as chez toi. Cependant, il y a à Maiz 150 personnes sur le même réseau, ce qui entraîne certaines contraintes. Ansi, pour pouvoir assurer un réseau sécurisé et un service de qualité, nous devons demander aux utilisateur de s'inscire.</p>\n"
-"<p>L'inscription est garantie rapide et indolore !</p>"
+"<p>L'inscription est garantie rapide et indolore !</p>\n"
+"<p><strong>Pour les résidents qui reviennent</strong>: votre compte register de l'an dernier n'a pas été conservé avec le nouveau site, il faut vous re-inscrire !</p>"
 
 #: templates/register/index.html:22
 msgid "What is your situation ?"

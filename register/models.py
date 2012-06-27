@@ -67,6 +67,7 @@ class Presence(models.Model):
 	user = models.ForeignKey(User, unique = True)
 	room = models.ForeignKey(Room, unique = True, blank = True, null = True)
 	netif = models.TextField(name = _("network interface"), help_text = ("The MAC adress(es) of your network card. If unsure, keep the pre-filled value"))
+	talkings = models.BooleanField(default=True)
 
 	def __unicode__(self):
 		if self.room != None:

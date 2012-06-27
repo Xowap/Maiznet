@@ -22,6 +22,7 @@ from maiznet.register.models import Promo, Presence
 from maiznet.register.tipmac import ip_to_mac
 from maiznet.register.decorators import anonymous_required
 
+
 @anonymous_required
 def signup(request):
 	"""
@@ -47,13 +48,15 @@ def signup(request):
 			promo = None
 
 		try:
+
 			mac = ip_to_mac(request.META['REMOTE_ADDR'])
-		except:
+		except :
 			mac = None
 
 		form = UserRegistrationForm(initial = {
 			'netif': mac,
-			'promo': promo
+			'promo': promo,
+			'talkings': True
 		})
 
 	return render_to_response("register/signup.html", {

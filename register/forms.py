@@ -13,7 +13,7 @@
 ########################################################################
 
 from django.conf import settings
-from django.forms import Form, ModelForm, RegexField, ModelChoiceField, CharField, EmailField, ValidationError
+from django.forms import Form, ModelForm, RegexField, ModelChoiceField, CharField, EmailField, ValidationError, BooleanField
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
@@ -103,10 +103,11 @@ class UserRegistrationForm(UserCreationForm):
 		error_messages = {'invalid': _("This value must begin and end with a letter and can contain letters, digits, and _/-")})
 	first_name = CharField(label = _("Firstname"), max_length = 30)
 	last_name  = CharField(label = _("Lastname"), max_length = 30)
-	email      = EmailField(label = _("Email"))
+	email      = EmailField(label = _("Email"), help_text=_("This email address is used by Maiz and Maiznet for official announces. You really should enter an address you use often. Please don't use hotmail or live addresses as our mails are considered as SPAM."))
 	promo      = ModelChoiceField(label = _("Promo"), help_text = _('Your promo'), queryset = Promo.objects.all(), empty_label = _("(None)"), required = False)
 	ticket     = CharField(max_length = 14, validators = [validate_ticket])
 	netif      = MacAddressField(label = _("MAC Address"), help_text = _("This is the MAC address of your network card. If unsure, keep the default value."), validators = [validate_mac], required = False)
+	talkings   = BooleanField(required = False, label = _("Subscribe to the talkings mailing-list"), help_text = _("Whatever you choose, you will subscribe to the Maiznet and Maiz announces mailing-list. The talkings mailing-list is the maling-list between inhabitants of Maiz. You should let this check-in"))
 
 	class Meta:
 		model = User
@@ -141,7 +142,7 @@ class UserRegistrationForm(UserCreationForm):
 			pass
 
 		# On créé son profil
-		p = Presence(user = user, room = room, netif = self.cleaned_data["netif"])
+		p = Presence(user = user, room = room, netif = self.cleaned_data["netif"], talkings = self.cleaned_data["talkings"])
 		p.save()
 
 		# On l'ajoute à sa promo
@@ -153,9 +154,10 @@ class UserRegistrationForm(UserCreationForm):
 class UserModificationForm(ModelForm):
 	first_name = CharField(label = _("Firstname"), max_length = 30)
 	last_name  = CharField(label = _("Lastname"), max_length = 30)
-	email = EmailField(label = _("Email"))
+	email      = EmailField(label = _("Email"), help_text=_("This email address is used by Maiz and Maiznet for official announces. You really should enter an address you use often. Please don't use hotmail or live addresses as our mails are considered as SPAM."))
 	promo = ModelChoiceField(label = _("Promo"), help_text = _('Your promo'), queryset = Promo.objects.all(), empty_label = _("(None)"), required = False)
 	netif = MacAddressField(label = _("MAC Address"), help_text = _("This is the MAC address of your network card. If unsure, keep the default value. If you are using a new mac address, it has been added to the list, but you should still save."), required = False)
+	talkings   = BooleanField(required = False, label = _("Subscribe to the talkings mailing-list"), help_text = _("Whatever you choose, you will subscribe to the Maiznet and Maiz announces mailing-list. The talkings mailing-list is the maling-list between inhabitants of Maiz. You should let this check-in"))
 
 	class Meta:
 		model = User
@@ -185,6 +187,7 @@ class UserModificationForm(ModelForm):
 				pass
 
 			initial['netif'] = netif
+			initial['talkings'] = p.talkings
 
 		super(UserModificationForm, self).__init__(data = data, files = files, instance = instance, initial = initial, *args, **kwargs)
 
@@ -219,6 +222,7 @@ class UserModificationForm(ModelForm):
 		# Et on met à jour sa carte réseau
 		p = user.get_profile()
 		p.netif = self.cleaned_data['netif']
+		p.talkings = self.cleaned_data['talkings']
 		p.save()
 
 		return user

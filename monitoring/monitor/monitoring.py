@@ -27,11 +27,18 @@ class Monitoring(object):
 		return "KO"
 	
 	def jabber(self):
-		c = commands.getoutput("/usr/lib/nagios/plugins/check_tcp -H " + config.JABBER_SERVER + " -p " + str(config.JABBER_PORT) + """ -s "<stream:stream to='host' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams'>" -e "<?xml version='1.0' encoding='UTF-8'?><stream:stream xmlns:stream=\\"http://etherx.jabber.org/streams" xmlns="jabber:client\\"" -w 3 -c 5 -v """)
-		state = c.split()
-		if state[1] == 'OK':
+		try :
+			from jabber import jabber
+			connex = jabber.Client(host=config.JABBER_SERVER,debug=[], port=config.JABBER_PORT)
+			connex.connect()
 			return "OK"
-		return "KO"
+		except :
+			return "KO"
+		#c = commands.getoutput("/usr/lib/nagios/plugins/check_tcp -H " + config.JABBER_SERVER + " -p " + str(config.JABBER_PORT) + """ -s "<stream:stream to='host' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams'>" -e "<?xml version='1.0' encoding='UTF-8'?><stream:stream xmlns:stream=\\"http://etherx.jabber.org/streams" xmlns="jabber:client\\"" -w 3 -c 5 -v """)
+		#state = c.split()
+		#if state[1] == 'OK':
+		#	return "OK"
+		#return "KO"
 
 m = Monitoring()
 services = {}

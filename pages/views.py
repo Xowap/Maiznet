@@ -47,3 +47,11 @@ def presence(request) :
 	return render_to_response("pages/presence.html", {
 		"admins": admins,
 	}, RequestContext(request))
+
+def monitoring(request) :
+	"""
+	Affiche les graphes d'etat des lignes
+	"""
+
+	return render_to_response("pages/monitoring.html", {
+	}, RequestContext(request))

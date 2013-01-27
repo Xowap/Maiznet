@@ -17,5 +17,6 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
 	url(r'^presence$', 'maiznet.pages.views.presence', name="presence"),
+	url(r'^monitoring$','maiznet.pages.views.monitoring', name="monitoring"),
 	url(r'^(?P<slug>[-\w]+)$', 'maiznet.pages.views.display', name="page-display"),
 )

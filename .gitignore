@@ -3,6 +3,8 @@
 *.pyc
 *.mo
 local_settings.py
+monitoring/monitor/state
+templates/dhcp/dhcpd.conf
 *.db
 *.png
 doc/_build

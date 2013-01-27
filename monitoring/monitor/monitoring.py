@@ -12,19 +12,22 @@
 import commands
 import json
 import config
-from sqlite3 import dbapi2 as sqlite
+import monitor
 
 
 class Monitoring(object):
 	def __init__(self):
-		self.connection = sqlite.connect(config.DATABASE)
-		self.cursor = self.connection.cursor()
+		self.mp = monitor.MonitorProtocol()
 	
 	def xDSL(self,line):
-		value = self.cursor.execute('SELECT `packetloss` FROM ping_re%s ORDER BY date DESC' % str(line)).fetchone()
-		if value != 0:
-			return "OK"
-		return "KO"
+		
+                try :
+		        value = self.mp.fetchValue(config.PRE_PING_PLUGINS_MUNIN+str(line))[0]
+		        if value != "100.0":
+			        return "OK"
+		        return "KO"
+                except :
+                        return "KO"
 	
 	def jabber(self):
 		try :
@@ -34,11 +37,6 @@ class Monitoring(object):
 			return "OK"
 		except :
 			return "KO"
-		#c = commands.getoutput("/usr/lib/nagios/plugins/check_tcp -H " + config.JABBER_SERVER + " -p " + str(config.JABBER_PORT) + """ -s "<stream:stream to='host' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams'>" -e "<?xml version='1.0' encoding='UTF-8'?><stream:stream xmlns:stream=\\"http://etherx.jabber.org/streams" xmlns="jabber:client\\"" -w 3 -c 5 -v """)
-		#state = c.split()
-		#if state[1] == 'OK':
-		#	return "OK"
-		#return "KO"
 
 m = Monitoring()
 services = {}
@@ -50,3 +48,4 @@ for key in config.SERVICES:
 		services[key] = method()
 wfile = open(config.STATE_PATH,"w")
 wfile.write(json.dumps(services))
+wfile.close()

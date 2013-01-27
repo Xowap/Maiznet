@@ -21,8 +21,6 @@ class MonitorProtocol(object):
 	def __init__(self):
 		self.ip_server = config.IP_MUNIN
 		self.port = config.PORT_MUNIN
-		self.connection = sqlite.connect(config.DATABASE)
-		self.cursor = self.connection.cursor()
 
 	def fetchValue(self, plugin):
 		"""
@@ -59,65 +57,3 @@ class MonitorProtocol(object):
 		s.send("quit\n")
 		s.close()
 		return values
-
-	def closeDB(self):
-		self.connection.commit()
-		self.connection.close()
-		
-class MonitorPlugin(object):
-	def __init__(self,plugin,monitorprotocol):
-		self.plugin = plugin
-		self.mp = monitorprotocol
-
-	def fetchValue(self, function = lambda values : values):
-		"""
-		Récupère et modifie éventuellement les valeurs
-		"""
-		self.values = self.mp.fetchValue(self.plugin[0])
-		self.values = function(self.values)
-		if self.plugin in config.PLUGINS_REVERSE:
-			self.values.reverse()
-	
-	def insertValues(self):
-		"""
-		Insère les valeurs dans la base de données
-		"""
-		hours = (datetime.now() - timedelta(hours=config.TIME/60),)
-		now = (datetime.now(),)
-		a = "?,"*(len(self.values)-1) + "?"
-		self.values.append(datetime.now())
-		t_values = tuple(self.values)
-		request = 'INSERT INTO %s VALUES (null, %s, datetime(?))' % (self.plugin[0], a)
-		self.mp.cursor.execute(request, tuple(self.values))
-		self.mp.cursor.execute('DELETE FROM %s WHERE datetime(date) <  datetime(?)' % (self.plugin[0],), hours)
-	
-	def retreiveValues(self):
-		""" Utilisé pour les tests uniquement """
-		a = self.mp.cursor.execute('SELECT * FROM ping_re1').fetchall()
-
-def ifacePluginDB(names):
-	connection = sqlite.connect(config.DATABASE)
-	cursor = connection.cursor()
-	for name in names :
-		if "if_" in name[0] :
-			cursor.execute('CREATE TABLE %s (id INTEGER PRIMARY KEY, `in` INTEGER, out INTEGER, date DATETIME)' % name[0])
-		else :
-			cursor.execute('CREATE TABLE %s (id INTEGER PRIMARY KEY, `packetloss` INTEGER, ping INTEGER, date DATETIME)' % name[0])
-	connection.commit()
-	connection.close()
-
-try :
-	rfile = open(config.DATABASE,"r")
-	rfile.close()
-except:
-	ifacePluginDB(config.PLUGINS)
-
-mprot = MonitorProtocol()
-for plugin in config.PLUGINS :
-	mplug = MonitorPlugin(plugin,mprot)
-	if "if_" in plugin[0] :
-		mplug.fetchValue(function= lambda values : [str(int(value)/1024) for value in values])
-	else :
-		mplug.fetchValue(function  = lambda values : [values[0],str(int(float(values[1])*1000))])
-	mplug.insertValues()
-mprot.closeDB()

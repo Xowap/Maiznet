@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %} - {% trans "Monitoring" %}{% endblock %}
+{% block content-title %}{% trans "Monitoring" %}{% endblock %}
+
+{% block content %}
+<article>
+
+	<div class="page_text">
+		{% blocktrans %}
+		<div class="figure">
+			<a href="http://www.maiznet.fr/smokeping/smokeping.cgi?target=Lignes.adsl1">
+				<div class="img_a"><img id="ADSL1" src="{{ MEDIA_URL }}monitoring/adsl1.png" alt="ADSL1 Latency" /></div>
+			</a>
+			<br>
+			<div>ADSL 1 Latency</div>
+		</div>
+		<br>
+		<br>
+		<div class="figure">
+			<a href="http://www.maiznet.fr/smokeping/smokeping.cgi?target=Lignes.adsl2">
+				<div class="img_a"><img id="ADSL2" src="{{ MEDIA_URL }}monitoring/adsl2.png" alt="ADSL2 Latency"/></div>
+			</a>
+			<br>
+			<div>ADSL 2 Latency</div>
+		</div>
+		<br>
+		<br>
+		<div class="figure">
+			<a href="http://www.maiznet.fr/smokeping/smokeping.cgi?target=Lignes.adsl3">
+				<div class="img_a"><img id="ADSL3" src="{{ MEDIA_URL }}monitoring/adsl3.png" alt="ADSL3 Latency"/></div>
+			</a>
+			<br>
+			<div>ADSL 3 Latency</div>
+		</div>
+		<br>
+		<br>
+		<div class="figure">
+			<a href="http://maiznet.fr/smokeping/smokeping.cgi?target=Lignes.sdsl">
+				<div class="img_a"><img id="SDSL" src="{{ MEDIA_URL }}monitoring/sdsl.png" alt="SDSL Latency"/></div>
+			</a>
+			<br>
+			<div>SDSL Latency</div>
+		</div>
+
+		{% endblocktrans %}
+	</div>
+</article>
+{% endblock %}
+

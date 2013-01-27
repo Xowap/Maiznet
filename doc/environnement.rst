@@ -13,7 +13,7 @@ Dans ce nouveau dossier, on va chercher une copie de la production
 
 .. code-block:: bash
 
- sudo git clone https://github.com/EquiNux/Maiznet.git /var/wsgi/maiznet-TEST/
+ sudo git clone https://github.com/Xowap/Maiznet.git /var/wsgi/maiznet-TEST/
 
 Ensuite, on indique à Apache qu'on veut un deuxième site
 

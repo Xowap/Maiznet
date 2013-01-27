@@ -15,7 +15,9 @@ Table des matières
    intro
    workflow
    operation
+   environnement
    register
+   monitoring
    dhcp
    pages
    news

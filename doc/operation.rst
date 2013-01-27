@@ -26,6 +26,8 @@ Pour fonctionner, différents modules sont nécessaires :
   - :py:mod:`modeltranslation` s'occuper de traduire certains modèles.
   - :py:mod:`piwik` permet l'intégration à Piwik, pour les stats du
     site.
+  - :py:mod:`jabber` est utilisé pour monitorer le serveur Jabber.
+  - :py:mod:`sphinx` est utilisé pour gérer la documentation.
 
 De plus, *gettext* et nécessaire pour les traductions.
 
@@ -55,19 +57,21 @@ Copie du code
 
 Une fois que toutes les dépendances sont présentes, il faut installer le
 site en lui même. Le code est géré par Git, et hébergé sur GitHub. La
-page GitHub est à l'adresse https://github.com/EquiNux/Maiznet. 
+page GitHub est à l'adresse https://github.com/Xowap/Maiznet. 
 
 Dans le cas où on voudrait installer un site en production, le mieux est
 de prendre la branche de référence. On la récupère comme suit :
 
 .. code-block:: bash
 
- git clone https://github.com/EquiNux/Maiznet.git maiznet
+ git clone https://github.com/Xowap/Maiznet.git maiznet
 
 Cependant, pour faire du développement, chaque développeur est invité à
 effectuer un fork de la branche principale, et de faire ses
 modifications à part. Les modifications seront ensuite réintégrées au
 site principal par le mainteneur.
+
+Pour déboguer ou développer une nouvelle partie du site, on peut égalemment être ammené à passer par un `environnement de test <http://maiznet.fr/maiznet-doc/environnement.html>`_.
 
 Configuration d'Apache
 ~~~~~~~~~~~~~~~~~~~~~~
